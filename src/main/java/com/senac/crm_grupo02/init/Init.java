@@ -9,13 +9,23 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.senac.crm_grupo02.domain.Cliente;
+import com.senac.crm_grupo02.domain.NivelInstrucao;
+import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.service.ClienteService;
+import com.senac.crm_grupo02.service.NivelInstrucaoService;
+import com.senac.crm_grupo02.service.ProdutoService;
 
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
 	ClienteService servicoCliente;
+	
+	@Autowired
+	ProdutoService servicoProduto;
+	
+	@Autowired
+	NivelInstrucaoService servicoNivelInstrucao;
 	
 	
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -36,14 +46,48 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		c2.setEmail("testeFulano@gmail.com");
 		c2.setStatus("1");
 		
+		NivelInstrucao nI1 = new NivelInstrucao();
+		nI1.setId(null);
+		nI1.setDescricao("Graduação");
+		nI1.setStatus("1");
+		
+		NivelInstrucao nI2 = new NivelInstrucao();
+		nI2.setId(null);
+		nI2.setDescricao("Especialização - MBA");
+		nI2.setStatus("1");
+		
+		Produto p1 = new Produto();
+		p1.setId(null);
+		p1.setDescricao("Análise e Desenvolvimento de Sistemas");
+		p1.setStatus("1");
+		p1.setNivelInstrucao(nI1);
+		
+		Produto p2 = new Produto();
+		p2.setId(null);
+		p2.setDescricao("Redes de Computadores");
+		p2.setStatus("1");
+		p2.setNivelInstrucao(nI1);		
 		
 		
 		List<Cliente> listaDeClientes = new ArrayList<>();
 		
 		listaDeClientes.add(c1);
 		listaDeClientes.add(c2);
+
+		List<NivelInstrucao> listaDeNivelInstrucao = new ArrayList<>();
+		
+		listaDeNivelInstrucao.add(nI1);
+		listaDeNivelInstrucao.add(nI2);
+		
+		List<Produto> listaDeProdutos = new ArrayList<>();
+		
+		listaDeProdutos.add(p1);
+		listaDeProdutos.add(p2);		
+		
 		
 		servicoCliente.saveAll(listaDeClientes);
+		servicoNivelInstrucao.saveAll(listaDeNivelInstrucao);
+		servicoProduto.saveAll(listaDeProdutos);
 		
 	}
 
