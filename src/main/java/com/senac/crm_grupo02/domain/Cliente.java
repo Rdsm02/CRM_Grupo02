@@ -1,14 +1,21 @@
 package com.senac.crm_grupo02.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Cliente {
-	
+public class Cliente implements Serializable{
+
+	private static final long serialVersionUID = 4104395240980789652L;
+
 	@Id
 	@Column(name = "cliente_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "cliente_cpf")
