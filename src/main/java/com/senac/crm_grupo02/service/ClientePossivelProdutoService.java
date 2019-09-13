@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.ClientePossivelProduto;
+import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.repository.ClientePossivelProdutoRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -35,14 +36,14 @@ public class ClientePossivelProdutoService {
 		return repoClientePossivelProduto.saveAll(clientePossivelProdutos);
 	}
 	
-	public ClientePossivelProduto edit (ClientePossivelProduto clientePossivelProduto) throws ObjectNotFoundException{
+	/*public ClientePossivelProduto edit (ClientePossivelProduto clientePossivelProduto) throws ObjectNotFoundException{
 		ClientePossivelProduto clientePossivelProdutoAntigo = search(clientePossivelProduto.getClienteId().getId());
 		clientePossivelProdutoAntigo.setProdutoId(clientePossivelProduto.getProdutoId());
 		clientePossivelProdutoAntigo.setClienteId(clientePossivelProduto.getClienteId());
 		clientePossivelProdutoAntigo.setClientePossivelProdutoStatus(clientePossivelProduto.getClientePossivelProdutoStatus());
 		clientePossivelProdutoAntigo.setClientePossivelProdutoData(clientePossivelProduto.getClientePossivelProdutoData());
 		return save(clientePossivelProdutoAntigo);
-	}
+	}*/
 	
 	public void delete(Integer id) {
 		repoClientePossivelProduto.deleteById(id);

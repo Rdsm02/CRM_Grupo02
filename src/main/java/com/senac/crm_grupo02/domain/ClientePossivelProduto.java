@@ -7,15 +7,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
+@IdClass(ClientePossivelProdutoId.class)
 public class ClientePossivelProduto implements Serializable{
 
 	private static final long serialVersionUID = -6251109573639808327L;
 	
-/*	@Column(name = "cliente_possivel_produto_id")
+/*	@Id
+	@Column(name = "cliente_possivel_produto_id")
 	private Integer id;*/
 	
 	@Id
@@ -23,6 +26,7 @@ public class ClientePossivelProduto implements Serializable{
     @JoinColumn(name = "produto_id", nullable = false)
 	private Produto produtoId;
 	
+	@Id
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente clienteId;
