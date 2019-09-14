@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.ClientePossivelProduto;
+import com.senac.crm_grupo02.domain.ClientePossivelProdutoId;
 import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.repository.ClientePossivelProdutoRepository;
 
@@ -18,7 +19,7 @@ public class ClientePossivelProdutoService {
 	@Autowired
 	ClientePossivelProdutoRepository repoClientePossivelProduto;
 	
-	public ClientePossivelProduto search(Integer id) throws ObjectNotFoundException{
+	public ClientePossivelProduto search(ClientePossivelProdutoId id) throws ObjectNotFoundException{
 		Optional<ClientePossivelProduto> clientePossivelProduto = repoClientePossivelProduto.findById(id);
 		return clientePossivelProduto.orElseThrow(() -> new ObjectNotFoundException(
 				"não encontrado. id: " + id + ", Tipo!" + ClientePossivelProduto.class.getName()));		
@@ -45,7 +46,7 @@ public class ClientePossivelProdutoService {
 		return save(clientePossivelProdutoAntigo);
 	}*/
 	
-	public void delete(Integer id) {
+	public void delete(ClientePossivelProdutoId id) {
 		repoClientePossivelProduto.deleteById(id);
 	}
 
