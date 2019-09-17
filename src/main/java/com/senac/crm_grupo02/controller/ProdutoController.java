@@ -20,7 +20,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class ProdutoController {
 	
 	@Autowired
-	private ProdutoService servicoProduto;
+	ProdutoService servicoProduto;
 	
 	@Autowired
 	NivelInstrucaoService servicoNivelInstrucao;
@@ -42,9 +42,9 @@ public class ProdutoController {
 	}
 
 	@PostMapping("/salvar")
-	public ModelAndView salvarProdutos(Produto produto) {
+	public String salvarProdutos(Produto produto) {
 		servicoProduto.save(produto);
-		return listarTodosOsProdutos();
+		return "redirect:/listarTodosProdutos";
 	}
 	
 	@GetMapping("/alterar/{id}")

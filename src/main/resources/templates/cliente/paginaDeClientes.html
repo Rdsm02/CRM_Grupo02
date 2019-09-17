@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http:www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Listagem de Clientes</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="panel-default">
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Listagem de Clientes</h1>
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>CPF</th>
+                                <th>NOME</th>
+                                <th>SOBRENOME</th>
+                                <th>EMAIL</th>
+                                <th>STATUS</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="cliente : ${clientes}">
+                                <td th:text="${cliente.id}"></td>
+                                <td th:text="${cliente.cpf}"></td>
+                                <td th:text="${cliente.nome}"></td>
+                                <td th:text="${cliente.sobrenome}"></td>
+                                <td th:text="${cliente.email}"></td>
+                                <td th:text="${cliente.status}"></td>
+                                <td>
+                                    <div class="btn-group pull-right" style="float:right;">
+                                        <a class="btn btn-sm btn-primary" th:href="@{/cliente/alterar/{idcliente}(idcliente=${cliente.id})}">ALTERAR</a>
+                                        <a class="delete btn btn-sm btn-danger" th:href="@{/cliente/excluir/{idcliente}(idcliente=${cliente.id})}">EXCLUIR</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-sm btn-success" th:href="@{/cliente/cadastrarClientes}">CADASTRAR NOVO ACESSORIO</a>
+    </div>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

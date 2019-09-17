@@ -47,12 +47,12 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		c2.setStatus("1");
 		
 		NivelInstrucao nI1 = new NivelInstrucao();
-		nI1.setId(null);
+		nI1.setId(1);
 		nI1.setDescricao("Graduação");
 		nI1.setStatus("1");
 		
 		NivelInstrucao nI2 = new NivelInstrucao();
-		nI2.setId(null);
+		nI2.setId(2);
 		nI2.setDescricao("Especialização - MBA");
 		nI2.setStatus("1");
 		
@@ -66,7 +66,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		p2.setId(null);
 		p2.setDescricao("Redes de Computadores");
 		p2.setStatus("1");
-		p2.setNivelInstrucao(nI1);		
+		p2.setNivelInstrucao(nI2);	
+		
+		System.out.println(servicoNivelInstrucao.searchAll());
 		
 		
 		List<Cliente> listaDeClientes = new ArrayList<>();

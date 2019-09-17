@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http:www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<title>Cadastro de Produtos</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="panel-heading" align="center">
+			<strong>CADASTRO DE PRODUTOS</strong>
+		</div>
+
+		<div class="panel-body border">
+			<form action="form-horizontal" th:object="${produto}"
+				th:action="@{/produto/salvar}" method="post" style="margin: 10px;">
+				<div class="form-group">
+					<fieldset>
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+							<label>DESCRIÇÃO</label> <input type="text"
+								class="form-control input-sm" th:field="*{descricao}"
+								autofocus="autofocus" placeholder="Informe a descrição..."
+								maxlength="50" />
+						</div>
+							<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">	
+							<label>NÍVEL DE INSTRUÇÃO</label>
+								<select class="form-control" th:field="*{nivelInstrucao}">
+								<option value="">Selecione o nível de Instrucao</option>
+								<option th:each="nivelInstrucao : ${nivelInstrucoes}" th:value="${nivelInstrucao.id}" th:text="${nivelInstrucao.descricao}"></option>
+								</select>
+						</div>
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+							<label>STATUS</label> <input type="text"
+								class="form-control input-sm" th:field="*{status}"
+								autofocus="autofocus" placeholder="Informe o status..."
+								maxlength="1" />
+						</div>						
+					</fieldset>
+				</div>
+				<div align="center">
+					<button type="submit" class="btn btn-sm btn-default">SALVAR</button>
+					<a th:href="@{/produto/listarTodosProdutos}" class="btn btn-sm btn-default">CANCELAR</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

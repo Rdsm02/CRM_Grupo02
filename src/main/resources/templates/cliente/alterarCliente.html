@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http:www.thymeleaf.org">
+<html lang="pt">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<title>Cadastro de Clientes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Editar Cliente</title>
 </head>
 
 <body>
-	<div class="container">
-		<div class="panel-heading" align="center">
-			<strong>CADASTRO DE CLIENTES</strong>
-		</div>
-
-		<div class="panel-body border">
-			<form action="form-horizontal" th:object="${cliente}"
-				th:action="@{/cliente/salvar}" method="post" style="margin: 10px;">
-				<div class="form-group">
+    <div class="container">
+        <div class="panel-heading" align="center"><strong>ALTERAÇÃO DE ACESSORIOS</strong></div>
+        <div class="panel-body">
+            <form class="form-horizontal" th:object="${cliente}" th:action="@{/cliente/alterar}" method="post" style="margin: 10px;">
+                <div class="form-group">
 					<fieldset>
 						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
 						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
@@ -57,13 +48,14 @@
 						</div>						
 					</fieldset>
 				</div>
-				<div align="center">
-					<button type="submit" class="btn btn-sm btn-default">SALVAR</button>
-					<a th:href="@{/cliente/listarTodosClientes}" class="btn btn-sm btn-default">CANCELAR</a>
-				</div>
-			</form>
-		</div>
-	</div>
+                <div align="center">
+                    <button type="submit" class="btn btn-sm btn-success">SALVAR</button>
+                    <a th:href="@{/cliente/listarTodosClientes}" class="btn btn-sm btn-default">CANCELAR</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </html>
