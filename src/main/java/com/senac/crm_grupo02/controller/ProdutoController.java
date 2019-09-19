@@ -37,14 +37,14 @@ public class ProdutoController {
 	public ModelAndView cadastrarProdutos() {
 		ModelAndView mv = new ModelAndView("produto/cadastroDeProdutos");
 		mv.addObject("produto", new Produto());
-		mv.addObject("nivelInstrucao", new NivelInstrucao());
+		mv.addObject("nivelInstrucoes", servicoNivelInstrucao.searchAll());
 		return mv;
 	}
 
 	@PostMapping("/salvar")
 	public String salvarProdutos(Produto produto) {
 		servicoProduto.save(produto);
-		return "redirect:/listarTodosProdutos";
+		return "redirect:/produto/listarTodosProdutos";
 	}
 	
 	@GetMapping("/alterar/{id}")
