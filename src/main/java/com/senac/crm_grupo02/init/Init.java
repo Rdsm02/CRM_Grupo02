@@ -1,5 +1,6 @@
 package com.senac.crm_grupo02.init;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Component;
 
 import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.domain.NivelInstrucao;
+import com.senac.crm_grupo02.domain.Oferta;
 import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.service.ClienteService;
 import com.senac.crm_grupo02.service.NivelInstrucaoService;
+import com.senac.crm_grupo02.service.OfertaService;
 import com.senac.crm_grupo02.service.ProdutoService;
 
 @Component
@@ -27,6 +30,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	@Autowired
 	NivelInstrucaoService servicoNivelInstrucao;
 	
+	@Autowired
+	OfertaService servicoOferta;
 	
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
@@ -68,6 +73,19 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		p2.setStatus("1");
 		p2.setNivelInstrucao(nI2);	
 		
+		
+		LocalDate dataInicio = LocalDate.of(2019, 7, 1);
+		LocalDate dataFim = LocalDate.of(2019, 12, 20);
+		
+		Oferta o1 = new Oferta();
+		o1.setId(1);
+		o1.setDescricao("2019.2n");
+		o1.setDataInicio("2019-07-01");
+		o1.setDataFim("2019-12-20");
+		o1.setPreco(699.99);
+		o1.setProdutoId(p1);
+		o1.setStatus("1");
+		
 		System.out.println(servicoNivelInstrucao.searchAll());
 		
 		
@@ -86,10 +104,14 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		listaDeProdutos.add(p1);
 		listaDeProdutos.add(p2);		
 		
+		List<Oferta> listaDeOfertas = new ArrayList<>();
+		listaDeOfertas.add(o1);
 		
 		servicoCliente.saveAll(listaDeClientes);
 		servicoNivelInstrucao.saveAll(listaDeNivelInstrucao);
 		servicoProduto.saveAll(listaDeProdutos);
+		servicoOferta.saveAll(listaDeOfertas);
+		
 		
 	}
 

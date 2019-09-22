@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Editar Niveis de Instrução</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="panel-heading" align="center"><strong>ALTERAÇÃO DE ACESSORIOS</strong></div>
+        <div class="panel-body">
+            <form class="form-horizontal" th:object="${nivelInstrucao}" th:action="@{/nivelInstrucao/alterar}" method="post" style="margin: 10px;">
+                <div class="form-group">
+					<fieldset>
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+						<div class="form-group row">
+                        <label> CÓDIGO</label>
+                        <input type="text" class="form-control input-sm" th:field="*{id}" readonly="readonly" />
+                    </div>
+						</div>
+							<label>DESCRIÇÃO</label> <input type="text"
+								class="form-control input-sm" th:field="*{descricao}"
+								autofocus="autofocus" placeholder="Informe a Descrição..."
+								maxlength="50" />
+						</div>
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+							<label>STATUS</label> <input type="text"
+								class="form-control input-sm" th:field="*{status}"
+								autofocus="autofocus" placeholder="Informe o Status..."
+								maxlength="50" />
+						</div>					
+					</fieldset>
+				</div>
+                <div align="center">
+                    <button type="submit" class="btn btn-sm btn-success">SALVAR</button>
+                    <a th:href="@{/nivelInstrucao/listarTodosNivelInstrucoes}" class="btn btn-sm btn-default">CANCELAR</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

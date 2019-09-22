@@ -20,16 +20,16 @@ public class NivelInstrucaoController {
 	@Autowired
 	private NivelInstrucaoService servicoNivelInstrucao;
 
-	@GetMapping("/listarTodosNivelInstrucaos")
+	@GetMapping("/listarTodosNivelInstrucoes")
 	public ModelAndView listarTodosOsNivelInstrucaos() {
-		ModelAndView mv = new ModelAndView("nivelInstrucao/paginaDeNivelInstrucaos");
-		mv.addObject("nivelInstrucaos", servicoNivelInstrucao.searchAll());
+		ModelAndView mv = new ModelAndView("nivelDeInstrucao/paginaDeNivelDeInstrucao");
+		mv.addObject("nivelDeInstrucoes", servicoNivelInstrucao.searchAll());
 		return mv;
 	}
 
-	@GetMapping("/cadastrarNivelInstrucaos")
+	@GetMapping("/cadastrarNivelInstrucao")
 	public ModelAndView cadastrarNivelInstrucaos() {
-		ModelAndView mv = new ModelAndView("nivelInstrucao/cadastroDeNivelInstrucaos");
+		ModelAndView mv = new ModelAndView("nivelDeInstrucao/cadastroDeNivelDeInstrucao");
 		mv.addObject("nivelInstrucao", new NivelInstrucao());
 		return mv;
 	}
@@ -42,7 +42,7 @@ public class NivelInstrucaoController {
 	
 	@GetMapping("/alterar/{id}")
 	public ModelAndView alterarNivelInstrucao(@PathVariable("id") Integer id) throws ObjectNotFoundException {
-		ModelAndView mv = new ModelAndView("nivelInstrucao/alterarNivelInstrucao");
+		ModelAndView mv = new ModelAndView("nivelDeInstrucao/alterarNivelDeInstrucao");
 		mv.addObject("nivelInstrucao", servicoNivelInstrucao.search(id));
 		return mv;
 	}

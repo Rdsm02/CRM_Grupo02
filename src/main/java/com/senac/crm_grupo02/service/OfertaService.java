@@ -17,6 +17,14 @@ public class OfertaService {
 	@Autowired
 	OfertaRepository repoOferta;
 	
+	/*
+	 * public Oferta procurarPorId(Integer id) { Optional<Oferta> oferta =
+	 * repoOferta.findById(id);
+	 * 
+	 * 
+	 * }
+	 */
+	
 	public Oferta search(Integer id) throws ObjectNotFoundException{
 		Optional<Oferta> oferta = repoOferta.findById(id);
 		return oferta.orElseThrow(() -> new ObjectNotFoundException(
@@ -28,6 +36,10 @@ public class OfertaService {
 	}
 	
 	public Oferta save(Oferta oferta) {
+		/*String[] dataInicioFS = oferta.getDataInicio().toString().split("-");
+		String[] dataFimFS = oferta.getDataFim().toString().split("-");
+		oferta.setDataInicio(LocalDate.of(Integer.parseInt(dataInicioFS[0]), Integer.parseInt(dataInicioFS[1]), Integer.parseInt(dataInicioFS[2])));
+		oferta.setDataFim(LocalDate.of(Integer.parseInt(dataFimFS[0]), Integer.parseInt(dataFimFS[1]), Integer.parseInt(dataFimFS[2])));*/
 		return repoOferta.save(oferta);
 	}
 	
@@ -39,8 +51,8 @@ public class OfertaService {
 		Oferta ofertaAntiga = search(oferta.getId());
 		ofertaAntiga.setId(oferta.getId());
 		ofertaAntiga.setDescricao(oferta.getDescricao());
-		ofertaAntiga.setDataInicio(oferta.getDataInicio());
-		ofertaAntiga.setDataInicio(oferta.getDataFim());
+		ofertaAntiga.setDataInicio(oferta.getDataInicio().toString());
+		ofertaAntiga.setDataInicio(oferta.getDataFim().toString());
 		ofertaAntiga.setPreco(oferta.getPreco());
 		ofertaAntiga.setProdutoId(oferta.getProdutoId());		
 		ofertaAntiga.setStatus(oferta.getStatus());		

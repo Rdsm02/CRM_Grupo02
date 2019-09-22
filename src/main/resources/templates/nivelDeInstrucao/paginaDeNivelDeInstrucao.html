@@ -6,42 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Listagem de Ofertas</title>
+    <title>Listagem de Nivel De Instruções</title>
 </head>
 
 <body>
     <div class="container">
         <div class="panel-default">
             <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Listagem de Ofertas</h1>
+                <h1 class="h4 text-gray-900 mb-4">Listagem de Nivel De Instruções</h1>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-sm table-striped table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>CÓDIGO</th>
                                 <th>DESCRIÇÃO</th>
-                                <th>DATA INÍCIO</th>
-                                <th>DATA FIM</th>
-                                <th>PREÇO</th>
-                                <th>PRODUTO</th>
                                 <th>STATUS</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="oferta : ${ofertas}">
-                                <td th:text="${oferta.id}"></td>
-                                <td th:text="${oferta.descricao}"></td> 
-                                <td th:text="${oferta.dataInicio}"></td>
-                                <td th:text="${oferta.dataFim}"></td>
-                                <td th:text="${oferta.preco}"></td>
-                                <td th:text="${oferta.produtoId.descricao}"></td>
-                                <td th:text="${oferta.status}"></td>
+                            <tr th:each="nivelDeInstrucao : ${nivelDeInstrucoes}">
+                                <td th:text="${nivelDeInstrucao.id}"></td>
+                                <td th:text="${nivelDeInstrucao.descricao}"></td>
+                                <td th:text="${nivelDeInstrucao.status}"></td>
                                 <td>
                                     <div class="btn-group pull-right" style="float:right;">
-                                        <a class="btn btn-sm btn-primary" th:href="@{/oferta/alterar/{idoferta}(idoferta=${oferta.id})}">ALTERAR</a>
+                                        <a class="btn btn-sm btn-primary" th:href="@{/nivelInstrucao/alterar/{idnivelDeInstrucao}(idnivelDeInstrucao=${nivelDeInstrucao.id})}">ALTERAR</a>
                                     </div>
                                 </td>
                             </tr>
@@ -50,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-sm btn-success" th:href="@{/oferta/cadastrarOfertas}">CADASTRAR NOVA OFERTA</a>
+        <a class="btn btn-sm btn-success" th:href="@{/nivelInstrucao/cadastrarNivelInstrucao}">CADASTRAR NOVO NÍVEL DE INSTRUÇÃO</a>
     </div>
 </body>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

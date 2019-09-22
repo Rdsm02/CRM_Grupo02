@@ -1,7 +1,6 @@
 package com.senac.crm_grupo02.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Oferta implements Serializable{
@@ -23,10 +23,12 @@ public class Oferta implements Serializable{
 	private String descricao;
 	
 	@Column(name = "oferta_data_inicio")
-	private Date dataInicio;
+	//@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private String dataInicio;
 	
 	@Column(name = "oferta_data_fim")
-	private Date dataFim;
+	//@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private String dataFim;
 	
 	@Column(name = "oferta_preco")
 	private Double preco;
@@ -53,23 +55,25 @@ public class Oferta implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public Date getDataInicio() {
+/*
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setDataInicio(String dataInicio) {
+		String[] dataInicioFS = dataInicio.toString().split("-");		
+		this.dataInicio = LocalDate.of(Integer.parseInt(dataInicioFS[0]), Integer.parseInt(dataInicioFS[1]), Integer.parseInt(dataInicioFS[2]));
 	}
 
-	public Date getDataFim() {
+	public LocalDate getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
+	public void setDataFim(String dataFim) {
+		String[] dataFimFS = dataFim.toString().split("-");
+		this.dataFim = LocalDate.of(Integer.parseInt(dataFimFS[0]), Integer.parseInt(dataFimFS[1]), Integer.parseInt(dataFimFS[2]));
 	}
-
+*/
 	public Double getPreco() {
 		return preco;
 	}
@@ -92,6 +96,22 @@ public class Oferta implements Serializable{
 
 	public void setProdutoId(Produto produtoId) {
 		this.produtoId = produtoId;
+	}
+
+	public String getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(String dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public String getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(String dataFim) {
+		this.dataFim = dataFim;
 	}
 
 }

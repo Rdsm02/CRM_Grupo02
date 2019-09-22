@@ -11,35 +11,60 @@
 	rel="stylesheet"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<title>Cadastro de Produtos</title>
+<title>Cadastro de Ofertas</title>
 </head>
 
 <body>
 	<div class="container">
 		<div class="panel-heading" align="center">
-			<strong>CADASTRO DE PRODUTOS</strong>
+			<strong>CADASTRO DE OFERTAS</strong>
 		</div>
 
 		<div class="panel-body border">
-			<form action="form-horizontal" th:object="${produto}"
-				th:action="@{/produto/salvar}" method="post" style="margin: 10px;">
+			<form action="form-horizontal" th:object="${oferta}"
+				th:action="@{/oferta/salvar}" method="post" style="margin: 10px;">
 				<div class="form-group">
 					<fieldset>
+					<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+							<label>CÓDIGO</label> <input type="text"
+								class="form-control input-sm" th:field="*{id}"
+								autofocus="autofocus" placeholder="Informe a descrição..."
+								maxlength="50" />
+						</div>
 						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
 							<label>DESCRIÇÃO</label> <input type="text"
 								class="form-control input-sm" th:field="*{descricao}"
 								autofocus="autofocus" placeholder="Informe a descrição..."
 								maxlength="50" />
 						</div>
-							<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">	
-							<label>NÍVEL DE INSTRUÇÃO</label>
-								<select class="form-control" th:field="*{nivelInstrucao}">
-								<option value="">Selecione o nível de Instrucao</option>
-								<option th:each="nivelInstrucao : ${nivelInstrucoes}" th:value="${nivelInstrucao.id}" th:text="${nivelInstrucao.descricao}"></option>
-								</select>
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+							<label>DATA INÍCIO</label> <input type="date"
+								class="form-control input-sm" th:field="*{dataInicio}"
+								autofocus="autofocus" placeholder="Informe a data no formato dd/mm/yyyy..."
+								maxlength="50" />
 						</div>
 						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
-							<label>STATUS</label> <input type="text"
+							<label>DATA FIM</label> <input type="date"
+								class="form-control input-sm" th:field="*{dataFim}"
+								autofocus="autofocus" placeholder="Informe a data no formato dd/mm/yyyy..."
+								maxlength="50" />
+						</div>
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+							<label>PREÇO DA OFERTA</label> <input type="text"
+								class="form-control input-sm" th:field="*{preco}"
+								autofocus="autofocus" placeholder="Informe o preço..."
+								maxlength="50" />
+						</div>
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">	
+							<label>PRODUTO</label>
+								<select class="form-control" th:field="*{produtoId}">
+								<option value="">Selecione o produto</option>
+								<option th:each="produto : ${produtos}" th:value="${produto.id}" th:text="${produto.descricao}"></option>
+								</select>
+						</div>
+							
+						<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">
+							<label>STATUS</label> <input type="number"
 								class="form-control input-sm" th:field="*{status}"
 								autofocus="autofocus" placeholder="Informe o status..."
 								maxlength="1" />
@@ -48,7 +73,7 @@
 				</div>
 				<div align="center">
 					<button type="submit" class="btn btn-sm btn-default">SALVAR</button>
-					<a th:href="@{/produto/listarTodosProdutos}" class="btn btn-sm btn-default">CANCELAR</a>
+					<a th:href="@{/oferta/listarTodosOfertas}" class="btn btn-sm btn-default">CANCELAR</a>
 				</div>
 			</form>
 		</div>
