@@ -1,0 +1,601 @@
+<!-- <!DOCTYPE html>
+<html lang="pt-BR"> -->
+
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmls:th="http://www.thymeleaf.org">
+
+	<head>
+
+		<base href="../">
+
+		<!-- Evita os caracteres nos textos. -->
+		<meta charset="UTF-8" />
+
+		<!-- Título que fica ali em cima na aba. -->
+		<title>Projeto Integrador - SENAC CRM</title>
+
+		<!-- Onde colocaremos a descrição, mais para frente. SEO - ajuda no bom rankeamento nos mecanismos de pesquisa. -->
+		<meta name="description" content="">
+
+		<!-- Determinação da scala para a responsividade funcionar, a page se adequar a todos os tipode de tela. -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Fonte que estamos utilizando nos textos. -->
+		<!-- <link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css?family=:Roboto300,400,500,600,700|Poppins:300,400,500,600,700}" /> -->
+
+		<!-- Estilização CSS Ju -->
+		<!-- <link href="assets/css/style.css" rel="stylesheet" type="text/css" />-->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+
+		<!-- Favicon: o icone do logotipo, que fica ali em cima na aba da página. -->
+		<!-- <link rel="shortcut icon" href="./assets/img/logotipo/favicon.png" /> -->
+		<link rel="shortcut icon" type="text/css" th:href="@{/img/logotipo/favicon.png}" />
+
+
+		<link rel="stylesheet" type="text/css" th:href="@{/css/template.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/tether/dist/css/tether.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-daterangepicker/daterangepicker.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-select/dist/css/bootstrap-select.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/select2/dist/css/select2.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/ion-rangeslider/css/ion.rangeSlider.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/nouislider/distribute/nouislider.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/owl.carousel/dist/assets/owl.carousel.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/owl.carousel/dist/assets/owl.theme.default.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/dropzone/dist/dropzone.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/summernote/dist/summernote.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/bootstrap-markdown/css/bootstrap-markdown.min.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/animate.css/animate.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/toastr/build/toastr.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/morris.js/morris.css}" /> 
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/sweetalert2/dist/sweetalert2.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/socicon/css/socicon.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/custom/vendors/line-awesome/css/line-awesome.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/custom/vendors/flaticon/flaticon.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/custom/vendors/flaticon2/flaticon.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/@fortawesome/fontawesome-free/css/all.min.css}" />
+		
+		<!-- CSS Template 
+		<link href="./assets/css/template.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/tether/dist/css/tether.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-datetime-picker/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-timepicker/css/bootstrap-timepicker.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/nouislider/distribute/nouislider.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/owl.carousel/dist/assets/owl.carousel.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/owl.carousel/dist/assets/owl.theme.default.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/summernote/dist/summernote.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/animate.css/animate.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/toastr/build/toastr.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/morris.js/morris.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/sweetalert2/dist/sweetalert2.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/socicon/css/socicon.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/custom/vendors/line-awesome/css/line-awesome.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/custom/vendors/flaticon/flaticon.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/custom/vendors/flaticon2/flaticon.css" rel="stylesheet" type="text/css" />
+		<link href="./assets/vendors/general/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />-->
+		
+	
+		
+		
+
+	</head>
+
+	<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-page--loading kt-aside--minimize">
+
+		<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+			<div class="kt-header-mobile__logo"></div>
+			<div class="kt-header-mobile__toolbar">
+				<button class="kt-header-mobile__toolbar-toggler kt-header-mobile__toolbar-toggler--left" id="kt_aside_mobile_toggler"><span></span></button>
+				<button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler"><span></span></button>
+				<button class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more"></i></button>
+			</div>
+		</div>
+
+		<div class="kt-grid kt-grid--hor kt-grid--root">
+			<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+
+				<button class="kt-aside-close " id="kt_aside_close_btn"><i class="la la-close"></i></button>
+				<div class="kt-aside  kt-aside--fixed  kt-grid__item kt-grid kt-grid--desktop kt-grid--hor-desktop" id="kt_aside">
+
+					<div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
+						<div class="kt-aside__brand-logo"></div>
+						<div class="kt-aside__brand-tools">
+							<button class="kt-aside__brand-aside-toggler" id="kt_aside_toggler"><span></span></button>
+						</div>
+					</div>
+				
+					<div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
+						<div id="kt_aside_menu" class="kt-aside-menu " data-ktmenu-vertical="1" data-ktmenu-scroll="1">
+							<ul class="kt-menu__nav ">
+
+								<li class="kt-menu__item " aria-haspopup="true">
+									<a href="index.html" class="kt-menu__link ">
+									<i class="kt-menu__link-icon flaticon-home-1"></i>
+									<span class="kt-menu__link-text">Início</span></a>
+								</li>
+
+								<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon fa fa-user-friends"></i><span class="kt-menu__link-text">Clientes</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+									<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+										<ul class="kt-menu__subnav">
+											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
+											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-cliente" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar</span></div></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a href="/client-list/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Pesquisar</span></a></li>
+										</ul>
+									</div>
+								</li>
+
+								<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon fa fa-suitcase"></i><span class="kt-menu__link-text">Produtos</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+									<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+										<ul class="kt-menu__subnav">
+											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
+											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-produto" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar</span></div></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a href="/business-list/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Pesquisar</span></a></li>
+										</ul>
+									</div>
+								</li>
+								
+								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-chart-bar"></i><span class="kt-menu__link-text">Estatística</span></a></li>
+								
+								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-star"></i><span class="kt-menu__link-text">Preferências</span></a></li>
+								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-calendar-alt"></i><span class="kt-menu__link-text">Agenda</span></a></li>
+								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-cloud-download-alt"></i><span class="kt-menu__link-text">Nuvem</span></a></li>
+								<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-code-branch"></i><span class="kt-menu__link-text">Serviços</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+
+					<div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
+
+						<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+						<div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+							<div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default ">
+								<ul class="kt-menu__nav ">
+									<li class="kt-menu__item  kt-menu__item--active " aria-haspopup="true">
+										<a href="index.html" class="kt-menu__link ">
+											<span class="kt-menu__link-text logotipo">
+												<!-- <img alt="Logo" class="logotipo-img" src="./assets/img/logotipo/senac-logo.png" /> -->
+												<img alt="Logo" class="logotipo-img" th:src="@{/img/logotipo/senac-logo.png}" />
+											</span>
+										</a>
+									</li>
+									<li class="kt-menu__item  kt-menu__item--active " aria-haspopup="true">
+										<div class="input-group">
+	                                    	<input type="text" class="form-control" id="input-busca" name="creditcard" placeholder="Pesquisar...">
+	                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                               			</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="kt-header__topbar">
+
+							<div class="kt-header__topbar-item kt-header__topbar-item--quick-panel">
+								<span class="kt-header__topbar-icon" id="kt_quick_panel_toggler_btn">
+									<i class="flaticon-grid-menu"></i>
+        						</span>
+							</div>
+
+							<div class="kt-header__topbar-item dropdown">
+								<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="true">
+									<span class="kt-header__topbar-icon"><i class="flaticon2-bell-alarm-symbol"></i></span>
+									<span class="kt-hidden kt-badge kt-badge--dot kt-badge--notify kt-badge--sm"></span>
+								</div>
+								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-lg">
+									<form>
+
+										<div class="kt-head kt-head--skin-light kt-head--fit-x kt-head--fit-b">
+											<h3 class="kt-head__title">
+												Notificações
+												&nbsp;
+												<span class="btn btn-label-primary btn-sm btn-bold btn-font-md">5</span>
+											</h3>
+											<ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand  kt-notification-item-padding-x" role="tablist">
+												<li class="nav-item">
+													<a class="nav-link active show" data-toggle="tab" href="#topbar_notifications_notifications" role="tab" aria-selected="true">Alertas</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" data-toggle="tab" href="#topbar_notifications_events" role="tab" aria-selected="false">Eventos</a>
+												</li>
+											</ul>
+										</div>
+
+										<div class="tab-content">
+											<div class="tab-pane active show" id="topbar_notifications_notifications" role="tabpanel">
+												<div class="kt-notification kt-margin-t-10 kt-margin-b-10 kt-scroll" data-scroll="true" data-height="300" data-mobile-height="200">
+													<a href="#" class="kt-notification__item">
+														<div class="kt-notification__item-icon">
+															<i class="flaticon2-line-chart kt-font-success"></i>
+														</div>
+														<div class="kt-notification__item-details">
+															<div class="kt-notification__item-title">
+																Notas
+															</div>
+														</div>
+													</a>
+													<a href="#" class="kt-notification__item">
+														<div class="kt-notification__item-icon">
+															<i class="flaticon-download-1 kt-font-danger"></i>
+														</div>
+														<div class="kt-notification__item-details">
+															<div class="kt-notification__item-title">
+																Download
+															</div>
+														</div>
+													</a>
+												</div>
+											</div>
+											
+										</div>
+									</form>
+								</div>
+							</div>
+
+							<div class="kt-header__topbar-item dropdown">
+								<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px" aria-expanded="true">
+									<span class="kt-header__topbar-icon"><i class="flaticon2-gear"></i></span>
+								</div>
+								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+									<form>
+
+										<div class="kt-head kt-head--skin-light">
+											<h3 class="kt-head__title">
+												Configurações
+												<span class="kt-space-15"></span>
+											</h3>
+										</div>
+
+										<div class="kt-grid-nav kt-grid-nav--skin-light">
+											<div class="kt-grid-nav__row">
+												<a href="#" class="kt-grid-nav__item">
+													<span class="kt-grid-nav__title">Conta</span>
+												</a>
+												<a href="#" class="kt-grid-nav__item">
+													<span class="kt-grid-nav__title">Administrativo</span>
+												</a>
+											</div>
+											<div class="kt-grid-nav__row">
+												<a href="#" class="kt-grid-nav__item">
+													<span class="kt-grid-nav__title">Projetos</span>
+												</a>
+												<a href="#" class="kt-grid-nav__item">
+													<span class="kt-grid-nav__title">Exercícios</span>
+												</a>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+
+							<div class="kt-header__topbar-item kt-header__topbar-item--user">
+								<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
+									<div class="kt-header__topbar-user">
+										<img alt="Foto Usuário" class="kt-radius-100" th:src="@{/img/user/default.jpg}" />
+									</div>
+								</div>
+								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
+
+									<div class="kt-user-card kt-user-card--skin-light kt-notification-item-padding-x">
+										<div class="kt-user-card__avatar">
+											<img class="kt-hidden-" alt="Pic" th:src="@{/img/user/default.jpg}" />
+										</div>
+									</div>
+
+									<div class="kt-notification">
+										<a href="#" class="kt-notification__item">
+											<div class="kt-notification__item-icon">
+												<i class="flaticon2-calendar-3 kt-font-success"></i>
+											</div>
+											<div class="kt-notification__item-details">
+												<div class="kt-notification__item-title kt-font-bold">
+													Perfil
+												</div>
+											</div>
+										</a>
+										<a href="#" class="kt-notification__item">
+											<div class="kt-notification__item-icon">
+												<i class="flaticon2-mail kt-font-warning"></i>
+											</div>
+											<div class="kt-notification__item-details">
+												<div class="kt-notification__item-title kt-font-bold">
+													Mensagens
+												</div>
+											</div>
+										</a>
+										<a href="#" class="kt-notification__item">
+											<div class="kt-notification__item-icon">
+												<i class="flaticon2-hourglass kt-font-brand"></i>
+											</div>
+											<div class="kt-notification__item-details">
+												<div class="kt-notification__item-title kt-font-bold">
+													Tarefas
+												</div>
+											</div>
+										</a>
+										<div class="kt-notification__custom kt-space-between">
+											<a href="#" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Sair</a>
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+<!------------------------------------- Menu e Dashboard (acima) ----------------------------------------------------------------->
+	
+					<div class="col-md-12 content-page">
+
+					</div>
+
+				</div><!-- /col-md-12 content-page -->
+								
+
+								
+<!------------------------------------- Fechamento do Menu e Dashboard (abaixo) -------------------------------------------------->	
+
+<!------------------- Modal Cliente ---------------------------------->
+<div class="modal fade modal-cliente" id="modal-cliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-cliente-header">
+                <div class="kt-widget__head">
+
+					<div class="kt-avatar kt-avatar--outline kt-avatar--circle img-perfil-modal">
+						<div class="kt-avatar__holder" style="background-image: url(img/user/default.jpg);"></div>
+						
+							<label class="kt-avatar__upload" data-toggle="kt-tooltip" data-placement="right" data-original-title="Editar">
+								<i class="fa fa-pen" style="right: -15%!important;"></i>
+								<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+							</label>
+							
+						</div>
+					</div>	
+
+                	<button type="button" class="close fechar-modal-cliente" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            	<form action="" method="" class="form-cliente">
+												
+					<label for="cpf">CPF</label>
+					<input class="form-control" type="text" name="cpf" id="cpf">
+				
+					<label for="nome">Nome</label>
+					<input class="form-control" type="text" name="nome" id="nome">
+				
+					<label for="whats">Whats</label>
+					<input class="form-control" type="text" name="whats" id="whats">
+					
+					<label for="email">E-mail</label>
+					<input class="form-control" type="email" name="email" id="email">
+
+				</form>
+                
+            </div>
+            <div class="modal-footer d-flex">
+            	<button style="margin-top: -5px!important;" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato mr-auto p-2" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato">
+					<i class="fa fa-plus"></i>
+				</button>
+                <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-cadastrar p-2">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------- Modal Cliente ---------------------------------->
+
+<!------------------- Modal Produto ---------------------------------->
+<div class="modal fade modal-cliente" id="modal-produto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-cliente-header">
+                <div class="kt-widget__head">
+					<div class="kt-avatar kt-avatar--outline kt-avatar--circle img-perfil-modal">
+						<div class="kt-avatar kt-avatar--outline kt-avatar--circle box-produto" style="margin: 5px 0 10px 0;">
+							<i class="fa fa-5x fa-suitcase"></i>
+						</div>
+					</div>
+				</div>	
+
+                	<button type="button" class="close fechar-modal-cliente" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            	<form action="" method="" class="form-cliente">
+												
+					<label for="nome">Nome</label>
+					<input class="form-control" type="text" name="nome" id="nome">
+				
+					<label for="nome">Número</label>
+					<input class="form-control" type="text" name="numero" id="numero">
+					
+					<div class="row">
+						<div class="col-md-6">
+							<label for="data">Data Prevista</label>
+							<input class="form-control" type="date" name="data" id="data">
+						</div>
+
+						<div class="col-md-6">
+							<label for="funil">Fase do Funil</label>
+							<input class="form-control" type="number" name="funil" id="funil">
+						</div>
+					</div>
+
+					<label for="clientes">Clientes</label>
+					<input class="form-control" type="text" name="clientes" id="clientes">
+
+					<label for="responsavel">Responsável</label>
+					<input class="form-control" type="text" name="responsavel" id="responsavel">
+
+				</form>
+                
+            </div>
+            <div class="modal-footer d-flex">
+            	<button style="margin-top: -5px!important;" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato mr-auto p-2" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar dados">
+					<i class="fa fa-plus"></i>
+				</button>
+                <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-cadastrar p-2">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------- Modal Produto ---------------------------------->
+
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" th:src="@{/vendors/general/jquery/dist/jquery.js}"></script>
+
+		<script type="text/javascript" th:src="@{/vendors/general/jquery/dist/jquery.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/popper.js/dist/umd/popper.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap/dist/js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/js-cookie/src/js.cookie.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/moment/min/moment.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/tooltip.js/dist/umd/tooltip.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/sticky-js/dist/sticky.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/wnumb/wNumb.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/jquery-form/dist/jquery.form.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/block-ui/jquery.blockUI.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/js/vendors/bootstrap-datepicker.init.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-timepicker/js/bootstrap-timepicker.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/js/vendors/bootstrap-timepicker.init.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-daterangepicker/daterangepicker.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-maxlength/src/bootstrap-maxlength.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/vendors/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-select/dist/js/bootstrap-select.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-switch/dist/js/bootstrap-switch.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/js/vendors/bootstrap-switch.init.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/select2/dist/js/select2.full.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/ion-rangeslider/js/ion.rangeSlider.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/typeahead.js/dist/typeahead.bundle.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/handlebars/dist/handlebars.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/inputmask/dist/jquery.inputmask.bundle.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/inputmask/dist/inputmask/inputmask.date.extensions.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/inputmask/dist/inputmask/inputmask.numeric.extensions.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/owl.carousel/dist/owl.carousel.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/autosize/dist/autosize.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/clipboard/dist/clipboard.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/dropzone/dist/dropzone.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/summernote/dist/summernote.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/markdown/lib/markdown.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-markdown/js/bootstrap-markdown.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/js/vendors/bootstrap-markdown.init.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/bootstrap-notify/bootstrap-notify.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/js/vendors/bootstrap-notify.init.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/jquery-validation/dist/jquery.validate.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/jquery-validation/dist/additional-methods.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/js/vendors/jquery-validation.init.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/toastr/build/toastr.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/raphael/raphael.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/morris.js/morris.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/chart.js/dist/Chart.bundle.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/waypoints/lib/jquery.waypoints.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/counterup/jquery.counterup.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/es6-promise-polyfill/promise.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/sweetalert2/dist/sweetalert2.min.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/custom/js/vendors/sweetalert2.init.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/jquery.repeater/src/lib.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/jquery.repeater/src/jquery.input.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/jquery.repeater/src/repeater.js}"></script>
+		<script type="text/javascript" th:src="@{/vendors/general/dompurify/dist/purify.js}"></script>
+		<script type="text/javascript" th:src="@{/js/template.js}"></script>
+		<script type="text/javascript" th:src="@{/js/dashboard.js}"></script>
+		
+		<script type="text/javascript" th:src="@{/js/main.js}"></script>
+		
+		
+		<!-- Scripts Template
+		<script src="./assets/vendors/general/jquery/dist/jquery.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/popper.js/dist/umd/popper.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/js-cookie/src/js.cookie.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/moment/min/moment.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/tooltip.js/dist/umd/tooltip.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/perfect-scrollbar/dist/perfect-scrollbar.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/sticky-js/dist/sticky.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/wnumb/wNumb.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/block-ui/jquery.blockUI.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/js/vendors/bootstrap-datepicker.init.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-datetime-picker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/js/vendors/bootstrap-timepicker.init.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-maxlength/src/bootstrap-maxlength.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/vendors/bootstrap-multiselectsplitter/bootstrap-multiselectsplitter.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-select/dist/js/bootstrap-select.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-switch/dist/js/bootstrap-switch.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/js/vendors/bootstrap-switch.init.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/select2/dist/js/select2.full.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/ion-rangeslider/js/ion.rangeSlider.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/typeahead.js/dist/typeahead.bundle.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/handlebars/dist/handlebars.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/inputmask/dist/jquery.inputmask.bundle.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/inputmask/dist/inputmask/inputmask.date.extensions.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/inputmask/dist/inputmask/inputmask.numeric.extensions.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/owl.carousel/dist/owl.carousel.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/autosize/dist/autosize.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/clipboard/dist/clipboard.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/dropzone/dist/dropzone.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/summernote/dist/summernote.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/markdown/lib/markdown.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/js/vendors/bootstrap-markdown.init.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/bootstrap-notify/bootstrap-notify.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/js/vendors/bootstrap-notify.init.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/jquery-validation/dist/jquery.validate.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/jquery-validation/dist/additional-methods.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/js/vendors/jquery-validation.init.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/toastr/build/toastr.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/raphael/raphael.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/morris.js/morris.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/chart.js/dist/Chart.bundle.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/vendors/bootstrap-session-timeout/dist/bootstrap-session-timeout.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/waypoints/lib/jquery.waypoints.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/counterup/jquery.counterup.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/es6-promise-polyfill/promise.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/sweetalert2/dist/sweetalert2.min.js" type="text/javascript"></script>
+		<script src="./assets/vendors/custom/js/vendors/sweetalert2.init.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/jquery.repeater/src/lib.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/jquery.repeater/src/jquery.input.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/jquery.repeater/src/repeater.js" type="text/javascript"></script>
+		<script src="./assets/vendors/general/dompurify/dist/purify.js" type="text/javascript"></script>
+		<script src="./assets/js/template.js" type="text/javascript"></script>
+		<script src="./assets/js/dashboard.js" type="text/javascript"></script>-->
+		<!-- /Scripts Template -->
+
+		<!-- Scripts Ju -->
+		<!-- <script src="./assets/js/main.js" type="text/javascript"></script> -->
+		<!-- /Scripts Ju -->
+
+	</body>
+</html>

@@ -1,0 +1,484 @@
+* { margin: 0; padding: 0; }
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=:Roboto300,400,500,600,700|Poppins:300,400,500,600,700");
+
+html, body {
+    font-family: Roboto, Poppins, sans-serif!important;
+    background-color: #e5e5e5!important;
+}
+
+:hover{
+    transition: 0.7s!important;
+    -webkit-transition: 0.7s!important;
+}
+/******* Menu e Dashboard *******/
+.logotipo img{
+	width: 80px!important;
+}
+
+.kt-aside {
+    background-color: #005594!important;
+}
+
+.kt-aside__brand {
+    background-color: #004a7f!important;
+}
+
+.kt-aside__brand .kt-aside__brand-tools .kt-aside__brand-aside-toggler span,
+.kt-aside__brand .kt-aside__brand-tools .kt-aside__brand-aside-toggler span::before,
+.kt-aside__brand .kt-aside__brand-tools .kt-aside__brand-aside-toggler span::after {
+    background: rgba(255,255,255,0.9)!important;
+}
+
+.kt-aside-menu {
+    background-color: #005594!important;
+}
+
+.kt-header {
+    background-color: #fff!important;
+}
+
+.kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--open, .kt-header-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--active {
+    background-color: #fff!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__heading .kt-menu__link-icon, .kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-icon {
+    color: rgba(255,255,255,0.9)!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__heading .kt-menu__link-icon, .kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-icon:focus {
+    background-color: #004a7f!important;
+    color: red!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--open > .kt-menu__heading, .kt-aside-menu .kt-menu__nav > .kt-menu__item.kt-menu__item--open > .kt-menu__link {
+    background-color: #004a7f!important;
+	transition: 0.7s;
+	-webkit-transition: 0.7s;
+}
+
+.kt-aside-menu .kt-menu__nav .kt-menu__item > .kt-menu__heading, .kt-aside-menu .kt-menu__nav .kt-menu__item > .kt-menu__link:hover{
+	background-color: #004a7f!important;
+} 
+
+.kt-aside .kt-aside-menu {
+    padding-top: 0!important;
+}
+
+.kt-aside-menu .kt-menu__nav {
+   padding-top: 0!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item > .kt-menu__heading .kt-menu__link-text, .kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item > .kt-menu__link .kt-menu__link-text {
+    color: #fff!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item > .kt-menu__heading .kt-menu__link-bullet.kt-menu__link-bullet--dot > span, .kt-aside-menu .kt-menu__nav > .kt-menu__item .kt-menu__submenu .kt-menu__item > .kt-menu__link .kt-menu__link-bullet.kt-menu__link-bullet--dot > span {
+    background-color: #fff!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__heading .kt-menu__link-text, .kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-text {
+    color: rgba(255,255,255,0.7)!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__heading .kt-menu__link-text, .kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-text:hover {
+    color: rgba(255,255,255,1.0)!important;
+}
+
+.kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__heading .kt-menu__link-text, .kt-aside-menu .kt-menu__nav > .kt-menu__item > .kt-menu__link .kt-menu__link-text:focus {
+    color: rgba(255,255,255,1.0)!important;
+}
+
+.kt-header__topbar .kt-header__topbar-item .kt-header__topbar-icon:hover{
+	background-color: #f4f4f4!important;
+	transition: 0.7s;
+	-webkit-transition: 0.7s;
+}
+
+.kt-header__topbar .kt-header__topbar-item .kt-header__topbar-icon:focus{
+	background-color: #f4f4f4!important;
+	transition: 0.7s;
+	-webkit-transition: 0.7s;
+}
+
+.kt-header__topbar .kt-header__topbar-item:hover .kt-header__topbar-icon, .kt-header__topbar .kt-header__topbar-item.show .kt-header__topbar-icon {
+    transition: all 0.3s;
+    background-color: #f4f4f4!important;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.65rem 1rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #c7c5d8!important;
+    text-align: center;
+    white-space: nowrap;
+    background-color: transparent!important;
+    border: none!important;
+    position: relative;
+    z-index: 2; 
+    left: -45px;
+}
+
+#input-busca{
+    margin: 1rem 0!important;
+    width: 600px!important;
+    border-radius: 4px!important;
+    background-color: #fafafa;
+    position: relative;
+    z-index: 1;    
+}
+
+/**** Menu Responsivo ****/
+.kt-header-mobile {
+   background-color: #005594!important;
+}
+
+.kt-header-mobile .kt-header-mobile__toolbar .kt-header-mobile__toolbar-toggler span {
+    background: #fff!important;
+}
+
+.kt-header-mobile .kt-header-mobile__toolbar .kt-header-mobile__toolbar-toggler span::after {
+    background: #fff!important;
+}
+
+.kt-header-mobile .kt-header-mobile__toolbar .kt-header-mobile__toolbar-toggler span::before {
+    background: #fff!important;
+}
+
+.kt-header-mobile .kt-header-mobile__toolbar .kt-header-mobile__toolbar-topbar-toggler i {
+    color: #fff!important;
+}
+
+.ps__thumb-y{
+    background-color: rgba(255,255,255,0.5)!important;
+    border-radius: 4px!important;
+}
+/**** /Menu Responsivo ****/
+/******* /Menu e Dashboard *******/
+
+/********* Content Page *********/
+.content-page{
+    margin-top: 25px!important;
+    margin-bottom: 25px!important;
+}
+
+/**** Form Cliente ****/
+.content-cliente{
+    border-radius: 4px!important;
+}
+
+.kt-portlet__body-image{
+    background-color: #005594!important;
+    border-radius: 4px 4px 0 0!important;
+    padding-bottom: 35px!important;
+}
+
+.kt-portlet__body-form{
+    /*background-color: #C6CBD0!important;*/
+    border-radius: 0 0 4px 4px!important;
+}
+
+.kt-widget.kt-widget--user-profile-4 .kt-widget__head .kt-avatar {
+    display: flex!important;
+    justify-content: center!important;
+}
+
+.box-cliente .kt-avatar__upload {
+    right: 23%!important;
+    top: 5px;
+}
+
+.kt-avatar .kt-avatar__upload:hover {
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    background-color: #F78B1F!important;
+    
+}
+
+.kt-avatar .kt-avatar__upload:hover i {
+    color: #ffffff!important;
+}
+
+.kt-avatar .kt-avatar__upload i {
+    color: #005594!important;
+    font-size: 0.9rem;
+}
+
+.form-cliente label{
+    font-weight: 500!important;
+    line-height: 1.2!important;
+}
+
+.form-cliente .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.3em + 1.1rem + 2px);
+    padding: 0.5rem 1rem!important;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #a4a8bc;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.btn-adicionar-contato{
+    background-color: #005594!important;
+    border-color: #005594!important;
+    box-shadow: 1px 4px 4px rgba(0,0,0,0.5)!important;
+    margin-top: 12px;
+}
+
+.btn-adicionar-contato:hover{
+    background-color: #fff!important;
+    border-color: #fff!important;
+}
+
+
+.btn-adicionar-contato:hover i{
+    color: #005594!important;
+}
+
+.header-box-padrao{
+    background-color: #005594!important;
+    border-radius: 4px 4px 0 0;
+}
+
+.kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-title {
+    font-size: 1rem!important;
+    font-weight: 500;
+    color: #fff!important;
+}
+
+.body-box-padrao{
+    background-color: #fff!important;
+    height: 150px;
+}
+
+.kt-portlet--height-fluid{
+    height: auto!important;
+    margin-bottom: 0!important;
+}
+
+.footer-box-padrao{
+    background-color: #fff!important;
+    border-radius: 0 0 4px 4px;
+}
+
+.box-botao-salvar{
+    padding: 15px;
+}
+
+.btn-salvar{
+    position: relative!important;
+    background-color: #005594!important;
+    border-color: #005594!important;
+    float: right!important;
+    border-radius: 4px!important;
+}
+
+.btn-salvar:hover{
+    background-color: #003f6c!important;
+    border-color: #003f6c!important;
+    float: right!important;
+    border-radius: 4px!important;
+}
+/**** /Form Cliente ****/
+
+
+/**** Box Negocios ****/
+.body-box-negocios{
+    background-color: #fff!important;
+    height: 150px;
+    border-radius: 0 0 4px 4px;
+}
+/**** /Box Negocios ****/
+
+/**** Linha do Tempo ****/
+.body-box-linha-do-tempo{
+    padding: 25px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 0 0 4px 4px;
+}
+
+.foto-linha-tempo img{
+    width: 60px;
+    border-radius: 50%;
+}
+
+.nome-linha-tempo{
+    margin: 5px 0 0 20px;
+}
+
+.accordion-linha-tempo {
+    margin-bottom: 0px!important;
+    box-shadow: none!important;
+}
+
+.card-accordion-linha-tempo{
+    border-bottom: 1px solid #005594!important;
+}
+/**** /Linha do Tempo ****/
+
+/**** Modal Cliente ****/
+.modal-dialog{
+    max-width: 400px!important;
+}
+
+.modal-cliente{
+    margin-left: 8%!important;
+}
+.modal-content{
+    border-radius: 4px!important;
+    border: none!important;
+}
+
+.modal-cliente .kt-avatar__upload {
+    right: 3%!important;
+    top: 5px;
+}
+
+.modal-cliente-header{
+    background-color: #005594!important;
+    border-color: #005594!important;
+    border-radius: 4px 4px 0 0!important;
+}
+
+.img-perfil-modal{
+    margin: 5px 0 0 120px;
+}
+
+.fechar-modal-cliente{
+    color: #fff!important;
+}
+
+.btn-cadastrar{
+    background-color: #005594!important;
+    border-color: #005594!important;
+    border-radius: 4px!important;
+}
+
+.btn-cadastrar:hover{
+    background-color: #003f6c!important;
+    border-color: #003f6c!important;
+}
+
+.btn-cancelar{
+    border: 1px solid #F78B1F!important;
+    color: #f78b1f!important;
+    border-radius: 4px!important;
+    font-weight: 500!important;
+    line-height: 1.2!important;
+}
+
+.btn-cancelar:hover{
+    border: 1px solid #F78B1F!important;
+    background-color: #f78b1f!important;
+    color: #fff!important;
+}
+/**** /Modal Cliente ****/
+
+/**** Modal Produto ****/
+
+/**** /Modal Produto ****/
+
+/**** Section Produto ****/
+.box-produto i{
+    color: #fff;
+    padding: 20px;
+    border-radius: 50%;
+    border: solid 3px #fff;
+
+}
+/**** /Section Produto ****/
+/**** Lista ****/
+.lista {
+    margin: 0 25px;
+    border-radius: 4px;
+}
+
+.lista table{
+    color: #74788d!important;
+}
+
+.kt-portlet .lista-header {
+    background-color: #005594;
+    border-radius: 4px 4px 0 0!important;
+    min-height: 4px!important;
+    border-bottom: 0!important;
+}
+
+.lista thead{
+    background-color: #005594;
+    color: #fff;
+}
+
+.lista th, td{
+    padding: 2% 0 2% 10%!important; 
+}
+
+@media screen and (max-width: 450px){
+
+    .lista th, td{
+        padding: 0!important; 
+    }
+
+}
+
+.lista h6{
+    padding-top: 10px;
+    font-weight: 400!important;
+}
+
+.kt-portlet .body-list {
+    padding: 0!important;
+}
+
+.foto-lista img{
+    width: 35px;
+    border-radius: 50%;
+}
+
+.foto-lista i{
+    color: #005594!important;
+    position: relative;
+    top: 2px;
+}
+
+.nome-lista{
+    margin-left: 10px;
+}
+
+.lista td span{
+    margin-top: 30px;
+}
+
+.botao-lista{
+    position: relative;
+    margin-right: 30px;
+    float: right;
+}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: none!important;
+    border-bottom: 1px solid #ebedf2;
+}
+/**** /Lista ****/
+
+/********* /Content Page *********/
+
+
+
