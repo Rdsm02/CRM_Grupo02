@@ -30,7 +30,7 @@ public class ClienteController {
 	@GetMapping("/listagemClientes")
 	public ModelAndView listagemCliente() {
 		ModelAndView mv = new ModelAndView("paginas/cliente/listagemClientes");
-		//mv.addObject("clientes", servicoCliente.searchAll());
+		mv.addObject("clientes", servicoCliente.searchAll());
 		return mv;
 	}
 

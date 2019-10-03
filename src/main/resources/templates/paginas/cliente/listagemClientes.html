@@ -10,55 +10,25 @@
 					<thead>
 						<tr>
 							<th>NOME</th>
-							<th>CONTATO</th>
-							<th>INFORMAÇÕES</th>
-							<th>OFERTA RELACIONADA</th>
+							<th>CPF</th>
+							<th>EMAIL</th>
+							<th>STATUS</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr th:each="cliente : ${clientes}">
 							<th scope="row"><span class="foto-lista"> <img
 									src="./assets/img/user/default.jpg"
 									th:src="@{/img/user/default.jpg}">
-							</span> <span class="nome-lista"> Maria dos Santos Ribeiro </span></th>
+							</span> <span class="nome-lista" th:text="${cliente.nome}"> </span></th>
 							<td>
-								<h6>a@hotmail.com</h6>
+								<h6 th:text="${cliente.cpf}"></h6>
 							</td>
 							<td>
-								<h6>2</h6>
+								<h6 th:text="${cliente.email}"></h6>
 							</td>
 							<td>
-								<h6>Contrato para ADS</h6>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row"><span class="foto-lista"> <img
-									src="./assets/img/user/default.jpg"
-									th:src="@{/img/user/default.jpg}">
-							</span> <span class="nome-lista"> João da Cruz </span></th>
-							<td>
-								<h6>ba@hotmail.com</h6>
-							</td>
-							<td>
-								<h6>0</h6>
-							</td>
-							<td>
-								<h6>Nenhuma</h6>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row"><span class="foto-lista"> <img
-									src="./assets/img/user/default.jpg"
-									th:src="@{/img/user/default.jpg}">
-							</span> <span class="nome-lista"> Everton Souza </span></th>
-							<td>
-								<h6>97598-3269</h6>
-							</td>
-							<td>
-								<h6>1</h6>
-							</td>
-							<td>
-								<h6>Contrato para Hotelaria</h6>
+								<h6 th:text="${cliente.status}"></h6>
 							</td>
 						</tr>
 					</tbody>
