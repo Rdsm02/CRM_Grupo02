@@ -1,14 +1,5 @@
 "use strict";
 
-$( document ).ready(function() {
-	  // Handler for .ready() called.
-	/*=====[Rodrigo]=====*/
-	
-	$("#kt_aside_menu > ul > li.kt-menu__item.kt-menu__item--submenu.kt-menu__item--open > div > ul > li:nth-child(3) > a > span").click(function(){
-		$("#central").load("http://localhost:8080/cliente/listagemClientes");
-	});
-	});
-
 // Class definition
 var KTDashboard = function() {
 	
@@ -1937,4 +1928,5 @@ var KTDashboard = function() {
 // Class initialization on page load
 jQuery(document).ready(function() {
     KTDashboard.init();
+
 });

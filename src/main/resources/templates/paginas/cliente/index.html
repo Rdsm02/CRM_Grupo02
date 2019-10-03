@@ -26,7 +26,6 @@
 		<!-- Favicon: o icone do logotipo, que fica ali em cima na aba da página. -->
 		<link rel="shortcut icon" type="text/css" th:href="@{/img/logotipo/favicon.png}" />
 
-
 		<link rel="stylesheet" type="text/css" th:href="@{/css/template.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/perfect-scrollbar/css/perfect-scrollbar.css}" />
 		<link rel="stylesheet" type="text/css" th:href="@{/vendors/general/tether/dist/css/tether.css}" />
@@ -99,7 +98,7 @@
 										<ul class="kt-menu__subnav">
 											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
 											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-cliente" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar</span></div></li>
-											<li class="kt-menu__item " aria-haspopup="true"><a href="/client-list/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Pesquisar</span></a></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="listarClientes" class="kt-menu__link-text">Pesquisar Clientes</span></a></li>
 										</ul>
 									</div>
 								</li>
@@ -109,7 +108,7 @@
 										<ul class="kt-menu__subnav">
 											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
 											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-produto" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar</span></div></li>
-											<li class="kt-menu__item " aria-haspopup="true"><a href="/business-list/" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Pesquisar</span></a></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="listarProdutos" class="kt-menu__link-text">Pesquisar Produtos</span></a></li>
 										</ul>
 									</div>
 								</li>
@@ -491,6 +490,22 @@
 		<script type="text/javascript" th:src="@{/js/template.js}"></script>
 		<script type="text/javascript" th:src="@{/js/dashboard.js}"></script>
 		<script type="text/javascript" th:src="@{/js/main.js}"></script>
+		
+		<script>
+		$( document ).ready(function() {
+			  // Handler for .ready() called.
+		/*=====[Rodrigo]=====*/
+			$("#listarClientes").click(function(){
+				$("#central").load("http://localhost:8080/cliente/listagemClientes");
+			});
+			$("#listarProdutos").click(function(){
+				$("#central").load("http://localhost:8080/produto/listagemProdutos");
+			});
+		});
+		
+		
+		
+		</script>
 		
 
 	</body>
