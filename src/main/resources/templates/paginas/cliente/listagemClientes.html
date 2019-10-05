@@ -10,9 +10,9 @@
 					<thead>
 						<tr>
 							<th>NOME</th>
+							<th>SOBRENOME</th>
 							<th>CPF</th>
-							<th>EMAIL</th>
-							<th>STATUS</th>
+							<th>OFERTA RELACINADA</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -22,10 +22,10 @@
 									th:src="@{/img/user/default.jpg}">
 							</span> <span class="nome-lista" th:text="${cliente.nome}"> </span></th>
 							<td>
-								<h6 th:text="${cliente.cpf}"></h6>
+								<h6 th:text="${cliente.sobrenome}"></h6>
 							</td>
 							<td>
-								<h6 th:text="${cliente.email}"></h6>
+								<h6 th:text="${cliente.cpf}"></h6>
 							</td>
 							<td>
 								<h6 th:text="${cliente.status}"></h6>

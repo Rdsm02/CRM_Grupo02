@@ -339,26 +339,48 @@
             <div class="modal-body">
 
             	<form action="" method="" class="form-cliente">
-												
+					
+					<div id="dadosObrigatorios">						
 					<label for="cpf">CPF</label>
 					<input class="form-control" type="text" name="cpf" id="cpf">
 				
 					<label for="nome">Nome</label>
 					<input class="form-control" type="text" name="nome" id="nome">
-				
-					<label for="whats">Whats</label>
-					<input class="form-control" type="text" name="whats" id="whats">
+					</div>
 					
-					<label for="email">E-mail</label>
-					<input class="form-control" type="email" name="email" id="email">
+					<div id="dadosComplementares">
+					<fieldset><legend>Dados Complementares</legend>
+					</fieldset>
+					</div>	
+					
+					
+					<div class="dropdown">
+					<div class="row">
+					<div class="col-md-7">
+					      <select  class="form-control"  id="camposComplementaresSelecionar" data-placeholder="Selecione o tipo do dado">
+					         <option value="0">TESTE</option>
+					       </select>
+					   </div>
+					 <!--  <div class="col-md-7">
+					      <select  class="form-control"  id="camposComplementaresSelecionar" data-placeholder="Selecione o tipo do dado" th:field="*{}">
+					         <option value="0" th:each="dadoTipo : ${dadoTipoLista}" th:value="${dadoTipo.codigo}" th:text="${dadoTipo.descricao}"></option>
+					       </select>
+					   </div> -->
+					   <div class="col-md-5">
+					       <button id="botaoAdicionarNovoCampo" style="margin-top: -5px!important;" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato mr-auto p-2" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato">
+							<i class="fa fa-plus"></i>
+						</button>
+						</div>
+					   </div>
+					  
+					</div>
+					
 
 				</form>
                 
             </div>
             <div class="modal-footer d-flex">
-            	<button style="margin-top: -5px!important;" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato mr-auto p-2" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato">
-					<i class="fa fa-plus"></i>
-				</button>
+            	
                 <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;">Cancelar</button>
                 <button type="button" class="btn btn-primary btn-cadastrar p-2">Cadastrar</button>
             </div>
@@ -490,18 +512,36 @@
 		<script type="text/javascript" th:src="@{/js/template.js}"></script>
 		<script type="text/javascript" th:src="@{/js/dashboard.js}"></script>
 		<script type="text/javascript" th:src="@{/js/main.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.mask.js}"></script>
 		
 		<script>
 		$( document ).ready(function() {
 			  // Handler for .ready() called.
 		/*=====[Rodrigo]=====*/
+		var dominio = window.location.origin;
 			$("#listarClientes").click(function(){
-				$("#central").load("http://localhost:8080/cliente/listagemClientes");
+				$("#central").load(dominio + "/cliente/listagemClientes");
+				console.log(window.location.href);
+				console.log(window.location);
 			});
 			$("#listarProdutos").click(function(){
-				$("#central").load("http://localhost:8080/produto/listagemProdutos");
+				$("#central").load(dominio + "/produto/listagemProdutos");
 			});
+			
+			("#botaoAdicionarNovoCampo").click(function(){
+				
+			});
+			
+			/*=====[Mascaras para os campos]=====*/
+			
+			
+			$("input#cpf.form-control").mask('000.000.000-00', {reverse: true});
+			
 		});
+		
+		/*
+		*$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").append('<input class="form-control" type="text" name="teste" id="teste" maxlength="14">');
+		*/
 		
 		
 		
