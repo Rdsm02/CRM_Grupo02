@@ -37,7 +37,7 @@ public class ClienteDadoTipo implements Serializable {
 	private String mascara;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "cliente_dado_tipo_categoria_id)", nullable = false)
+	@JoinColumn(name = "cliente_dado_tipo_categoria_id", nullable = false)
 	// @JsonIgnore
 	private ClienteDadoTipoCategoria cliente_dado_tipo_categoria_id;
 
