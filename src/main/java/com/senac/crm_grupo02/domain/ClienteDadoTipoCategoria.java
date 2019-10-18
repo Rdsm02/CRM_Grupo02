@@ -15,7 +15,6 @@ public class ClienteDadoTipoCategoria implements Serializable {
 
 	@Id
 	@Column(name = "cliente_dado_tipo_categoria_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 
 	@Column(name = "cliente_dado_tipo_categoria_descricao")
@@ -23,6 +22,14 @@ public class ClienteDadoTipoCategoria implements Serializable {
 
 	@Column(name = "cliente_dado_tipo_categoria_status")
 	private String status;
+
+	public Integer getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -39,8 +46,5 @@ public class ClienteDadoTipoCategoria implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public Integer getCodigo() {
-		return codigo;
-	}
+	
 }

@@ -1,6 +1,5 @@
 package com.senac.crm_grupo02.init;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,11 +9,14 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.senac.crm_grupo02.domain.Cliente;
+import com.senac.crm_grupo02.domain.ClienteDadoTipo;
+import com.senac.crm_grupo02.domain.ClienteDadoTipoCategoria;
 import com.senac.crm_grupo02.domain.ClienteOferta;
-import com.senac.crm_grupo02.domain.ClienteOfertaId;
 import com.senac.crm_grupo02.domain.NivelInstrucao;
 import com.senac.crm_grupo02.domain.Oferta;
 import com.senac.crm_grupo02.domain.Produto;
+import com.senac.crm_grupo02.service.ClienteDadoTipoCategoriaService;
+import com.senac.crm_grupo02.service.ClienteDadoTipoService;
 import com.senac.crm_grupo02.service.ClienteOfertaService;
 import com.senac.crm_grupo02.service.ClienteService;
 import com.senac.crm_grupo02.service.NivelInstrucaoService;
@@ -38,6 +40,12 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
 	ClienteOfertaService servicoClienteOferta;
+	
+	@Autowired
+	ClienteDadoTipoService servicoClienteDadoTipo;
+	
+	@Autowired
+	ClienteDadoTipoCategoriaService servicoClienteDadoTipoCategoria;
 	
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
@@ -102,8 +110,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		servicoProduto.saveAll(listaDeProdutos);
 		
 		
-		LocalDate dataInicio = LocalDate.of(2019, 7, 1);
-		LocalDate dataFim = LocalDate.of(2019, 12, 20);
+		//LocalDate dataInicio = LocalDate.of(2019, 7, 1);
+		//LocalDate dataFim = LocalDate.of(2019, 12, 20);
 		
 		Oferta o1 = new Oferta();
 		o1.setId(1);
@@ -137,6 +145,66 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		//servicoClienteOferta.saveAll(listaDeClienteOferta);
 		
+		ClienteDadoTipoCategoria endereco = new ClienteDadoTipoCategoria();
+		endereco.setCodigo(0);
+		endereco.setDescricao("Endereco");
+		endereco.setStatus("ativo");
+		
+		ClienteDadoTipoCategoria contato = new ClienteDadoTipoCategoria();
+		contato.setCodigo(1);
+		contato.setDescricao("Contato");
+		contato.setStatus("ativo");
+		
+		List<ClienteDadoTipoCategoria> listaDeClienteDadoTipoCategoria = new ArrayList<>();
+		listaDeClienteDadoTipoCategoria.add(endereco);
+		listaDeClienteDadoTipoCategoria.add(contato);
+		servicoClienteDadoTipoCategoria.saveAll(listaDeClienteDadoTipoCategoria);
+		
+		
+		
+		ClienteDadoTipo cep = new ClienteDadoTipo();
+		cep.setCodigo(null);
+		cep.setDescricao("CEP");
+		cep.setStatus("Ativo");	
+		cep.setObrigatorio(1);
+		cep.setPadrao(1);
+		cep.setMascara("00000-000");
+		cep.setCliente_dado_tipo_categoria(endereco);		
+		
+		ClienteDadoTipo rua = new ClienteDadoTipo();
+		rua.setCodigo(null);
+		rua.setDescricao("Rua");
+		rua.setStatus("Ativo");	
+		rua.setObrigatorio(1);
+		rua.setPadrao(1);
+		rua.setMascara("SSSS");
+		rua.setCliente_dado_tipo_categoria(endereco);
+		
+		ClienteDadoTipo telefone = new ClienteDadoTipo();
+		telefone.setCodigo(null);
+		telefone.setDescricao("Telefone");
+		telefone.setStatus("Ativo");	
+		telefone.setObrigatorio(1);
+		telefone.setPadrao(1);
+		telefone.setMascara("(00) 0 0000-0000");
+		telefone.setCliente_dado_tipo_categoria(contato);
+		
+		ClienteDadoTipo email = new ClienteDadoTipo();
+		email.setCodigo(null);
+		email.setDescricao("email");
+		email.setStatus("Ativo");	
+		email.setObrigatorio(1);
+		email.setPadrao(1);
+		email.setMascara("SSSS");
+		email.setCliente_dado_tipo_categoria(contato);
+		
+		List<ClienteDadoTipo> listaDeClienteDadoTipo = new ArrayList<>();
+		listaDeClienteDadoTipo.add(cep);
+		listaDeClienteDadoTipo.add(rua);
+		listaDeClienteDadoTipo.add(telefone);
+		listaDeClienteDadoTipo.add(email);
+		
+		servicoClienteDadoTipo.saveAll(listaDeClienteDadoTipo);
 		
 	}
 

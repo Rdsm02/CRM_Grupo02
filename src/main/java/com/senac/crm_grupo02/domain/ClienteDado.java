@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ClienteDado implements Serializable {
@@ -28,12 +27,10 @@ public class ClienteDado implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "cliente_id", nullable = false)
-	// @JsonIgnore
 	private Cliente clienteId;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "cliente_dado_tipo_id", nullable = false)
-	// @JsonIgnore
 	private ClienteDadoTipo clienteDadoTipoId;
 
 	public String getStatus() {
@@ -54,6 +51,26 @@ public class ClienteDado implements Serializable {
 
 	public Integer getCodigo() {
 		return codigo;
+	}
+
+	public Cliente getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Cliente clienteId) {
+		this.clienteId = clienteId;
+	}
+
+	public ClienteDadoTipo getClienteDadoTipoId() {
+		return clienteDadoTipoId;
+	}
+
+	public void setClienteDadoTipoId(ClienteDadoTipo clienteDadoTipoId) {
+		this.clienteDadoTipoId = clienteDadoTipoId;
+	}
+
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 }

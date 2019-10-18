@@ -33,6 +33,12 @@ public class ClienteController {
 		mv.addObject("clientes", servicoCliente.searchAll());
 		return mv;
 	}
+	
+	@GetMapping("/detalheClientes")
+	public ModelAndView detalheCliente() {
+		ModelAndView mv = new ModelAndView("paginas/cliente/detalheClientes");
+		return mv;
+	}
 
 	@GetMapping("/listarTodosClientes")
 	public ModelAndView listarTodosOsClientes() {

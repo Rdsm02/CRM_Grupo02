@@ -97,8 +97,9 @@
 									<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
 										<ul class="kt-menu__subnav">
 											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
-											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-cliente" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar</span></div></li>
+											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-cliente" class="kt-menu__link " onclick="carregarClienteDadoCategorias()"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar</span></div></li>
 											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="listarClientes" class="kt-menu__link-text">Pesquisar Clientes</span></a></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="detalheClientes" class="kt-menu__link-text">Detalhar Clientes</span></a></li>
 										</ul>
 									</div>
 								</li>
@@ -109,6 +110,7 @@
 											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
 											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-produto" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar</span></div></li>
 											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="listarProdutos" class="kt-menu__link-text">Pesquisar Produtos</span></a></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="detalharProdutos" class="kt-menu__link-text">Detalhar Produtos</span></a></li>
 										</ul>
 									</div>
 								</li>
@@ -317,7 +319,7 @@
 <!------------------------------------- Fechamento do Menu e Dashboard (abaixo) -------------------------------------------------->	
 
 <!------------------- Modal Cliente ---------------------------------->
-<div class="modal fade modal-cliente" id="modal-cliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade modal-cliente" id="modal-cliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header modal-cliente-header">
@@ -358,7 +360,7 @@
 					<div class="row">
 					<div class="col-md-7">
 					      <select  class="form-control"  id="camposComplementaresSelecionar" data-placeholder="Selecione o tipo do dado">
-					         <option value="0">TESTE</option>
+					         <option value="-1">Selecione uma Categoria</option>
 					       </select>
 					   </div>
 					 <!--  <div class="col-md-7">
@@ -381,8 +383,8 @@
             </div>
             <div class="modal-footer d-flex">
             	
-                <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-cadastrar p-2">Cadastrar</button>
+                <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;" onclick="zerarTodosOsCampos()">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-cadastrar p-2" onclick="cadastrarCliente()">Cadastrar</button>
             </div>
         </div>
     </div>
@@ -515,21 +517,49 @@
 		<script type="text/javascript" th:src="@{/js/jquery.mask.js}"></script>
 		
 		<script>
+		var dominio = window.location.origin;
+		console.log(window.location.href);
+		console.log(window.location);
+		
 		$( document ).ready(function() {
 			  // Handler for .ready() called.
 		/*=====[Rodrigo]=====*/
-		var dominio = window.location.origin;
 			$("#listarClientes").click(function(){
 				$("#central").load(dominio + "/cliente/listagemClientes");
-				console.log(window.location.href);
-				console.log(window.location);
+			});
+			$("#detalheClientes").click(function(){
+				$("#central").load(dominio + "/cliente/detalheClientes");
 			});
 			$("#listarProdutos").click(function(){
 				$("#central").load(dominio + "/produto/listagemProdutos");
 			});
+			$("#detalharProdutos").click(function(){
+				$("#central").load(dominio + "/produto/detalheProdutos");
+			});			
 			
-			("#botaoAdicionarNovoCampo").click(function(){
-				
+			
+			$("#botaoAdicionarNovoCampo").click(function(){
+				var idCategoria = $("#camposComplementaresSelecionar option:selected").val();
+				var listaDeDadoTipo;
+				/*Requisição ajax passando id do dado tipo do cliente*/
+				$.ajax({
+				type: "GET",
+				url: dominio + "/clienteREST/clienteDadoTipo?categoriaId="+idCategoria,
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					console.log(response);
+					listaDeDadoTipo = response;									            
+					}
+				});
+				$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").append('<fieldset><legend id="'+listaDeDadoTipo[0].cliente_dado_tipo_categoria.descricao.toLowerCase()+'">'+listaDeDadoTipo[0].cliente_dado_tipo_categoria.descricao+'</legend></fieldset>');
+				$.each(listaDeDadoTipo, function(index, value) {
+				$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").append('<label for="nome">'+value.descricao+'</label><input class="form-control" type="text" name="'+value.descricao.toLowerCase()+'" id="'+value.descricao.toLowerCase()+'" maxlength="14" required="true">');
+				if((value.descricao).length !== null && (value.descricao).length > 0){
+					$("#"+value.descricao.toLowerCase()).mask(value.mascara, {reverse: true});					
+				}
+				});
+				acoesParaCategoriaEndereco();
 			});
 			
 			/*=====[Mascaras para os campos]=====*/
@@ -539,8 +569,115 @@
 			
 		});
 		
+		
+		function carregarClienteDadoCategorias(){
+			var listaDeCategorias;
+			$.ajax({
+				type: "GET",
+				url: dominio + "/clienteREST/clienteDadoTipoCategorias",
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					listaDeCategorias = response;									            
+					}
+				});
+			
+			$("#camposComplementaresSelecionar option").remove();
+			$("#camposComplementaresSelecionar").append('<option value="-1">Selecione uma Categoria</option>');
+			
+			$.each(listaDeCategorias, function(index, value) {
+				$("#camposComplementaresSelecionar").append('<option value="'+value.codigo+'">'+value.descricao+'</option>');
+			});
+			
+		}
+		
+		function acoesParaCategoriaEndereco(){
+			
+			/*criar um método para essas ações serem criadas ao ser criado o campo dinamico*/
+			$("#cep").on('keydown', '#textbox', function(e) { 
+				  var keyCode = e.keyCode || e.which; 
+				  	console.log(e);
+					console.log("keycode sozinho " + keyCode);
+					console.log("wich" + e.wich);
+					console.log("keycode " + e.keyCode);
+				  if (keyCode == 9) { 
+				    e.preventDefault(); 
+				    // call custom function here
+				  } 
+				});
+			
+			$("#cep").keypress(function(e){
+				console.log(e.wich);
+				console.log(e);
+				console.log("keycode sozinho " + keyCode);
+				console.log("wich" + e.wich);
+				console.log("keycode " + e.keyCode);
+				if(e.wich == 9 || e.keyCode == 9){
+					alert('Tecla ENTER');
+				}
+			  });
+			
+			$("#cep").change(function() {
+			
+		});
+		}
+		
+		function cadastrarCliente(){
+			
+			var lista = new Array();
+
+			var form = $("#modal-cliente > div > div > div.modal-body > form > div > input");
+
+			$.each(form, function(index, value) {
+				var objeto = new Object();
+				objeto.descricao = value['name'];
+				objeto.valor = value['value'];
+				lista.push(objeto);
+			});
+
+			var listaFormatada = JSON.stringify(lista);
+			
+			if(($("#dadosComplementares > fieldset > #contato").text) != null){
+				
+				var form = $("#modal-cliente > div > div > div.modal-body > form").serialize();
+				$.ajax({
+					type: "POST",
+					url: dominio + "/clienteREST/cadastrarCliente",
+					data: listaFormatada,
+					contentType: "application/json",
+					dataType: "JSON",
+					async: false,
+					success: function (response) {
+						console.log(respose[0]);									            
+						}
+					});
+				
+			}else{
+				
+				return false;
+				
+			}
+		}
+		
+		function zerarTodosOsCampos(){
+			
+			$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").children().remove();
+			
+		}
+		
 		/*
-		*$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").append('<input class="form-control" type="text" name="teste" id="teste" maxlength="14">');
+		var lista = new Array();
+
+var form = $("#modal-cliente > div > div > div.modal-body > form > div > input");
+
+$.each(form, function(index, value) {
+var objeto = new Object();
+objeto.descricao = value['name'];
+objeto.valor = value['value'];
+lista.push(objeto);
+
+				console.log(lista);
+			});
 		*/
 		
 		

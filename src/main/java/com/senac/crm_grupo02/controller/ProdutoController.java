@@ -31,6 +31,13 @@ public class ProdutoController {
 		//mv.addObject("clientes", servicoCliente.searchAll());
 		return mv;
 	}
+	
+	@GetMapping("/detalheProdutos")
+	public ModelAndView detalheProduto() {
+		ModelAndView mv = new ModelAndView("paginas/produto/detalheProdutos");
+		//mv.addObject("clientes", servicoCliente.searchAll());
+		return mv;
+	}
 
 	@GetMapping("/listarTodosProdutos")
 	public ModelAndView listarTodosOsProdutos() {

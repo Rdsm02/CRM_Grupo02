@@ -39,7 +39,7 @@ public class ClienteDadoTipo implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "cliente_dado_tipo_categoria_id", nullable = false)
 	// @JsonIgnore
-	private ClienteDadoTipoCategoria cliente_dado_tipo_categoria_id;
+	private ClienteDadoTipoCategoria cliente_dado_tipo_categoria;
 
 	public String getDescricao() {
 		return descricao;
@@ -81,8 +81,20 @@ public class ClienteDadoTipo implements Serializable {
 		this.mascara = mascara;
 	}
 
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
+
 	public Integer getCodigo() {
 		return codigo;
+	}
+
+	public ClienteDadoTipoCategoria getCliente_dado_tipo_categoria() {
+		return cliente_dado_tipo_categoria;
+	}
+
+	public void setCliente_dado_tipo_categoria(ClienteDadoTipoCategoria cliente_dado_tipo_categoria) {
+		this.cliente_dado_tipo_categoria = cliente_dado_tipo_categoria;
 	}
 
 }
