@@ -145,22 +145,53 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		//servicoClienteOferta.saveAll(listaDeClienteOferta);
 		
+		ClienteDadoTipoCategoria principal = new ClienteDadoTipoCategoria();
+		principal.setCodigo(0);
+		principal.setDescricao("Principal");
+		principal.setStatus("ativo");
+		
 		ClienteDadoTipoCategoria endereco = new ClienteDadoTipoCategoria();
-		endereco.setCodigo(0);
+		endereco.setCodigo(1);
 		endereco.setDescricao("Endereco");
 		endereco.setStatus("ativo");
 		
 		ClienteDadoTipoCategoria contato = new ClienteDadoTipoCategoria();
-		contato.setCodigo(1);
+		contato.setCodigo(2);
 		contato.setDescricao("Contato");
 		contato.setStatus("ativo");
 		
 		List<ClienteDadoTipoCategoria> listaDeClienteDadoTipoCategoria = new ArrayList<>();
+		listaDeClienteDadoTipoCategoria.add(principal);
 		listaDeClienteDadoTipoCategoria.add(endereco);
 		listaDeClienteDadoTipoCategoria.add(contato);
 		servicoClienteDadoTipoCategoria.saveAll(listaDeClienteDadoTipoCategoria);
 		
-		
+		ClienteDadoTipo cpf = new ClienteDadoTipo();
+		cpf.setCodigo(null);
+		cpf.setDescricao("CPF");
+		cpf.setStatus("Ativo");	
+		cpf.setObrigatorio(1);
+		cpf.setPadrao(1);
+		cpf.setMascara("000.000.000-00");
+		cpf.setCliente_dado_tipo_categoria(principal);
+
+		ClienteDadoTipo nome = new ClienteDadoTipo();
+		nome.setCodigo(null);
+		nome.setDescricao("Nome");
+		nome.setStatus("Ativo");	
+		nome.setObrigatorio(1);
+		nome.setPadrao(1);
+		nome.setMascara("0");
+		nome.setCliente_dado_tipo_categoria(principal);
+
+		ClienteDadoTipo sobrenome = new ClienteDadoTipo();
+		sobrenome.setCodigo(null);
+		sobrenome.setDescricao("Sobrenome");
+		sobrenome.setStatus("Ativo");	
+		sobrenome.setObrigatorio(1);
+		sobrenome.setPadrao(1);
+		sobrenome.setMascara("SSSSSSSSSSSSSSSSSSSSSSSS");
+		sobrenome.setCliente_dado_tipo_categoria(principal);
 		
 		ClienteDadoTipo cep = new ClienteDadoTipo();
 		cep.setCodigo(null);
@@ -199,6 +230,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		email.setCliente_dado_tipo_categoria(contato);
 		
 		List<ClienteDadoTipo> listaDeClienteDadoTipo = new ArrayList<>();
+		listaDeClienteDadoTipo.add(cpf);
+		listaDeClienteDadoTipo.add(nome);
+		listaDeClienteDadoTipo.add(sobrenome);
 		listaDeClienteDadoTipo.add(cep);
 		listaDeClienteDadoTipo.add(rua);
 		listaDeClienteDadoTipo.add(telefone);

@@ -344,10 +344,17 @@
 					
 					<div id="dadosObrigatorios">						
 					<label for="cpf">CPF</label>
-					<input class="form-control" type="text" name="cpf" id="cpf">
+					<input type="hidden" id="idCpf" name="idCpf" value="0">
+					<input class="form-control" type="text" name="cpf" id="cpf" maxlength="14">
 				
 					<label for="nome">Nome</label>
-					<input class="form-control" type="text" name="nome" id="nome">
+					<input type="hidden" id="idNome" name="idNome" value="1">
+    				<input class="form-control" type="text" name="nome" id="nome">
+
+    				<label for="nome">Sobrenome</label>
+					<input type="hidden" id="idSobrenome" name="idSobrenome" value="2">
+					<input class="form-control" type="text" name="sobrenome" id="sobrenome">					
+					
 					</div>
 					
 					<div id="dadosComplementares">
@@ -517,7 +524,14 @@
 		<script type="text/javascript" th:src="@{/js/jquery.mask.js}"></script>
 		
 		<script>
-		var dominio = window.location.origin;
+		var url = window.location.origin;
+
+		var nomePath = window.location.pathname;
+
+		var array = nomePath.split("/");
+
+		var dominio = url+"/"+array[1];
+		//var dominio = window.location.origin;
 		console.log(window.location.href);
 		console.log(window.location);
 		
@@ -548,13 +562,13 @@
 				dataType: "JSON",
 				async: false,
 				success: function (response) {
-					console.log(response);
+					//console.log(response);
 					listaDeDadoTipo = response;									            
 					}
 				});
 				$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").append('<fieldset><legend id="'+listaDeDadoTipo[0].cliente_dado_tipo_categoria.descricao.toLowerCase()+'">'+listaDeDadoTipo[0].cliente_dado_tipo_categoria.descricao+'</legend></fieldset>');
 				$.each(listaDeDadoTipo, function(index, value) {
-				$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").append('<label for="nome">'+value.descricao+'</label><input class="form-control" type="text" name="'+value.descricao.toLowerCase()+'" id="'+value.descricao.toLowerCase()+'" maxlength="14" required="true">');
+				$("#modal-cliente > div > div > div.modal-body > form > #dadosComplementares").append('<label for="nome">'+value.descricao+'</label><input type="hidden" id="id'+value.descricao.toLowerCase()+'" name="id'+value.descricao.toLowerCase()+'" value="'+value.codigo+'"><input class="form-control" type="text" name="'+value.descricao.toLowerCase()+'" id="'+value.descricao.toLowerCase()+'" maxlength="14" required="true">');
 				if((value.descricao).length !== null && (value.descricao).length > 0){
 					$("#"+value.descricao.toLowerCase()).mask(value.mascara, {reverse: true});					
 				}
@@ -571,6 +585,22 @@
 		
 		
 		function carregarClienteDadoCategorias(){
+
+			var listaDeDadoTipoPrincipal;
+				$.ajax({
+				type: "GET",
+				url: dominio + "/clienteREST/clienteDadoTipo?categoriaId=0",
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					listaDeDadoTipoPrincipal = response;									            
+					}
+				});
+
+			$("#idCpf").attr('value', listaDeDadoTipoPrincipal[0].codigo);
+			$("#idNome").attr('value', listaDeDadoTipoPrincipal[1].codigo);
+			$("#idSobrenome").attr('value', listaDeDadoTipoPrincipal[2].codigo);
+
 			var listaDeCategorias;
 			$.ajax({
 				type: "GET",
@@ -587,7 +617,9 @@
 			
 			$.each(listaDeCategorias, function(index, value) {
 				$("#camposComplementaresSelecionar").append('<option value="'+value.codigo+'">'+value.descricao+'</option>');
-			});
+			});			
+			$("#camposComplementaresSelecionar option[value=0]").remove();
+			
 			
 		}
 		
@@ -626,10 +658,12 @@
 			
 			var lista = new Array();
 
-			var form = $("#modal-cliente > div > div > div.modal-body > form > div > input");
+			var idCampos = $("#modal-cliente > div > div > div.modal-body > form > div > input:even");//id campos
+			var valorCampos = $("#modal-cliente > div > div > div.modal-body > form > div > input:odd");//valores campos
 
-			$.each(form, function(index, value) {
+			$.each(valorCampos, function(index, value) {
 				var objeto = new Object();
+				objeto.idCampo = idCampos[index]['value'];
 				objeto.descricao = value['name'];
 				objeto.valor = value['value'];
 				lista.push(objeto);
@@ -637,9 +671,9 @@
 
 			var listaFormatada = JSON.stringify(lista);
 			
-			if(($("#dadosComplementares > fieldset > #contato").text) != null){
+			if(($("#dadosComplementares > fieldset > #contato").text()) != ""){
 				
-				var form = $("#modal-cliente > div > div > div.modal-body > form").serialize();
+				//var form = $("#modal-cliente > div > div > div.modal-body > form").serialize();
 				$.ajax({
 					type: "POST",
 					url: dominio + "/clienteREST/cadastrarCliente",
@@ -648,13 +682,13 @@
 					dataType: "JSON",
 					async: false,
 					success: function (response) {
-						console.log(respose[0]);									            
+						//console.log(respose);									            
 						}
 					});
 				
 			}else{
 				
-				return false;
+				alert("Para o cadastro ser realizado com sucesso, deverá haver pelo menos um contato do cliente");
 				
 			}
 		}

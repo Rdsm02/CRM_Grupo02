@@ -23,6 +23,15 @@ public class ClienteService {
 				"não encontrado. id: " + id + ", Tipo!" + Cliente.class.getName()));		
 	}
 	
+	public Cliente buscarPorCpf(String cpf){
+		return repoCliente.findByCpf(cpf);
+	}
+	
+	public Integer buscarPorCpfRetornarIdCliente(String cpf) {
+		Cliente c = repoCliente.findByCpf(cpf);
+		return c.getId();
+	}
+	
 	public List<Cliente> searchAll(){
 		return repoCliente.findAll();
 	}

@@ -7,5 +7,7 @@ import com.senac.crm_grupo02.domain.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
+	
+	Cliente findByCpf(String cpf);
 
 }
