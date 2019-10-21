@@ -549,7 +549,14 @@
 			});
 			$("#detalharProdutos").click(function(){
 				$("#central").load(dominio + "/produto/detalheProdutos");
-			});			
+			});	
+
+			$(function(){  
+			    $("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").hover(
+			        function(){$(this).css("background-color", "#EBEDFF")},
+			        function(){$(this).css("background-color", '')}
+			    );
+			});		
 			
 			
 			$("#botaoAdicionarNovoCampo").click(function(){
@@ -682,7 +689,8 @@
 					dataType: "JSON",
 					async: false,
 					success: function (response) {
-						//console.log(respose);									            
+						$('#modal-cliente').modal('hide');
+						zerarTodosOsCampos();									            
 						}
 					});
 				
