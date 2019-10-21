@@ -20,6 +20,7 @@
 							<th scope="row"><span class="foto-lista"> <img
 									src="./assets/img/user/default.jpg"
 									th:src="@{/img/user/default.jpg}">
+							<input type="hidden" id="clienteId" name="clienteId" th:value="${cliente.id}">
 							</span> <span class="nome-lista" th:text="${cliente.nome}"> </span></th>
 							<td>
 								<h6 th:text="${cliente.sobrenome}"></h6>
@@ -49,3 +50,21 @@
 	</div>
 
 </div>
+<script>
+
+$( document ).ready(function() {
+
+	$(function(){  
+	    $("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").hover(
+	        function(){$(this).css("background-color", "#EBEDFF")},
+	        function(){$(this).css("background-color", '')}
+	    );
+	});	
+	
+	$("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").click(function(){
+		var idCliente = $(this).find('#clienteId').val();
+		carregarDetalheCliente(idCliente); //Método se encontra dentro de paginas -> cliente -> index.html 
+	});
+	
+});
+</script>

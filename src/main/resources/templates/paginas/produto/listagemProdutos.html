@@ -9,53 +9,22 @@
 				<table class="table table-striped filtro">
 					<thead>
 						<tr>
-							<th>NOME</th>
-							<th>FASE ATUAL</th>
-							<th>ATIVIDADES AGENDADAS</th>
-							<th>CLIENTE RELACIONADO</th>
+							<th>DESCRICAO</th>
+							<th>STATUS</th>
+							<th>NIVEL DE INSTRUCAO</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr th:each="produto : ${produtos}" style="cursor: pointer;">
 							<th scope="row"><span class="foto-lista"> <i
 									class="fa fa-2x fa-suitcase"></i>
-							</span> <span class="nome-lista"> Contrato para ADS </span></th>
+							<input type="hidden" id="produtoId" name="produtoId" th:value="${produto.id}">
+							</span> <span class="nome-lista" th:text="${produto.descricao}"> </span></th>
 							<td>
-								<h6>Novo</h6>
+								<h6 th:text="${produto.status}"></h6>
 							</td>
 							<td>
-								<h6>...</h6>
-							</td>
-							<td>
-								<h6>Maria dos Santos Ribeiro</h6>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row"><span class="foto-lista"> <i
-									class="fa fa-2x fa-suitcase"></i>
-							</span> <span class="nome-lista"> Contrato para Design </span></th>
-							<td>
-								<h6>Perdeu</h6>
-							</td>
-							<td>
-								<h6>...</h6>
-							</td>
-							<td>
-								<h6>João da Cruz</h6>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row"><span class="foto-lista"> <i
-									class="fa fa-2x fa-suitcase"></i>
-							</span> <span class="nome-lista"> Contrato para Hotelaria </span></th>
-							<td>
-								<h6>Ganhou</h6>
-							</td>
-							<td>
-								<h6>...</h6>
-							</td>
-							<td>
-								<h6>Everton Souza</h6>
+								<h6 th:text="${produto.nivelInstrucao.descricao}"></h6>
 							</td>
 						</tr>
 					</tbody>
@@ -76,3 +45,22 @@
 	</div>
 
 </div>
+
+<script>
+
+$( document ).ready(function() {
+
+	$(function(){  
+	    $("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").hover(
+	        function(){$(this).css("background-color", "#EBEDFF")},
+	        function(){$(this).css("background-color", '')}
+	    );
+	});	
+	
+	$("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").click(function(){
+		var idCliente = $(this).find('#clienteId').val();
+		carregarDetalheCliente(idCliente); //Método se encontra dentro de paginas -> cliente -> index.html 
+	});
+	
+});
+</script>

@@ -28,7 +28,7 @@ public class ProdutoController {
 	@GetMapping("/listagemProdutos")
 	public ModelAndView listagemProduto() {
 		ModelAndView mv = new ModelAndView("paginas/produto/listagemProdutos");
-		//mv.addObject("clientes", servicoCliente.searchAll());
+		mv.addObject("produtos", servicoProduto.searchAll());
 		return mv;
 	}
 	

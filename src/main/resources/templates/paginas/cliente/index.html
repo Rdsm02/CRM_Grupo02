@@ -115,7 +115,16 @@
 									</div>
 								</li>
 								
-								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-chart-bar"></i><span class="kt-menu__link-text">Estatística</span></a></li>
+								<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon fa fa-user-friends"></i><span class="kt-menu__link-text">Parametrizações</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+								<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+										<ul class="kt-menu__subnav">
+											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="categoriasCliente" class="kt-menu__link-text">Categorias de dados do Cliente</span></a></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="TipoDadosCliente" class="kt-menu__link-text">Tipos de dados do Cliente</span></a></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="DetalhesDeClientes" class="kt-menu__link-text">Detalhar Clientes</span></a></li>
+										</ul>
+									</div>
+								</li>
 								
 								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-star"></i><span class="kt-menu__link-text">Preferências</span></a></li>
 								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-calendar-alt"></i><span class="kt-menu__link-text">Agenda</span></a></li>
@@ -530,7 +539,7 @@
 
 		var array = nomePath.split("/");
 
-		var dominio = url+"/"+array[1];
+		var dominio = url;
 		//var dominio = window.location.origin;
 		console.log(window.location.href);
 		console.log(window.location);
@@ -550,13 +559,11 @@
 			$("#detalharProdutos").click(function(){
 				$("#central").load(dominio + "/produto/detalheProdutos");
 			});	
-
-			$(function(){  
-			    $("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").hover(
-			        function(){$(this).css("background-color", "#EBEDFF")},
-			        function(){$(this).css("background-color", '')}
-			    );
+			
+			$("#categoriasCliente").click(function(){
+				$("#central").load(dominio + "/parametrizacao/listarCategorias");
 			});		
+			
 			
 			
 			$("#botaoAdicionarNovoCampo").click(function(){
@@ -707,6 +714,36 @@
 			
 		}
 		
+		function carregarDetalheCliente(idCliente){
+			var dadosCliente;
+			$.ajax({
+				type: "GET",
+				url: dominio + "/clienteREST/listarClientePorId?clienteId="+idCliente,
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					dadosCliente = response;	
+					/* $( "#central" ).load( dominio + "/cliente/detalheClientes", function() {
+						  alert( "Load was performed." );
+						}); */
+					$("#central").load(dominio + "/cliente/detalheClientes");
+					
+					}
+				});
+			setTimeout(function(){ carregarValoresCamposDetalhamentoCliente(dadosCliente); }, 500);
+			
+		}
+		
+		function carregarValoresCamposDetalhamentoCliente(dadosCliente){
+			console.log(dadosCliente[0].sobrenome);
+			$('.detalhamentoCliente > #cpf').val(dadosCliente[0].cpf);
+			$('.detalhamentoCliente > #nome').val(dadosCliente[0].nome);
+			$('.detalhamentoCliente > #sobreNome').val(dadosCliente[0].sobrenome);
+			$('.detalhamentoCliente > #cpf').val(dadosCliente[0].cpf);
+			$('.detalhamentoCliente > #cpf').val(dadosCliente[0].cpf);
+		}
+		
+	
 		/*
 		var lista = new Array();
 

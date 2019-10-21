@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.domain.ClienteDado;
@@ -133,6 +134,16 @@ public class ClienteControllerREST {
 		return new ResponseEntity<List<Cliente>>(new ArrayList<Cliente>(clientehas.values()), HttpStatus.OK);		
 	}
 	
+	@RequestMapping(value = "/listarClientePorId", method = RequestMethod.GET)
+	public ResponseEntity<List<Cliente>> listarClientePorId(@RequestParam("clienteId") int clienteId) throws ObjectNotFoundException {
+		Cliente cliente = new Cliente();
+		cliente = servicoCliente.search(clienteId);		
+		Map<Integer, Cliente> clientehas = new HashMap<Integer, Cliente>();
+		clientehas.put(1, cliente);	
+		
+		return new ResponseEntity<List<Cliente>>(new ArrayList<Cliente>(clientehas.values()), HttpStatus.OK);		
+	}
+	
 	@RequestMapping(value = "/listarClientesDado", method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteDado>> listarClientesDado() throws ObjectNotFoundException {
 		List<ClienteDado> clienteLista = new ArrayList<ClienteDado>();
@@ -146,6 +157,15 @@ public class ClienteControllerREST {
 		}
 		
 		return new ResponseEntity<List<ClienteDado>>(new ArrayList<ClienteDado>(clientehas.values()), HttpStatus.OK);		
+	}
+	
+	/*método nao usado no momento*/
+	@RequestMapping(value = "/carregarDetalheCliente", method = RequestMethod.GET)
+	public ModelAndView carregarDetalheCliente(@RequestParam("clienteId")  int clienteId) throws ObjectNotFoundException {
+		ModelAndView mv = new ModelAndView("paginas/cliente/index");
+		mv.addObject("clientesDetalhe", servicoCliente.search(clienteId));
+		
+		return mv;		
 	}
 	
 	@PostMapping(value = "/clienteTeste")
