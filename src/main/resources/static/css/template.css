@@ -3902,12 +3902,15 @@ a.close.disabled {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  /*width: 100%;*/
   pointer-events: auto;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ebedf2;
-  outline: 0; }
+  outline: 0; 
+  width: 500px; 
+  height: 510px;
+  }
 
 .modal-backdrop {
   position: fixed;

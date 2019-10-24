@@ -330,7 +330,7 @@
 <!------------------- Modal Cliente ---------------------------------->
 <div class="modal fade modal-cliente" id="modal-cliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="overflow-y: scroll;">
             <div class="modal-header modal-cliente-header">
                 <div class="kt-widget__head">
 
@@ -464,6 +464,57 @@
     </div>
 </div>
 <!------------------- Modal Produto ---------------------------------->
+
+<!-- modalCategorias -->
+
+<div class="modal fade modal-cliente" id="modal-categorias" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="overflow-y: scroll;">
+            <div class="modal-header modal-cliente-header">
+                <div class="kt-widget__head">
+
+					<div class="kt-avatar kt-avatar--outline kt-avatar--circle img-perfil-modal">
+						<div class="kt-avatar__holder" style="background-image: url(img/user/default.jpg);"></div>
+						
+							<label class="kt-avatar__upload" data-toggle="kt-tooltip" data-placement="right" data-original-title="Editar">
+								<i class="fa fa-pen" style="right: -15%!important;"></i>
+								<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+							</label>
+							
+						</div>
+					</div>	
+
+                	<button type="button" class="close fechar-modal-cliente" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            	<form action="" method="" class="form-cliente">
+					
+					<div id="dadosObrigatorios">						
+					<label for="codigo">Codigo da Categoria</label>
+					<input class="form-control" type="text" name="codigo" id="codigo" maxlength="14">
+				
+					<label for="descricao">Descricao Categoria</label>
+					<input type="hidden" id="descricao" name="descricao" value="">
+    				<input class="form-control" type="text" name="nome" id="nome">
+
+    				<label for="status">Status Categoria</label>
+					<input type="hidden" id="status" name="status" value="">
+					<input class="form-control" type="text" name="sobrenome" id="sobrenome">					
+					
+					</div>					
+
+				</form>
+                
+            </div>
+            <div class="modal-footer d-flex">
+            	
+                <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;" onclick="zerarTodosOsCampos()">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-cadastrar p-2">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 				</div>
 			</div>
