@@ -1,0 +1,52 @@
+<div class="kt-portlet lista">
+
+	<div class="kt-portlet__head lista-header"></div>
+
+	<div class="kt-portlet__body body-list">
+
+		<div class="kt-section">
+			<div class="kt-section__content">
+				<table class="table table-striped filtro">
+					<thead>
+						<tr>
+							<th>IDENTIFICADOR</th>
+							<th>DESCRICAO</th>
+							<th>STATUS</th>
+							<th>CATEGORIA</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="tipoDado : ${tipoDados}" style="cursor: pointer;">
+							<th scope="row"><span class="foto-lista"> <img
+									src="./assets/img/user/default.jpg"
+									th:src="@{/img/user/default.jpg}">
+							</span> <span class="nome-lista" th:text="${tipoDado.codigo}"> </span></th>
+							<td>
+								<h6 th:text="${tipoDado.descricao}"></h6>
+							</td>
+							<td>
+								<h6 th:text="${tipoDado.status}"></h6>
+							</td>
+							<td>
+								<h6 th:text="${tipoDado.cliente_dado_tipo_categoria.descricao}"></h6>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="botao-lista">
+				<button type="button"
+					class="btn btn-brand btn-circle btn-icon btn-adicionar-contato"
+					data-toggle="kt-tooltip" data-placement="right"
+					data-original-title="Adicionar contato">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
