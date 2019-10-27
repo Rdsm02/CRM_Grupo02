@@ -17,7 +17,7 @@ public class ClienteDadoTipoController {
 	
 	@GetMapping("/listarDadoTipo")
 	public ModelAndView paginaPrincipal() {
-		ModelAndView mv = new ModelAndView("paginas/parametrizacao/categoriaDadoCliente");
+		ModelAndView mv = new ModelAndView("paginas/parametrizacao/DadoTipoCliente");
 		mv.addObject("tipoDados", servicoClienteDadoTipo.searchAll());
 		return mv;
 	}

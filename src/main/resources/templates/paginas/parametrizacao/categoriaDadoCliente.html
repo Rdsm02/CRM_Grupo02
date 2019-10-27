@@ -5,7 +5,7 @@
 	<div class="kt-portlet__body body-list">
 
 		<div class="kt-section">
-			<div class="kt-section__content">
+			<div class="kt-section__content" style="height: 300px; overflow-y: scroll;">
 				<table class="table table-striped filtro">
 					<thead>
 						<tr>
@@ -16,10 +16,9 @@
 					</thead>
 					<tbody>
 						<tr th:each="categoria : ${categorias}" style="cursor: pointer;">
-							<th scope="row"><span class="foto-lista"> <img
-									src="./assets/img/user/default.jpg"
-									th:src="@{/img/user/default.jpg}">
-							</span> <span class="nome-lista" th:text="${categoria.codigo}"> </span></th>
+							<th scope="row"><span class="foto-lista"> <img src="./assets/img/user/default.jpg" th:src="@{/img/user/default.jpg}">
+								</span> <span class="nome-lista" th:text="${categoria.codigo}"> </span>
+							</th>
 							<td>
 								<h6 th:text="${categoria.descricao}"></h6>
 							</td>
@@ -32,10 +31,7 @@
 			</div>
 
 			<div class="botao-lista">
-				<button type="button"
-					class="btn btn-brand btn-circle btn-icon btn-adicionar-contato"
-					data-toggle="kt-tooltip" data-placement="right"
-					data-original-title="Adicionar contato">
+				<button type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato">
 					<i class="fa fa-plus"></i>
 				</button>
 			</div>

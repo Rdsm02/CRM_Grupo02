@@ -125,12 +125,18 @@
 										</ul>
 									</div>
 								</li>
-								
-								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-star"></i><span class="kt-menu__link-text">Preferências</span></a></li>
-								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-calendar-alt"></i><span class="kt-menu__link-text">Agenda</span></a></li>
-								<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-cloud-download-alt"></i><span class="kt-menu__link-text">Nuvem</span></a></li>
-								<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-code-branch"></i><span class="kt-menu__link-text">Serviços</span></a></li>
-							</ul>
+
+							<li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover"><a href="javascript:;" class="kt-menu__link kt-menu__toggle"><i class="kt-menu__link-icon fa fa-user-friends"></i><span class="kt-menu__link-text">Ofertas</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+								<div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
+									<ul class="kt-menu__subnav">
+										<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-star"></i><span id="cadastroOfertas" class="kt-menu__link-text">Cadastro de Ofertas</span></a></li>
+										<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-calendar-alt"></i><span id="listagemOfertas" class="kt-menu__link-text">Listagem de Ofertas</span></a></li>
+										<li class="kt-menu__item " aria-haspopup="true"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-cloud-download-alt"></i><span class="kt-menu__link-text">Nuvem</span></a></li>
+										<li class="kt-menu__item " aria-haspopup="true" data-ktmenu-link-redirect="1"><a href="#" class="kt-menu__link "><i class="kt-menu__link-icon fa fa-code-branch"></i><span class="kt-menu__link-text">Serviços</span></a></li>
+									</ul>
+								</div>
+							</li>
+						</ul>
 						</div>
 					</div>
 				</div>
@@ -755,7 +761,8 @@
 					async: false,
 					success: function (response) {
 						$('#modal-cliente').modal('hide');
-						zerarTodosOsCampos();									            
+						zerarTodosOsCampos();	
+						$("#central").load(dominio + "/cliente/listagemClientes");
 						}
 					});
 				
@@ -797,7 +804,7 @@
 			$('.detalhamentoCliente > #cpf').val(dadosCliente[0].cpf);
 			$('.detalhamentoCliente > #nome').val(dadosCliente[0].nome);
 			$('.detalhamentoCliente > #sobreNome').val(dadosCliente[0].sobrenome);
-			$('.detalhamentoCliente > #cpf').val(dadosCliente[0].cpf);
+			$('.detalhamentoCliente > #email').val(dadosCliente[0].email);
 			$('.detalhamentoCliente > #cpf').val(dadosCliente[0].cpf);
 		}
 		
