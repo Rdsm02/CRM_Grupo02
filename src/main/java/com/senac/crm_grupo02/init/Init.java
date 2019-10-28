@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.senac.crm_grupo02.domain.Acao;
+import com.senac.crm_grupo02.domain.AcaoCliente;
 import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.domain.ClienteDadoTipo;
 import com.senac.crm_grupo02.domain.ClienteDadoTipoCategoria;
@@ -15,6 +17,8 @@ import com.senac.crm_grupo02.domain.ClienteOferta;
 import com.senac.crm_grupo02.domain.NivelInstrucao;
 import com.senac.crm_grupo02.domain.Oferta;
 import com.senac.crm_grupo02.domain.Produto;
+import com.senac.crm_grupo02.service.AcaoClienteService;
+import com.senac.crm_grupo02.service.AcaoService;
 import com.senac.crm_grupo02.service.ClienteDadoTipoCategoriaService;
 import com.senac.crm_grupo02.service.ClienteDadoTipoService;
 import com.senac.crm_grupo02.service.ClienteOfertaService;
@@ -46,6 +50,13 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
 	ClienteDadoTipoCategoriaService servicoClienteDadoTipoCategoria;
+	
+	@Autowired
+	AcaoService acaoService;
+	
+	@Autowired
+	AcaoClienteService acaoClienteService;	
+	
 	
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
@@ -217,7 +228,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		telefone.setStatus("Ativo");	
 		telefone.setObrigatorio(1);
 		telefone.setPadrao(1);
-		telefone.setMascara("(00) 0 0000-0000");
+		telefone.setMascara("(99) 9 9999-9999");
 		telefone.setCliente_dado_tipo_categoria(contato);
 		
 		ClienteDadoTipo email = new ClienteDadoTipo();
@@ -226,7 +237,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		email.setStatus("Ativo");	
 		email.setObrigatorio(1);
 		email.setPadrao(1);
-		email.setMascara("SSSS");
+		email.setMascara("SSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
 		email.setCliente_dado_tipo_categoria(contato);
 		
 		List<ClienteDadoTipo> listaDeClienteDadoTipo = new ArrayList<>();
@@ -239,6 +250,19 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		listaDeClienteDadoTipo.add(email);
 		
 		servicoClienteDadoTipo.saveAll(listaDeClienteDadoTipo);
+		
+		Acao acao1 = new Acao();
+		acao1.setDescricao("Atendimento Telefônico");
+		acaoService.save(acao1);
+		
+		AcaoCliente acaoCliente1 = new AcaoCliente();
+		acaoCliente1.setClienteId(c1);
+		acaoCliente1.setAcaoId(acao1);
+		acaoCliente1.setDescricao("Tentativa frustada de entrar em contato com cliente");
+		acaoCliente1.setData("2019-10-25");
+		acaoCliente1.setHora("13:00");
+		acaoClienteService.save(acaoCliente1);
+		
 		
 	}
 
