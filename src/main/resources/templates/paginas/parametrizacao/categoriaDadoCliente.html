@@ -5,7 +5,7 @@
 	<div class="kt-portlet__body body-list">
 
 		<div class="kt-section">
-			<div class="kt-section__content" style="height: 300px; overflow-y: scroll;">
+			<div class="kt-section__content" style="height: 500px; overflow-y: scroll;">
 				<table class="table table-striped filtro">
 					<thead>
 						<tr>
@@ -31,7 +31,7 @@
 			</div>
 
 			<div class="botao-lista">
-				<button type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato">
+				<button type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato" onclick="abrirModalCategoriaCliente()">
 					<i class="fa fa-plus"></i>
 				</button>
 			</div>
@@ -41,3 +41,91 @@
 	</div>
 
 </div>
+<div class="modal fade modal-cliente" id="modal-categoriaCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="overflow-y: scroll;">
+            <div class="modal-header modal-cliente-header">
+                <div class="kt-widget__head">
+
+					<div class="kt-avatar kt-avatar--outline kt-avatar--circle img-perfil-modal">
+						<div class="kt-avatar__holder" style="background-image: url(img/user/default.jpg);"></div>
+						
+							<label class="kt-avatar__upload" data-toggle="kt-tooltip" data-placement="right" data-original-title="Editar">
+								<i class="fa fa-pen" style="right: -15%!important;"></i>
+								<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+							</label>
+							
+						</div>
+					</div>	
+
+                	<button type="button" class="close fechar-modal-cliente" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            	<form action="" method="" class="form-cliente">
+					
+					<div id="formulario-categoriaCliente">						
+					<label for="codigo">Codigo</label>
+					<input class="form-control" type="text" name="codigo" id="codigo" maxlength="14">
+				
+					<label for="nome">Descricao</label>
+    				<input class="form-control" type="text" name="descricao" id="descricao">
+
+    				<label for="nome">Status</label>
+					<input class="form-control" type="text" name="status" id="status">					
+					
+					</div>		
+
+				</form>
+                
+            </div>
+            <div class="modal-footer d-flex">
+            	
+                <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;" onclick="zerarTodosOsCampos()">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-cadastrar p-2" onclick="cadastrarCategoriaCliente()" data-dismiss="modal">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	var url = window.location.origin;
+
+	var nomePath = window.location.pathname;
+
+	var array = nomePath.split("/");
+
+	//var dominio = url+"/"+array[1];
+$( document ).ready(function() {
+	
+	function abrirModalCategoriaCliente(){
+		$('#modal-categoriaCliente').modal('show');
+		
+	}
+	
+	
+	
+	
+});
+function cadastrarCategoriaCliente(){
+	var objeto = new Object();
+	objeto.codigo = $("#codigo").val();
+	objeto.descricao = $("#descricao").val();
+	objeto.status = $("#status").val();
+	
+	var categoriaClienteJSON = JSON.stringify(objeto);
+	$.ajax({
+		type: "POST",
+		url: dominio + "/categoriaREST/cadastrarCategoria",
+		data: categoriaClienteJSON,
+		contentType: "application/json",
+		dataType: "JSON",
+		async: false,
+		success: function (response) {
+			//$('#modal-categoriaCliente').modal('hide').delay(100);
+			//zerarTodosOsCampos();	
+			setTimeout(function(){ $("#central").load(dominio + "/parametrizacao/listarCategorias"); }, 1000);
+			
+			}
+		});
+}
+</script>

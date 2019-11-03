@@ -201,7 +201,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		sobrenome.setStatus("Ativo");	
 		sobrenome.setObrigatorio(1);
 		sobrenome.setPadrao(1);
-		sobrenome.setMascara("SSSSSSSSSSSSSSSSSSSSSSSS");
+		sobrenome.setMascara("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		sobrenome.setCliente_dado_tipo_categoria(principal);
 		
 		ClienteDadoTipo cep = new ClienteDadoTipo();
@@ -228,7 +228,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		telefone.setStatus("Ativo");	
 		telefone.setObrigatorio(1);
 		telefone.setPadrao(1);
-		telefone.setMascara("(99) 9 9999-9999");
+		telefone.setMascara("00 0 0000-0000");
 		telefone.setCliente_dado_tipo_categoria(contato);
 		
 		ClienteDadoTipo email = new ClienteDadoTipo();
@@ -237,7 +237,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		email.setStatus("Ativo");	
 		email.setObrigatorio(1);
 		email.setPadrao(1);
-		email.setMascara("SSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+		email.setMascara("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		email.setCliente_dado_tipo_categoria(contato);
 		
 		List<ClienteDadoTipo> listaDeClienteDadoTipo = new ArrayList<>();

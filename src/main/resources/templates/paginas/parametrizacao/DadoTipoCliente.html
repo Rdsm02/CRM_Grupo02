@@ -5,7 +5,7 @@
 	<div class="kt-portlet__body body-list">
 
 		<div class="kt-section">
-			<div class="kt-section__content" style="height: 300px; overflow-y: scroll;">
+			<div class="kt-section__content" style="height: 500px; overflow-y: scroll;">
 				<table class="table table-striped filtro">
 					<thead>
 						<tr>
@@ -36,7 +36,7 @@
 			</div>
 
 			<div class="botao-lista">
-				<button type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato">
+				<button type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato" onclick="abrirModalClienteDado()")>
 					<i class="fa fa-plus"></i>
 				</button>
 			</div>
@@ -46,3 +46,153 @@
 	</div>
 
 </div>
+<div class="modal fade modal-cliente" id="modal-clienteDadoTipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="overflow-y: scroll;">
+            <div class="modal-header modal-cliente-header">
+                <div class="kt-widget__head">
+
+					<div class="kt-avatar kt-avatar--outline kt-avatar--circle img-perfil-modal">
+						<div class="kt-avatar__holder" style="background-image: url(img/user/default.jpg);"></div>
+						
+							<label class="kt-avatar__upload" data-toggle="kt-tooltip" data-placement="right" data-original-title="Editar">
+								<i class="fa fa-pen" style="right: -15%!important;"></i>
+								<input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg">
+							</label>
+							
+						</div>
+					</div>	
+
+                	<button type="button" class="close fechar-modal-cliente" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            	<form action="" method="" class="form-cliente">
+					
+					<div id="formularioDadoTipo">					
+					<label for="descricao">Descricao</label>
+    				<input class="form-control" type="text" name="descricao" id="descricao">
+
+    				<label for="nome">Status</label>
+					<input class="form-control" type="text" name="status" id="status">					
+					
+					</div>
+					
+					
+					<div class="dropdown">
+					<div class="row">
+					<div class="col-md-7">
+					<label for="obrigatorio">Campo obrigatorio?</label>
+					      <select  class="form-control"  id="obrigatorioSelecionar" data-placeholder="Selecione se o campo é obrigatorio">
+					         <option value="0">Sim</option>
+					         <option value="1">Nao</option>
+					       </select>
+					   </div>
+					   </div>
+			
+					   <div class="row">
+					<div class="col-md-7">
+					<label for="obrigatorio">Campo padrao?</label>
+					      <select  class="form-control"  id="campoPadrao" data-placeholder="Selecione se o campo é padrao">
+					         <option value="0">Sim</option>
+					         <option value="1">Nao</option>
+					       </select>
+					   </div>				
+					  
+					   </div>
+					   <label for="mascara">Mascara do Campo</label>
+					<input class="form-control" type="text" name="mascara" id="mascara">	
+					  <div class="row">
+					<div class="col-md-7">
+					<label for="obrigatorio">Selecione a categoria do Dado</label>
+					      <select  class="form-control"  id="categoriaCampo" data-placeholder="Selecione uma categoria para o campo">
+					         <option value="-1">Selecione uma Categoria</option>
+					       </select>
+					   </div>				
+					  
+					   </div>
+					  
+					</div>
+					
+
+				</form>
+                
+            </div>
+            <div class="modal-footer d-flex">
+            	
+                <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;" onclick="zerarTodosOsCampos()">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-cadastrar p-2" onclick="cadastrarClienteDado()" data-dismiss="modal">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+var url = window.location.origin;
+
+var nomePath = window.location.pathname;
+
+var array = nomePath.split("/");
+
+//var dominio = url+"/"+array[1];
+
+$( document ).ready(function() {
+		
+	
+	
+});
+
+	function abrirModalClienteDado(){
+		$('#modal-clienteDadoTipo').modal('show');
+		var listaDeCategorias;
+		$.ajax({
+			type: "GET",
+			url: dominio + "/clienteREST/clienteDadoTipoCategorias",
+			dataType: "JSON",
+			async: false,
+			success: function (response) {
+				listaDeCategorias = response;									            
+				}
+			});
+		
+		$("#categoriaCampo option").remove();
+		$("#categoriaCampo").append('<option value="-1">Selecione uma Categoria</option>');
+		
+		$.each(listaDeCategorias, function(index, value) {
+			$("#categoriaCampo").append('<option value="'+value.codigo+'">'+value.descricao+'</option>');
+		});			
+		
+	}
+	
+	function cadastrarClienteDado(){
+		var objeto = new Object();
+		objeto.codigo = null;
+		objeto.descricao = $("#descricao").val();
+		objeto.status = $("#status").val();
+		objeto.obrigatorio = $("#obrigatorioSelecionar option:selected").val();
+		objeto.padrao = $("#campoPadrao option:selected").val();
+		objeto.mascara = $("#mascara").val(); 
+		objeto.cliente_dado_tipo_categoria = new Object();
+        objeto.cliente_dado_tipo_categoria.codigo = $("#categoriaCampo option:selected").val();
+        
+		var dadoClienteJSON = JSON.stringify(objeto);
+		
+		$.ajax({
+			type: "POST",
+			url: dominio + "/dadoREST/cadastrarClienteDado",
+			data: dadoClienteJSON,
+			contentType: "application/json",
+			dataType: "JSON",
+			async: false,
+			success: function (response) {
+				//$('#modal-categoriaCliente').modal('hide').delay(100);
+				//zerarTodosOsCampos();	
+				setTimeout(function(){ $("#central").load(dominio + "/clienteDadotipo/listarDadoTipo"); }, 1000);
+				
+				}
+			});
+		
+	}
+	
+
+</script>

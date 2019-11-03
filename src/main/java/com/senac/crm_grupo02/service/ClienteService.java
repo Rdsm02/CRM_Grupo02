@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.senac.crm_grupo02.domain.CategoriasClienteRetornoConsultaNativeQuery;
 import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.repository.ClienteRepository;
 
@@ -57,6 +58,11 @@ public class ClienteService {
 	
 	public void delete(Integer id) {
 		repoCliente.deleteById(id);
+	}
+	
+	
+	public List<List<Object>> buscarCategoriasDadosClientePorId(Integer idCliente){
+		return repoCliente.buscarCategoriasDadosClientePorId(idCliente);
 	}
 
 }

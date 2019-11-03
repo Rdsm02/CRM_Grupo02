@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.senac.crm_grupo02.domain.CategoriasClienteRetornoConsultaNativeQuery;
 import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.domain.ClienteDado;
 import com.senac.crm_grupo02.domain.ClienteDadoTipo;
@@ -166,6 +167,33 @@ public class ClienteControllerREST {
 		mv.addObject("clientesDetalhe", servicoCliente.search(clienteId));
 		
 		return mv;		
+	}
+	//TODO criar metodo para buscar todos os dados do cliente
+	@RequestMapping(value = "/listarCategoriaClienteId", method = RequestMethod.GET)
+	public ResponseEntity<List<Object>> listarCategoriaClienteId(@RequestParam("clienteId") int clienteId) throws ObjectNotFoundException {
+		//CategoriasClienteRetornoConsultaNativeQuery ccrcnq = new CategoriasClienteRetornoConsultaNativeQuery();
+		List<List<Object>> listaCategorias = new ArrayList<List<Object>>();
+		listaCategorias = servicoCliente.buscarCategoriasDadosClientePorId(clienteId);	
+		
+		Map<Integer, CategoriasClienteRetornoConsultaNativeQuery> clienteCategoriahas = new HashMap<Integer, CategoriasClienteRetornoConsultaNativeQuery>();
+		
+		int cont = 1;
+		
+		for (List<Object> ClienteCategoriaLista: listaCategorias) {	
+			CategoriasClienteRetornoConsultaNativeQuery ccrcnq = new CategoriasClienteRetornoConsultaNativeQuery();
+			ccrcnq.setCliente_dado_tipo_categoria_id(Integer.parseInt(ClienteCategoriaLista.get(0).toString()));
+			ccrcnq.setCliente_dado_tipo_categoria_descricao(ClienteCategoriaLista.get(1).toString());
+			ccrcnq.setCliente_dado_tipo_id(Integer.parseInt(ClienteCategoriaLista.get(2).toString()));
+			ccrcnq.setCliente_dado_tipo_descricao(ClienteCategoriaLista.get(3).toString());
+			ccrcnq.setCliente_dado_tipo_mascara(ClienteCategoriaLista.get(4).toString());
+			ccrcnq.setCliente_dado_id(Integer.parseInt(ClienteCategoriaLista.get(5).toString()));
+			ccrcnq.setCliente_dado_descricao(ClienteCategoriaLista.get(6).toString());
+			
+			clienteCategoriahas.put(cont, ccrcnq);	
+			cont++;							
+		}	
+		
+		return new ResponseEntity<List<Object>>(new ArrayList<Object>(clienteCategoriahas.values()), HttpStatus.OK);		
 	}
 	
 	@PostMapping(value = "/clienteTeste")
