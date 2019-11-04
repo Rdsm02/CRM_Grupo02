@@ -14,23 +14,36 @@ import com.senac.crm_grupo02.service.AcaoService;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @Controller
-@RequestMapping("Acao")
+@RequestMapping("acao")
 public class AcaoController {
 
 	@Autowired
 	private AcaoService servicoAcao;
 
+	@GetMapping("/listagemAcoes")
+	public ModelAndView listagemAcao() {
+		ModelAndView mv = new ModelAndView("paginas/acao/listagemAcoes");
+		mv.addObject("acoes", servicoAcao.searchAll());
+		return mv;
+	}	
+	
+	@GetMapping("/detalheAcoes")
+	public ModelAndView detalheAcao() {
+		ModelAndView mv = new ModelAndView("paginas/acao/detalheAcoes");
+		return mv;
+	}
+	
 	@GetMapping("/listarTodasAcoes")
 	public ModelAndView listarTodasAcoes() {
-		ModelAndView mv = new ModelAndView("Acao/paginaDeAcao");
+		ModelAndView mv = new ModelAndView("acao/paginaDeAcao");
 		mv.addObject("acoes", servicoAcao.searchAll());
 		return mv;
 	}
 	
 	@GetMapping("/cadastrarAcao")
 	public ModelAndView cadastrarAcao() {
-		ModelAndView mv = new ModelAndView("Acao/cadastroDeNivelDeAcao");
-		mv.addObject("Acao", new Acao());
+		ModelAndView mv = new ModelAndView("acao/cadastroDeAcao");
+		mv.addObject("acao", new Acao());
 		return mv;
 	}
 	
@@ -42,7 +55,7 @@ public class AcaoController {
 	
 	@GetMapping("/alterar/{id}")
 	public ModelAndView alterarAcao(@PathVariable("id") Integer id) throws ObjectNotFoundException {
-		ModelAndView mv = new ModelAndView("Acao/alterarAcao");
+		ModelAndView mv = new ModelAndView("acao/alterarAcao");
 		mv.addObject("acao", servicoAcao.search(id));
 		return mv;
 	}	

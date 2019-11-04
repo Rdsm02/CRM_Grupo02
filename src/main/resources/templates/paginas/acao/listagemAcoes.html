@@ -1,0 +1,58 @@
+<div class="kt-portlet lista">
+
+	<div class="kt-portlet__head lista-header"></div>
+
+	<div class="kt-portlet__body body-list">
+
+		<div class="kt-section">
+			<div class="kt-section__content">
+				<table class="table table-striped filtro">
+					<thead>
+						<tr>
+							<th>DESCRICAO</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="acao : ${acoes}" style="cursor: pointer;">
+							<th scope="row"><span class="foto-lista"> <i
+									class="fa fa-2x fa-suitcase"></i>
+							<input type="hidden" id="acaoId" name="acaoId" th:value="${acao.id}">
+							</span> <span class="nome-lista" th:text="${acao.descricao}"> </span></th>	
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="botao-lista">
+				<button type="button"
+					class="btn btn-brand btn-circle btn-icon btn-adicionar-contato"
+					data-toggle="kt-tooltip" data-placement="right"
+					data-original-title="Adicionar contato">
+					<i class="fa fa-plus"></i>
+				</button>
+			</div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+
+$( document ).ready(function() {
+
+	$(function(){  
+	    $("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").hover(
+	        function(){$(this).css("background-color", "#EBEDFF")},
+	        function(){$(this).css("background-color", '')}
+	    );
+	});	
+	
+	$("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").click(function(){
+		var idCliente = $(this).find('#clienteId').val();
+		carregarDetalheCliente(idCliente); //Método se encontra dentro de paginas -> cliente -> index.html 
+	});
+	
+});
+</script>
