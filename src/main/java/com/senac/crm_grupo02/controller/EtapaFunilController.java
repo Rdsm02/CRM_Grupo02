@@ -36,10 +36,9 @@ public class EtapaFunilController {
 		return mv;
 	}
 
-	@GetMapping("/cadastrarEtapas")
+	@GetMapping("/funilEtapas")
 	public ModelAndView cadastrarEtapas() {
-		ModelAndView mv = new ModelAndView("etapa/cadastroDeProdutos");
-		mv.addObject("etapa", new Produto());
+		ModelAndView mv = new ModelAndView("paginas/funil/funilEtapas");
 		return mv;
 	}	
 	

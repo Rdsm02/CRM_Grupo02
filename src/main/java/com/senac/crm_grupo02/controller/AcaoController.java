@@ -23,7 +23,7 @@ public class AcaoController {
 	@GetMapping("/paginaDeAcoes")
 	public ModelAndView paginaDeAcoes() {
 		ModelAndView mv = new ModelAndView("paginas/acao/paginaAcao");
-		mv.addObject("acoes", servicoAcao.searchAll());
+		mv.addObject("acaoLista", servicoAcao.searchAll());
 		return mv;
 	}
 

@@ -9,10 +9,10 @@
 		<!------------------------------- Section Notas e Atividades -------------------------------------------------------------->
 		<div class="row">
 			<div class="col-xl-12">
-				<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
+				<div class="header-box-padrao header-box-padrao-funil kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
 					<div class="kt-portlet__head kt-portlet__head--noborder">
 						<div class="kt-portlet__head-label col-xl-12">
-							<h3 class="kt-portlet__head-title" style="margin-left: auto; margin-right: auto;">Cadastro de Acoes</h3>
+							<h3 class="kt-portlet__head-title" style="margin-left: auto; margin-right: auto;">Cadastro de Etapas</h3>
 						</div>
 
 					</div>
@@ -27,7 +27,7 @@
 
 						<div class="input-group">
 
-							<input type="text" class="form-control" id="campoCadastroObjeto" placeholder="Insira a Descricao da Acao..." aria-describedby="basic-addon1" style="border-top: none; border-right: none; border-left: none; border-bottom-color: black;">
+							<input type="text" class="form-control" id="campoCadastroObjeto" placeholder="Insira o nome da etapa..." aria-describedby="basic-addon1" style="border-top: none; border-right: none; border-left: none; border-bottom-color: black; padding-left: 0;">
 						</div>
 						<span class="form-text text-muted">Não é permitido caracteres especiais. ex: !@#$%¨&amp;*()</span>
 					</div>
@@ -39,7 +39,7 @@
 			<div class="col-xl-12">
 				<div class="footer-box-padrao kt-portlet kt-portlet--footer--noborder ">
 					<div class="box-botao-salvar" style="padding-top: 0px;">
-						<button type="button" id="cadastroNivelInstrucao" class="btn btn-salvar btn-brand" onclick="cadastrarAcaoCliente()">SALVAR</button>
+						<button type="button" id="cadastroNivelInstrucao" class="btn btn-salvar-funil btn-brand" onclick="cadastrarAcaoCliente()">SALVAR</button>
 					</div>
 				</div>
 			</div>
@@ -49,9 +49,9 @@
 		<!------------------------------- Section Linha do Tempo ------------------------------------------------------------------------>
 		<div class="kt-portlet lista" style="margin: 0 0px;">
 
-			<div class="kt-portlet__head lista-header"></div>
+			<div class="kt-portlet__head lista-header lista-header-funil"></div>
 
-			<div class="kt-portlet__body body-list">
+			<div class="kt-portlet__body body-list lista-funil">
 
 				<div class="kt-section">
 					<div class="kt-section__content">
@@ -101,7 +101,7 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div style="float: right; margin-right: 3%;">
+								<div style="float: right; margin-right: 3%;" class="paginacao-color-funil">
 									<button type="button" id="anterior" class="btn btn-info" style="border-radius: 50%;">&lt;</button>
 									<div class="btn-group btn-pill" role="group" aria-label="Button group with nested dropdown">
 										<button type="button" class="btn btn-info">1</button>

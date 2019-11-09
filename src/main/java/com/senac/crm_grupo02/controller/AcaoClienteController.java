@@ -31,14 +31,14 @@ public class AcaoClienteController {
 	
 	@GetMapping("/listarTodasAcoesCliente")
 	public ModelAndView listarTodasAcoesClientes() {
-		ModelAndView mv = new ModelAndView("AcaoCliente/paginaDeAcaoCliente");
+		ModelAndView mv = new ModelAndView("paginas/AcaoCliente/paginaDeAcaoCliente");
 		mv.addObject("AcaoClientes", servicoAcaoCliente.searchAll());
 		return mv;
 	}	
 	
 	@GetMapping("/cadastrarAcoesCliente")
 	public ModelAndView cadastrarOfertas() {
-		ModelAndView mv = new ModelAndView("AcaoCliente/cadastroDeAcaoCliente");
+		ModelAndView mv = new ModelAndView("paginas/AcaoCliente/cadastroDeAcaoCliente");
 		mv.addObject("acaoCliente", new AcaoCliente());
 		mv.addObject("acoes", servicoAcao.searchAll());
 		mv.addObject("clientes", servicoCliente.searchAll());

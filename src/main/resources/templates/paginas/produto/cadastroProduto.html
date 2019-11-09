@@ -12,7 +12,7 @@
 				<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
 					<div class="kt-portlet__head kt-portlet__head--noborder">
 						<div class="kt-portlet__head-label col-xl-12">
-							<h3 class="kt-portlet__head-title" style="margin-left: auto; margin-right: auto;">Cadastro de Acoes</h3>
+							<h3 class="kt-portlet__head-title" style="margin-left: auto; margin-right: auto;">Cadastro de Produto</h3>
 						</div>
 
 					</div>
@@ -27,9 +27,9 @@
 
 						<div class="input-group">
 
-							<input type="text" class="form-control" id="campoCadastroObjeto" placeholder="Insira a Descricao da Acao..." aria-describedby="basic-addon1" style="border-top: none; border-right: none; border-left: none; border-bottom-color: black;">
+							<input type="text" class="form-control" id="campoCadastroNivelDeInstrucao" placeholder="Insira o Produto" aria-describedby="basic-addon1" style="border-top: none; border-right: none; border-left: none; border-bottom-color: black;">
 						</div>
-						<span class="form-text text-muted">NÃ£o Ã© permitido caracteres especiais. ex: !@#$%Â¨&amp;*()</span>
+						<span class="form-text text-muted">Não permitido caracteres especiais. ex: !@#$%Â¨&amp;*()</span>
 					</div>
 				</div>
 			</div>
@@ -39,7 +39,7 @@
 			<div class="col-xl-12">
 				<div class="footer-box-padrao kt-portlet kt-portlet--footer--noborder ">
 					<div class="box-botao-salvar" style="padding-top: 0px;">
-						<button type="button" id="cadastroNivelInstrucao" class="btn btn-salvar btn-brand" onclick="cadastrarAcaoCliente()">SALVAR</button>
+						<button type="button" id="cadastroProduto" class="btn btn-salvar btn-brand" onclick="cadastroProduto()">SALVAR</button>
 					</div>
 				</div>
 			</div>
@@ -60,24 +60,33 @@
 								<tr>
 									<th>IDENTIFICADOR</th>
 									<th>DESCRICAO</th>
+									<th>NÍVEL DE INSTRUÇÃO</th>
 									<th>STATUS</th>
-									<th>ACOES</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="acao : ${acaoLista}">
-									<th scope="row"><span class="nome-lista" th:text="${acao.id}"></span></th>
+								<tr th:each="produto : ${produtoLista}">
+									<th scope="row"><span class="nome-lista" th:text="${produto.id}"></span></th>
 									<td>
-										<h6 th:text="${acao.descricao}"></h6>
+										<h6 th:text="${produto.descricao}"></h6>
 									</td>
+									
+								<div class="form-group row" style="margin-right: 0px; margin-left: 0px;">	
+									<label>NÍVEL DE INSTRUÇÃO</label>
+										<select class="form-control" th:field="*{nivelInstrucao}">
+											<option value="">Selecione o nível de instrução</option>
+											<option th:each="nivelinstrucaoo : ${nivelInstrucoes}" th:value="${nivelinstrucaoo.id}" th:text="${nivelinstrucaoo.descricao}"></option>
+										</select>
+								</div>										
+									
 									<td>
 										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchStatus" style="width: 106px;">
-											<div class="bootstrap-switch-container" id="switchMover" style="width: 185px;margin-left: 0px;" th:style="${(acao.status).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
+											<div class="bootstrap-switch-container" id="switchMover" style="width: 185px;margin-left: 0px;" th:style="${(produto.status).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
 												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Ativo</span>
 												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
 												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Inativo</span>
-												<input type="checkbox" th:checked="${(acao.status).equals('1')} ? 'true' : 'false'">
-												 <input type="hidden" id="status" name="status" th:value="${acao.status}">
+												<input type="checkbox" th:checked="${(produto.status).equals('1')} ? 'true' : 'false'">
+												 <input type="hidden" id="status" name="status" th:value="${produto.status}">
 											</div>
 										</div>
 									</td>
@@ -87,11 +96,12 @@
 										</div>
 									</td>
 								</tr>
+								
 							</tbody>
 						</table>
 						<div class="row">
 							<div class="col-md-4">
-								<label style="margin-left: 15%;">Itens por pÃ¡gina: </label>
+								<label style="margin-left: 15%;">Itens por página: </label>
 								<div class="dropdown dropdown-inline">
 
 									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">10</button>
@@ -180,7 +190,7 @@
 				linhaTabelaEditar.find("td:nth-child(4) > div").append('<i class="flaticon-like" id="botaoSalvarAlteracaoTabela" style="margin-right:10%; cursor: pointer;"></i>');
 				linhaTabelaEditar.find("td:nth-child(4) > div").append('<i class="flaticon-circle" id="botaoCancelarAlteracaoTabela" style="cursor: pointer;"></i>');
 			}else{
-				alert("Ha outro campo aberto. Feche o campo aberto para prosseguir!!!");
+				alert("Há outro campo aberto. Feche o campo aberto para prosseguir!!!");
 			}
 			
 			
@@ -198,12 +208,12 @@
 			objeto.descricao = textoInputAlteracaoTabela;
 			objeto.status = statusLinhaTabela;
 			
-			var objetoJSON = JSON.stringify(objeto);			
+			var produtoJSON = JSON.stringify(objeto);			
 			
 			$.ajax({
 				type : "POST",
-				url : dominio + "/acaoREST/editarAcao",
-				data : objetoJSON,
+				url : dominio + "/produtoREST/editarProduto",
+				data : produtoJSON,
 				contentType : "application/json",
 				dataType : "JSON",
 				async : false,
@@ -242,12 +252,12 @@
 				objeto.descricao = $(this).closest("tr").find("td:nth-child(2) > h6").text();
 				objeto.status = 0;
 				
-				var objetoJSON = JSON.stringify(objeto);
+				var produtoJSON = JSON.stringify(objeto);
 				
 				$.ajax({
 					type : "POST",
-					url : dominio + "/acaoREST/editarAcao",
-					data : objetoJSON,
+					url : dominio + "/produtoREST/editarProduto",
+					data : produtoJSON,
 					contentType : "application/json",
 					dataType : "JSON",
 					async : false,
@@ -265,12 +275,12 @@
 				objeto.descricao = $(this).closest("tr").find("td:nth-child(2) > h6").text();
 				objeto.status = 1;
 				
-				var objetoJSON = JSON.stringify(objeto);
+				var produtoJSON = JSON.stringify(objeto);
 				
 				$.ajax({
 					type : "POST",
-					url : dominio + "/acaoREST/editarAcao",
-					data : objetoJSON,
+					url : dominio + "/produtoREST/editarProduto",
+					data : produtoJSON,
 					contentType : "application/json",
 					dataType : "JSON",
 					async : false,
@@ -284,30 +294,33 @@
 		});
 	}
 	
-	function abrirModalNivelInstrucao(id){
-		$('#modal-nivelInstrucao').modal('show');
+	function abrirModalProduto(id){
+		$('#modal-produto').modal('show');
 		alert(id);
 		
 	}
 	
-	function cadastrarAcaoCliente() {
+	// AQUI
+	function cadastrarProduto() {
 		var objeto = new Object();
 		objeto.id = null;
-		objeto.descricao = $("#campoCadastroObjeto").val();
+		objeto.descricao = $("#campoCadastroProduto").val();
+		var objeto.nivelInstrucao = new Object();
+		//objeto.nivelInstrucao
 		objeto.status = "1";
 
-		var objetoJSON = JSON.stringify(objeto);
+		var nivelInstrucaoJSON = JSON.stringify(objeto);
 		$.ajax({
 			type : "POST",
-			url : dominio + "/acaoREST/cadastrarAcao",
-			data : objetoJSON,
+			url : dominio + "/produtoREST/cadastrarProduto",
+			data : nivelInstrucaoJSON,
 			contentType : "application/json",
 			dataType : "JSON",
 			async : false,
 			success : function(response) {
 
 				setTimeout(function() {
-					$("#central").load(dominio + "/acao/paginaDeAcoes");
+					$("#central").load(dominio + "/produto/cadastrarProduto");
 				}, 1000);
 
 			}
