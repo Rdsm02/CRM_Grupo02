@@ -254,6 +254,37 @@ html, body {
     border-radius: 4px 4px 0 0;
 }
 
+.header-box-padrao-funil{
+    background-color: #109618!important;
+    border-radius: 4px 4px 0 0;
+    text-transform: uppercase;
+}
+
+.paginacao-color-funil button{
+	background-color: #12941a !important;
+	border-color: #12941a !important;
+}
+
+.paginacao-color-funil button:hover{
+	background-color: #12701A !important;
+	border-color: #12701A !important;
+}
+
+.btn-salvar-funil{
+    position: relative!important;
+    background-color: #12941a!important;
+    border-color: #12941a!important;
+    float: right!important;
+    border-radius: 4px!important;
+}
+
+.btn-salvar-funil:hover{
+    background-color: #12701A!important;
+    border-color: #12701A!important;
+    float: right!important;
+    border-radius: 4px!important;
+}
+
 .kt-portlet .kt-portlet__head .kt-portlet__head-label .kt-portlet__head-title {
     font-size: 1rem!important;
     font-weight: 500;
@@ -417,6 +448,15 @@ html, body {
     border-radius: 4px 4px 0 0!important;
     min-height: 4px!important;
     border-bottom: 0!important;
+}
+
+.lista-header-funil {
+	background-color: #12941a !important;
+}
+
+.lista-funil thead{
+    background-color: #12941a !important;
+    color: #fff;
 }
 
 .lista thead{
