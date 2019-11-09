@@ -25,32 +25,32 @@ public class ProdutoController {
 	@Autowired
 	NivelInstrucaoService servicoNivelInstrucao;
 	
-	@GetMapping("/listagemProduto")
+	@GetMapping("/listagemProdutos")
 	public ModelAndView listagemProduto() {
-		ModelAndView mv = new ModelAndView("paginas/produto/listagemProduto");
+		ModelAndView mv = new ModelAndView("paginas/produto/listagemProdutos");
 		mv.addObject("produtos", servicoProduto.searchAll());
 		return mv;
 	}
 	
-	@GetMapping("/detalheProduto")
+	@GetMapping("/detalheProdutos")
 	public ModelAndView detalheProduto() {
-		ModelAndView mv = new ModelAndView("paginas/produto/detalheProduto");
+		ModelAndView mv = new ModelAndView("paginas/produto/detalheProdutos");
 		//mv.addObject("clientes", servicoCliente.searchAll());
 		return mv;
 	}
 
-	@GetMapping("/listarTodosProduto")
+	@GetMapping("/listarTodosProdutos")
 	public ModelAndView listarTodosOsProdutos() {
-		ModelAndView mv = new ModelAndView("paginas/produto/paginaDeProduto");
+		ModelAndView mv = new ModelAndView("produto/paginaDeProdutos");
 		mv.addObject("produtos", servicoProduto.searchAll());
 		mv.addObject("nivelInstrucoes", servicoNivelInstrucao.searchAll());
 		return mv;
 	}
 
-	@GetMapping("/cadastrarProduto")
+	@GetMapping("/cadastrarProdutos")
 	public ModelAndView cadastrarProdutos() {
-		ModelAndView mv = new ModelAndView("paginas/produto/cadastroProduto");
-		mv.addObject("produtoLista", servicoProduto.searchAll());
+		ModelAndView mv = new ModelAndView("produto/cadastroDeProdutos");
+		mv.addObject("produto", new Produto());
 		mv.addObject("nivelInstrucoes", servicoNivelInstrucao.searchAll());
 		return mv;
 	}
@@ -58,12 +58,12 @@ public class ProdutoController {
 	@PostMapping("/salvar")
 	public String salvarProdutos(Produto produto) {
 		servicoProduto.save(produto);
-		return "redirect:/produto/listarTodosProduto";
+		return "redirect:/produto/listarTodosProdutos";
 	}
 	
 	@GetMapping("/alterar/{id}")
 	public ModelAndView alterarProduto(@PathVariable("id") Integer id) throws ObjectNotFoundException {
-		ModelAndView mv = new ModelAndView("pagina/produto/alterarProduto");
+		ModelAndView mv = new ModelAndView("produto/alterarProduto");
 		mv.addObject("produto", servicoProduto.search(id));
 		mv.addObject("nivelInstrucoes", servicoNivelInstrucao.searchAll());
 		return mv;
