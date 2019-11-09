@@ -17,7 +17,7 @@ public class NivelInstrucao implements Serializable{
 	
 	@Id
 	@Column(name = "nivel_instrucao_id")
-	/*@GeneratedValue(strategy = GenerationType.IDENTITY)*/
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
 	@Column(name = "nivel_instrucao_descricao")

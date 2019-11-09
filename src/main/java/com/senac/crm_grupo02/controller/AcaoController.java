@@ -19,6 +19,13 @@ public class AcaoController {
 
 	@Autowired
 	private AcaoService servicoAcao;
+	
+	@GetMapping("/paginaDeAcoes")
+	public ModelAndView paginaDeAcoes() {
+		ModelAndView mv = new ModelAndView("paginas/acao/paginaAcao");
+		mv.addObject("acoes", servicoAcao.searchAll());
+		return mv;
+	}
 
 	@GetMapping("/listagemAcoes")
 	public ModelAndView listagemAcao() {

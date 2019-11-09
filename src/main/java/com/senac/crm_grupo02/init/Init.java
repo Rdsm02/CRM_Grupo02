@@ -91,7 +91,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		NivelInstrucao nI2 = new NivelInstrucao();
 		nI2.setId(2);
 		nI2.setDescricao("Especialização - MBA");
-		nI2.setStatus("1");
+		nI2.setStatus("0");
 		
 		List<NivelInstrucao> listaDeNivelInstrucao = new ArrayList<>();
 		

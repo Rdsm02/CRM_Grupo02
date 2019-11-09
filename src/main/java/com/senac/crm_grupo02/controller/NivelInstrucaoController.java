@@ -42,8 +42,8 @@ public class NivelInstrucaoController {
 
 	@GetMapping("/cadastrarNivelInstrucao")
 	public ModelAndView cadastrarNivelInstrucaos() {
-		ModelAndView mv = new ModelAndView("nivelDeInstrucao/cadastroDeNivelDeInstrucao");
-		mv.addObject("nivelInstrucao", new NivelInstrucao());
+		ModelAndView mv = new ModelAndView("paginas/nivelDeInstrucao/cadastroNivelInstrucao");
+		mv.addObject("nivelInstrucaoLista", servicoNivelInstrucao.searchAll());
 		return mv;
 	}
 
