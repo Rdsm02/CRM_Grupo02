@@ -253,6 +253,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		Acao acao1 = new Acao();
 		acao1.setDescricao("Atendimento Telefônico");
+		acao1.setStatus("1");
 		acaoService.save(acao1);
 		
 		AcaoCliente acaoCliente1 = new AcaoCliente();

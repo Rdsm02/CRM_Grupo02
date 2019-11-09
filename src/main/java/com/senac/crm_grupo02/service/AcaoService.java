@@ -40,7 +40,8 @@ public class AcaoService {
 		Acao AcaoAntigo = search(acao.getId());
 		AcaoAntigo.setId(acao.getId());
 		AcaoAntigo.setDescricao(acao.getDescricao());
-		return save(AcaoAntigo);
+		AcaoAntigo.setStatus(acao.getStatus());
+		return repoAcao.save(AcaoAntigo);
 	}
 	
 	public void delete(Integer id) {

@@ -12,7 +12,7 @@
 				<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
 					<div class="kt-portlet__head kt-portlet__head--noborder">
 						<div class="kt-portlet__head-label col-xl-12">
-							<h3 class="kt-portlet__head-title" style="margin-left: auto; margin-right: auto;">Cadastro de Nível de Instrução</h3>
+							<h3 class="kt-portlet__head-title" style="margin-left: auto; margin-right: auto;">Cadastro de Acoes</h3>
 						</div>
 
 					</div>
@@ -27,7 +27,7 @@
 
 						<div class="input-group">
 
-							<input type="text" class="form-control" id="campoCadastroNivelDeInstrucao" placeholder="Insira o Nível de Instrucao..." aria-describedby="basic-addon1" style="border-top: none; border-right: none; border-left: none; border-bottom-color: black;">
+							<input type="text" class="form-control" id="campoCadastroObjeto" placeholder="Insira a Descricao da Acao..." aria-describedby="basic-addon1" style="border-top: none; border-right: none; border-left: none; border-bottom-color: black;">
 						</div>
 						<span class="form-text text-muted">Não é permitido caracteres especiais. ex: !@#$%¨&amp;*()</span>
 					</div>
@@ -65,19 +65,19 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="nivel : ${nivelInstrucaoLista}">
-									<th scope="row"><span class="nome-lista" th:text="${nivel.id}"></span></th>
+								<tr th:each="acao : ${acaoLista}">
+									<th scope="row"><span class="nome-lista" th:text="${acao.id}"></span></th>
 									<td>
-										<h6 th:text="${nivel.descricao}"></h6>
+										<h6 th:text="${acao.descricao}"></h6>
 									</td>
 									<td>
 										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchStatus" style="width: 106px;">
-											<div class="bootstrap-switch-container" id="switchMover" style="width: 185px;margin-left: 0px;" th:style="${(nivel.status).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
+											<div class="bootstrap-switch-container" id="switchMover" style="width: 185px;margin-left: 0px;" th:style="${(acao.status).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
 												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Ativo</span>
 												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
 												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Inativo</span>
-												<input type="checkbox" th:checked="${(nivel.status).equals('1')} ? 'true' : 'false'">
-												 <input type="hidden" id="status" name="status" th:value="${nivel.status}">
+												<input type="checkbox" th:checked="${(acao.status).equals('1')} ? 'true' : 'false'">
+												 <input type="hidden" id="status" name="status" th:value="${acao.status}">
 											</div>
 										</div>
 									</td>
@@ -87,36 +87,6 @@
 										</div>
 									</td>
 								</tr>
-								<!-- <tr>
-									<th scope="row"><span class="nome-lista">02</span></th>
-									<td>
-										<h6>Bacharel</h6>
-									</td>
-									<td><span style="width: 113px;"><span class="kt-badge kt-badge--danger kt-badge--dot" style="margin: 0px;"></span>&nbsp;<span class="kt-font-bold kt-font-danger">Inativo</span></span></td>
-									<td><div class="kt-demo-icon__preview">
-											<i class="flaticon-edit"></i>
-										</div></td>
-								</tr>
-								<tr>
-									<th scope="row"><span class="nome-lista">03</span></th>
-									<td>
-										<h6>Tecnólogo</h6>
-									</td>
-									<td><span style="width: 113px;"><span class="kt-badge kt-badge--success kt-badge--dot" style="margin: 0px;"></span>&nbsp;<span class="kt-font-bold kt-font-success">Ativo</span></span></td>
-									<td><div class="kt-demo-icon__preview">
-											<i class="flaticon-edit"></i>
-										</div></td>
-								</tr>
-								<tr>
-									<th scope="row"><span class="nome-lista">04</span></th>
-									<td>
-										<h6>Pós Graduação</h6>
-									</td>
-									<td><span style="width: 113px;"><span class="kt-badge kt-badge--success kt-badge--dot" style="margin: 0px;"></span>&nbsp;<span class="kt-font-bold kt-font-success">Ativo</span></span></td>
-									<td><div class="kt-demo-icon__preview">
-											<i class="flaticon-edit"></i>
-										</div></td>
-								</tr> -->
 							</tbody>
 						</table>
 						<div class="row">
@@ -210,7 +180,7 @@
 				linhaTabelaEditar.find("td:nth-child(4) > div").append('<i class="flaticon-like" id="botaoSalvarAlteracaoTabela" style="margin-right:10%; cursor: pointer;"></i>');
 				linhaTabelaEditar.find("td:nth-child(4) > div").append('<i class="flaticon-circle" id="botaoCancelarAlteracaoTabela" style="cursor: pointer;"></i>');
 			}else{
-				alert("H� outro campo aberto. Feche o campo aberto para prosseguir!!!");
+				alert("Ha outro campo aberto. Feche o campo aberto para prosseguir!!!");
 			}
 			
 			
@@ -228,12 +198,12 @@
 			objeto.descricao = textoInputAlteracaoTabela;
 			objeto.status = statusLinhaTabela;
 			
-			var nivelInstrucaoJSON = JSON.stringify(objeto);			
+			var objetoJSON = JSON.stringify(objeto);			
 			
 			$.ajax({
 				type : "POST",
-				url : dominio + "/nivelInstrucaoREST/editarNivelInstrucao",
-				data : nivelInstrucaoJSON,
+				url : dominio + "/acaoREST/editarAcao",
+				data : objetoJSON,
 				contentType : "application/json",
 				dataType : "JSON",
 				async : false,
@@ -272,12 +242,12 @@
 				objeto.descricao = $(this).closest("tr").find("td:nth-child(2) > h6").text();
 				objeto.status = 0;
 				
-				var nivelInstrucaoJSON = JSON.stringify(objeto);
+				var objetoJSON = JSON.stringify(objeto);
 				
 				$.ajax({
 					type : "POST",
-					url : dominio + "/nivelInstrucaoREST/editarNivelInstrucao",
-					data : nivelInstrucaoJSON,
+					url : dominio + "/acaoREST/editarAcao",
+					data : objetoJSON,
 					contentType : "application/json",
 					dataType : "JSON",
 					async : false,
@@ -295,12 +265,12 @@
 				objeto.descricao = $(this).closest("tr").find("td:nth-child(2) > h6").text();
 				objeto.status = 1;
 				
-				var nivelInstrucaoJSON = JSON.stringify(objeto);
+				var objetoJSON = JSON.stringify(objeto);
 				
 				$.ajax({
 					type : "POST",
-					url : dominio + "/nivelInstrucaoREST/editarNivelInstrucao",
-					data : nivelInstrucaoJSON,
+					url : dominio + "/acaoREST/editarAcao",
+					data : objetoJSON,
 					contentType : "application/json",
 					dataType : "JSON",
 					async : false,
@@ -323,21 +293,21 @@
 	function cadastrarAcaoCliente() {
 		var objeto = new Object();
 		objeto.id = null;
-		objeto.descricao = $("#campoCadastroNivelDeInstrucao").val();
+		objeto.descricao = $("#campoCadastroObjeto").val();
 		objeto.status = "1";
 
-		var nivelInstrucaoJSON = JSON.stringify(objeto);
+		var objetoJSON = JSON.stringify(objeto);
 		$.ajax({
 			type : "POST",
-			url : dominio + "/nivelInstrucaoREST/cadastrarNivelInstrucao",
-			data : nivelInstrucaoJSON,
+			url : dominio + "/acaoREST/cadastrarAcao",
+			data : objetoJSON,
 			contentType : "application/json",
 			dataType : "JSON",
 			async : false,
 			success : function(response) {
 
 				setTimeout(function() {
-					$("#central").load(dominio + "/nivelInstrucao/cadastrarNivelInstrucao");
+					$("#central").load(dominio + "/acao/paginaDeAcoes");
 				}, 1000);
 
 			}
