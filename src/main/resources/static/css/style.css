@@ -339,6 +339,21 @@ html, body {
 .modal-cliente{
     margin-left: 8%!important;
 }
+
+.modal-header{
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.4)!important;
+	z-index: 9!important;
+}
+
+.modal-body{
+	overflow-y: scroll!important;
+}
+
+.modal-footer{
+	box-shadow: 1px -1px 3px rgba(0,0,0,0.4)!important;
+	z-index: 9!important;
+}
+
 .modal-content{
     border-radius: 4px!important;
     border: none!important;
@@ -479,7 +494,149 @@ html, body {
 }
 /**** /Lista ****/
 
+/**** Dashboard ****/
+.box-count-number{
+    margin-top: 20px;
+}
+
+.box-count-number .texto{
+	width: 98%!important;
+	height: auto;
+	border-radius: 4px;
+	color: #ffffff;
+	text-align: center;
+	text-transform: uppercase;
+	padding: 15px;
+}
+
+tspan{
+    display: none!important;
+}
+
+.sem-fundo{
+    background-color: transparent!important;
+    box-shadow: none!important;
+}
+
+.chart-text {
+    font-size: 1em;
+    fill: #000;
+    transform: translateY(0.25em);
+}
+
+.chart-number {
+    line-height: 1px;
+    font-size: 0.4em;
+    text-anchor: middle;
+    transform: translateY(-0.3em);
+}
+
+.chart-label { 
+    font-family: serif; 
+    font-size: 0.15em;
+    text-anchor: middle;
+    font-style: italic;
+    transform: translateY(0.1em);
+}
+
+.piechart{
+    padding-top: 5px!important;
+    background-color: transparent!important;
+}
+
+rect{
+    fill: transparent!important;
+}
+
+.clientes-satisfeitos{
+    background-color: #005594;
+}
+
+.atividades-pendentes{
+    background-color: #f78b1f;
+}
+
+.negocios-fechados{
+    background-color: #109618;
+}
+
+.negocios-perdidos{
+    background-color: #dc3912;
+}
+
+.graficos{
+    margin-top: 35px;
+}
+
+.amcharts-chart-div{
+    overflow-x: hidden!important;
+}
+/**** /Dashboard ****/
+
+/**** Sales Funill ****/
+.kanban-dragdrop{
+	padding-bottom: 0!important;
+	margin-bottom: 0!important;
+}
+
+.kanban-dragdrop .coluna {
+    flex: 0 0 20%!important;
+    max-width: 20%!important;
+}
+
+.kanban-dragdrop .content-coluna {
+	background-color: rgba(199, 206, 209, 0.7)!important;
+    height: 120vh!important;
+}
+
+.kanban-dragdrop .header-coluna {
+	background-color: rgb(16,150,24);
+	color: #fff;
+	padding: 15px;
+   
+    border-radius: 4px 4px 0 0;
+}
+
+.card-kanban{
+	width: 93%;
+	position: relative;
+	top: 10px;
+	margin: 0 auto;
+}
+
+.kt-portlet.kt-portlet--sortable .kt-portlet__head{
+    background-color: #005594;
+}
+
+.nav-tabs.nav-tabs-line.nav-tabs-line-primary.nav.nav-tabs .nav-link:hover, .nav-tabs.nav-tabs-line.nav-tabs-line-primary.nav.nav-tabs .nav-link.active, .nav-tabs.nav-tabs-line.nav-tabs-line-primary a.nav-link:hover, .nav-tabs.nav-tabs-line.nav-tabs-line-primary a.nav-link.active {
+    color: #fff!important;
+    border-bottom: 2px solid #f78b1f!important;
+}
+
+.nav-tabs.nav-tabs-line.nav-tabs-line-primary.nav.nav-tabs .nav-link:hover > i, .nav-tabs.nav-tabs-line.nav-tabs-line-primary.nav.nav-tabs .nav-link.active > i, .nav-tabs.nav-tabs-line.nav-tabs-line-primary a.nav-link:hover > i, .nav-tabs.nav-tabs-line.nav-tabs-line-primary a.nav-link.active > i {
+    color: #f78b1f!important;
+}
+
+.nav-tabs.nav-tabs-line.nav.nav-tabs .nav-link i, .nav-tabs.nav-tabs-line a.nav-link i {
+    color: #ffffff!important;
+}
+
+.nav-tabs.nav-tabs-line.nav.nav-tabs .nav-link, .nav-tabs.nav-tabs-line a.nav-link {
+    background-color: transparent;
+    color: rgba(255,255,255,0.7)!important;
+}
+
+.tab-pane{
+    color: #74788d!important;
+    font-weight: 400;
+}
+
+
+/**** /Sales Funill ****/
+
 /********* /Content Page *********/
+
+
 
 
 

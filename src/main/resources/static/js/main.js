@@ -64,3 +64,84 @@ $(function() {
   });
   
 });
+
+//DragDrop do Kanban
+var KTPortletDraggable = function () {
+
+    return {
+        //main function to initiate the module
+        init: function () {
+            $("#kt_sortable_portlets").sortable({
+                connectWith: ".kt-portlet__head",
+                items: ".kt-portlet",
+                opacity: 0.8,
+                handle : '.kt-portlet__head',
+                coneHelperSize: true,
+                placeholder: 'kt-portlet--sortable-placeholder',
+                forcePlaceholderSize: true,
+                tolerance: "pointer",
+                helper: "clone",
+                tolerance: "pointer",
+                forcePlaceholderSize: !0,
+                helper: "clone",
+                cancel: ".kt-portlet--sortable-empty", // cancel dragging if portlet is in fullscreen mode
+                revert: 250, // animation in milliseconds
+                update: function(b, c) {
+                    if (c.item.prev().hasClass("kt-portlet--sortable-empty")) {
+                        c.item.prev().before(c.item);
+                    }                    
+                }
+            });
+        }
+    };
+}();
+
+jQuery(document).ready(function() {
+    KTPortletDraggable.init();
+});
+
+//Contador da page dashboard
+var counter = document.querySelectorAll(".counter")
+
+window.addEventListener("load", function() {
+  counter.forEach(function(k, v) {
+	  
+	  var start = counter[v].getAttribute('data-count-start')
+	  var end = counter[v].getAttribute('data-count-end')
+	  var speed = counter[v].getAttribute('data-speed')
+
+	  setInterval(function() {
+		  start++;
+		  if(start > end) {
+			return false;
+		  }
+		  counter[v].innerText = start;
+
+		}, speed)
+  })
+  
+}, false)
+
+
+// Google Chart
+google.charts.load("current", {packages:["corechart"]});
+		google.charts.setOnLoadCallback(drawChart);
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+			['Language', 'Speakers (in millions)'],
+			['Clientes Satisfeitos',  40],
+			['Atividades Pendentes', 10],
+			['Negócios Fechados',  30],
+			['Negócios Perdidos', 20],
+			]);
+
+		var options = {
+			legend: 'none',
+			pieSliceText: 'none',
+			pieStartAngle: 'none',
+			colors: ['#005594',  '#f78b1f', '#109618', '#dc3912']
+		};
+
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart.draw(data, options);
+		}
