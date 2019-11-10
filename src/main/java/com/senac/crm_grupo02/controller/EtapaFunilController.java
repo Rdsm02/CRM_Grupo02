@@ -15,6 +15,13 @@ public class EtapaFunilController {
 	
 	@Autowired
 	EtapaFunilService servicoEtapaFunil;
+	
+	@GetMapping("/paginaEtapas")
+	public ModelAndView paginaEtapas() {
+		ModelAndView mv = new ModelAndView("paginas/etapa/funilEtapas");
+		mv.addObject("etapaLista", servicoEtapaFunil.searchAll());
+		return mv;
+	}	
 
 	@GetMapping("/listagemEtapas")
 	public ModelAndView listagemEtapa() {

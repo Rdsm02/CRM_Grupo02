@@ -20,13 +20,6 @@ public class ClienteController {
 	@Autowired
 	private ClienteService servicoCliente;
 	
-	@GetMapping("/index")
-	public ModelAndView paginaPrincipal() {
-		ModelAndView mv = new ModelAndView("paginas/cliente/index");
-		//mv.addObject("clientes", servicoCliente.searchAll());
-		return mv;
-	}
-	
 	@GetMapping("/listagemClientes")
 	public ModelAndView listagemCliente() {
 		ModelAndView mv = new ModelAndView("paginas/cliente/listagemClientes");

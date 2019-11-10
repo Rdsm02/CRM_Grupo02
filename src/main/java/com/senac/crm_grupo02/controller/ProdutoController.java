@@ -25,6 +25,14 @@ public class ProdutoController {
 	@Autowired
 	NivelInstrucaoService servicoNivelInstrucao;
 	
+	@GetMapping("/paginaProdutos")
+	public ModelAndView paginaProdutos() {
+		ModelAndView mv = new ModelAndView("paginas/produto/paginaProduto");
+		mv.addObject("produtoLista", servicoProduto.searchAll());
+		mv.addObject("nivelInstrucaoLista", servicoNivelInstrucao.searchAll());
+		return mv;
+	}
+	
 	@GetMapping("/listagemProdutos")
 	public ModelAndView listagemProduto() {
 		ModelAndView mv = new ModelAndView("paginas/produto/listagemProdutos");

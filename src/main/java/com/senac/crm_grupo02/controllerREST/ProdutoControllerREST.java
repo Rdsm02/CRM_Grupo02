@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.senac.crm_grupo02.domain.Acao;
 import com.senac.crm_grupo02.domain.ClienteDadoTipo;
 import com.senac.crm_grupo02.domain.NivelInstrucao;
 import com.senac.crm_grupo02.domain.Produto;
@@ -63,6 +64,22 @@ public class ProdutoControllerREST {
 		
 
 		servicoProduto.save(produtoNovo);
+		
+        return produtoNovo;
+    }
+	
+	@ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value ="/editarProduto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Produto editarAcao(@RequestBody Produto produto) throws ObjectNotFoundException{
+		
+		Produto produtoNovo = new Produto();
+		produtoNovo.setId(produto.getId());
+		produtoNovo.setDescricao(produto.getDescricao());
+		produtoNovo.setStatus(produto.getStatus());		
+		produtoNovo.setNivelInstrucao(servicoNivelInstrucao.search(produto.getNivelInstrucao().getId()));
+		
+		
+		servicoProduto.edit(produtoNovo);
 		
         return produtoNovo;
     }

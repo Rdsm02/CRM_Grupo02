@@ -18,8 +18,11 @@ public class EtapaFunil implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "acao_descricao")
+	@Column(name = "etapa_funil_descricao")
 	private String descricao;
+	
+	@Column(name = "etapa_funil_status")
+	private String status;
 
 	public Integer getId() {
 		return id;
@@ -36,7 +39,13 @@ public class EtapaFunil implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}	
 
 }
