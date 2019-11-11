@@ -18,7 +18,7 @@ public class EtapaFunilController {
 	
 	@GetMapping("/paginaEtapas")
 	public ModelAndView paginaEtapas() {
-		ModelAndView mv = new ModelAndView("paginas/etapa/funilEtapas");
+		ModelAndView mv = new ModelAndView("paginas/funil/paginaFunilEtapas");
 		mv.addObject("etapaLista", servicoEtapaFunil.searchAll());
 		return mv;
 	}	

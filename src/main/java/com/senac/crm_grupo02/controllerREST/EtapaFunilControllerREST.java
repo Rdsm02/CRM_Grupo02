@@ -22,11 +22,21 @@ public class EtapaFunilControllerREST {
 	EtapaFunilService servicoEtapaFunil;
 	
 	@ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value ="/cadastrarEtapaFnunil", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EtapaFunil cadastrarEtapaFnunil(@RequestBody EtapaFunil etapaFunil) throws ObjectNotFoundException{	
+    @RequestMapping(value ="/cadastrarEtapaFunil", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public EtapaFunil cadastrarEtapaFunil(@RequestBody EtapaFunil etapaFunil) throws ObjectNotFoundException{	
 		
 
 		servicoEtapaFunil.save(etapaFunil);
+		
+        return etapaFunil;
+    }
+	
+	@ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value ="/editarEtapaFunil", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public EtapaFunil editarEtapaFunil(@RequestBody EtapaFunil etapaFunil) throws ObjectNotFoundException{	
+		
+
+		servicoEtapaFunil.edit(etapaFunil);
 		
         return etapaFunil;
     }

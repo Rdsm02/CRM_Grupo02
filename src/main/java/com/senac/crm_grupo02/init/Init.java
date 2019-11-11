@@ -14,6 +14,7 @@ import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.domain.ClienteDadoTipo;
 import com.senac.crm_grupo02.domain.ClienteDadoTipoCategoria;
 import com.senac.crm_grupo02.domain.ClienteOferta;
+import com.senac.crm_grupo02.domain.EtapaFunil;
 import com.senac.crm_grupo02.domain.NivelInstrucao;
 import com.senac.crm_grupo02.domain.Oferta;
 import com.senac.crm_grupo02.domain.Produto;
@@ -23,6 +24,7 @@ import com.senac.crm_grupo02.service.ClienteDadoTipoCategoriaService;
 import com.senac.crm_grupo02.service.ClienteDadoTipoService;
 import com.senac.crm_grupo02.service.ClienteOfertaService;
 import com.senac.crm_grupo02.service.ClienteService;
+import com.senac.crm_grupo02.service.EtapaFunilService;
 import com.senac.crm_grupo02.service.NivelInstrucaoService;
 import com.senac.crm_grupo02.service.OfertaService;
 import com.senac.crm_grupo02.service.ProdutoService;
@@ -56,6 +58,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
 	AcaoClienteService acaoClienteService;	
+	
+	@Autowired
+	EtapaFunilService servicoEtapaFunil;
 	
 	
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -263,6 +268,13 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		acaoCliente1.setData("2019-10-25");
 		acaoCliente1.setHora("13:00");
 		acaoClienteService.save(acaoCliente1);
+		
+		EtapaFunil etapaFunil1 = new EtapaFunil();
+		etapaFunil1.setId(null);
+		etapaFunil1.setDescricao("Iniciante");
+		etapaFunil1.setStatus("1");
+		
+		servicoEtapaFunil.save(etapaFunil1);
 		
 		
 	}

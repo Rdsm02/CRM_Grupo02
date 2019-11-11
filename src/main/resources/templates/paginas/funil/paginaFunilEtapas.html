@@ -202,7 +202,7 @@
 			
 			$.ajax({
 				type : "POST",
-				url : dominio + "/acaoREST/editarAcao",
+				url : dominio + "/etapaFunilREST/editarEtapaFunil",
 				data : objetoJSON,
 				contentType : "application/json",
 				dataType : "JSON",
@@ -246,7 +246,7 @@
 				
 				$.ajax({
 					type : "POST",
-					url : dominio + "/acaoREST/editarAcao",
+					url : dominio + "/etapaFunilREST/editarEtapaFunil",
 					data : objetoJSON,
 					contentType : "application/json",
 					dataType : "JSON",
@@ -269,7 +269,7 @@
 				
 				$.ajax({
 					type : "POST",
-					url : dominio + "/acaoREST/editarAcao",
+					url : dominio + "/etapaFunilREST/editarEtapaFunil",
 					data : objetoJSON,
 					contentType : "application/json",
 					dataType : "JSON",
@@ -299,7 +299,7 @@
 		var objetoJSON = JSON.stringify(objeto);
 		$.ajax({
 			type : "POST",
-			url : dominio + "/acaoREST/cadastrarAcao",
+			url : dominio + "/etapaFunilREST/cadastrarEtapaFunil",
 			data : objetoJSON,
 			contentType : "application/json",
 			dataType : "JSON",
@@ -307,7 +307,7 @@
 			success : function(response) {
 
 				setTimeout(function() {
-					$("#central").load(dominio + "/acao/paginaDeAcoes");
+					$("#central").load(dominio + "/etapa/paginaEtapas");
 				}, 1000);
 
 			}

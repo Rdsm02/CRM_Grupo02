@@ -41,6 +41,7 @@ public class EtapaFunilService {
 		EtapaFunil etapaFunilAntigo = search(etapaFunil.getId());   
 		etapaFunilAntigo.setId(etapaFunil.getId());
 		etapaFunilAntigo.setDescricao(etapaFunil.getDescricao());
+		etapaFunilAntigo.setStatus(etapaFunil.getStatus());
 		return save(etapaFunilAntigo);
 	}	
 	
