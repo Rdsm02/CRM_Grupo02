@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.senac.crm_grupo02.service.ClienteDadoTipoCategoriaService;
 
 @Controller
-@RequestMapping("parametrizacao")
+@RequestMapping("clienteDadoTipoCategoria")
 public class ClienteDadoTipoCategoriaController {
 	
 	@Autowired
@@ -17,7 +17,7 @@ public class ClienteDadoTipoCategoriaController {
 	
 	@GetMapping("/listarCategorias")
 	public ModelAndView paginaPrincipal() {
-		ModelAndView mv = new ModelAndView("paginas/parametrizacao/categoriaDadoCliente");
+		ModelAndView mv = new ModelAndView("paginas/parametrizacao/paginaCategoriaDadoCliente");
 		mv.addObject("categorias", servicoClienteDadoTipoCategoria.searchAll());
 		return mv;
 	}

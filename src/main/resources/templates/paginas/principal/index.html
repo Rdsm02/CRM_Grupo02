@@ -632,7 +632,7 @@
 			});	
 			
 			$("#categoriasCliente").click(function(){
-				$("#central").load(dominio + "/parametrizacao/listarCategorias");
+				$("#central").load(dominio + "/clienteDadoTipoCategoria/listarCategorias");
 			});				
 			
 			$("#TipoDadosCliente").click(function(){
@@ -700,7 +700,7 @@
 			var listaDeDadoTipoPrincipal;
 				$.ajax({
 				type: "GET",
-				url: dominio + "/clienteREST/clienteDadoTipo?categoriaId=0",
+				url: dominio + "/clienteREST/clienteDadoTipo?categoriaId=1",
 				dataType: "JSON",
 				async: false,
 				success: function (response) {
@@ -729,7 +729,7 @@
 			$.each(listaDeCategorias, function(index, value) {
 				$("#camposComplementaresSelecionar").append('<option value="'+value.codigo+'">'+value.descricao+'</option>');
 			});			
-			$("#camposComplementaresSelecionar option[value=0]").remove();
+			$("#camposComplementaresSelecionar option[value=1]").remove();
 			
 			
 		}

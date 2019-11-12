@@ -15,6 +15,7 @@ public class ClienteDadoTipoCategoria implements Serializable {
 
 	@Id
 	@Column(name = "cliente_dado_tipo_categoria_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 
 	@Column(name = "cliente_dado_tipo_categoria_descricao")

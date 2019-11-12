@@ -162,19 +162,19 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		//servicoClienteOferta.saveAll(listaDeClienteOferta);
 		
 		ClienteDadoTipoCategoria principal = new ClienteDadoTipoCategoria();
-		principal.setCodigo(0);
+		principal.setCodigo(null);
 		principal.setDescricao("Principal");
-		principal.setStatus("ativo");
+		principal.setStatus("1");
 		
 		ClienteDadoTipoCategoria endereco = new ClienteDadoTipoCategoria();
-		endereco.setCodigo(1);
+		endereco.setCodigo(null);
 		endereco.setDescricao("Endereco");
-		endereco.setStatus("ativo");
+		endereco.setStatus("1");
 		
 		ClienteDadoTipoCategoria contato = new ClienteDadoTipoCategoria();
-		contato.setCodigo(2);
+		contato.setCodigo(null);
 		contato.setDescricao("Contato");
-		contato.setStatus("ativo");
+		contato.setStatus("1");
 		
 		List<ClienteDadoTipoCategoria> listaDeClienteDadoTipoCategoria = new ArrayList<>();
 		listaDeClienteDadoTipoCategoria.add(principal);
@@ -185,7 +185,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		ClienteDadoTipo cpf = new ClienteDadoTipo();
 		cpf.setCodigo(null);
 		cpf.setDescricao("CPF");
-		cpf.setStatus("Ativo");	
+		cpf.setStatus("1");	
 		cpf.setObrigatorio(1);
 		cpf.setPadrao(1);
 		cpf.setMascara("000.000.000-00");
@@ -194,7 +194,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		ClienteDadoTipo nome = new ClienteDadoTipo();
 		nome.setCodigo(null);
 		nome.setDescricao("Nome");
-		nome.setStatus("Ativo");	
+		nome.setStatus("1");	
 		nome.setObrigatorio(1);
 		nome.setPadrao(1);
 		nome.setMascara("0");
@@ -203,7 +203,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		ClienteDadoTipo sobrenome = new ClienteDadoTipo();
 		sobrenome.setCodigo(null);
 		sobrenome.setDescricao("Sobrenome");
-		sobrenome.setStatus("Ativo");	
+		sobrenome.setStatus("1");	
 		sobrenome.setObrigatorio(1);
 		sobrenome.setPadrao(1);
 		sobrenome.setMascara("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -212,7 +212,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		ClienteDadoTipo cep = new ClienteDadoTipo();
 		cep.setCodigo(null);
 		cep.setDescricao("CEP");
-		cep.setStatus("Ativo");	
+		cep.setStatus("1");	
 		cep.setObrigatorio(1);
 		cep.setPadrao(1);
 		cep.setMascara("00000-000");
@@ -221,7 +221,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		ClienteDadoTipo rua = new ClienteDadoTipo();
 		rua.setCodigo(null);
 		rua.setDescricao("Rua");
-		rua.setStatus("Ativo");	
+		rua.setStatus("1");	
 		rua.setObrigatorio(1);
 		rua.setPadrao(1);
 		rua.setMascara("SSSS");
@@ -230,7 +230,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		ClienteDadoTipo telefone = new ClienteDadoTipo();
 		telefone.setCodigo(null);
 		telefone.setDescricao("Telefone");
-		telefone.setStatus("Ativo");	
+		telefone.setStatus("1");	
 		telefone.setObrigatorio(1);
 		telefone.setPadrao(1);
 		telefone.setMascara("00 0 0000-0000");
@@ -239,7 +239,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		ClienteDadoTipo email = new ClienteDadoTipo();
 		email.setCodigo(null);
 		email.setDescricao("email");
-		email.setStatus("Ativo");	
+		email.setStatus("1");	
 		email.setObrigatorio(1);
 		email.setPadrao(1);
 		email.setMascara("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
