@@ -130,7 +130,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		//LocalDate dataFim = LocalDate.of(2019, 12, 20);
 		
 		Oferta o1 = new Oferta();
-		o1.setId(1);
+		o1.setId(null);
+		o1.setCodigo("2019.2n");
 		o1.setDescricao("2019.2n");
 		o1.setDataInicio("2019-07-01");
 		o1.setDataFim("2019-12-20");

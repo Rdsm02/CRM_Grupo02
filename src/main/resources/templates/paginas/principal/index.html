@@ -117,7 +117,7 @@
 										<ul class="kt-menu__subnav">
 											<li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text"></span></span></li>
 											<li class="kt-menu__item " aria-haspopup="true"><div data-toggle="modal" data-target="#modal-ofertas" class="kt-menu__link " onclick="carregarModalCadastroOfertas()"><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Cadastrar Oferta</span></div></li>
-											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="paginaOfertas" class="kt-menu__link-text">Pesquisar Ofertas</span></a></li>
+											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="listarOfertas" class="kt-menu__link-text">Pesquisar Ofertas</span></a></li>
 											<li class="kt-menu__item " aria-haspopup="true"><a class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span id="detalharOfertas" class="kt-menu__link-text">Detalhar Produtos</span></a></li>
 										</ul>
 									</div>
@@ -470,14 +470,27 @@
 					
 					<label for="status">Preco</label>
 					<input class="form-control" type="text" name="preco" id="preco">
-				
-					<label for="status">Status</label>
-					<input class="form-control" type="text" name="status" id="status">
 					
-					 <div class="row">
+					<label for="status">Data de Inicio</label>
+					<div class="input-group date" data-provide="datepicker">
+					    <input type="text" class="form-control" id="dataInicio">
+					    <div class="input-group-addon">
+					        <span class="glyphicon glyphicon-th"></span>
+					    </div>
+					</div>
+					
+					<label for="status">Data de Termino</label>
+					<div class="input-group date" data-provide="datepicker">
+					    <input type="text" class="form-control" id="dataFim">
+					    <div class="input-group-addon">
+					        <span class="glyphicon glyphicon-th"></span>
+					    </div>
+					</div>
+					
+					<div class="row">
 					<div class="col-md-7">
 					<label for="obrigatorio">Selecione o produto</label>
-					      <select  class="form-control"  id="produto" data-placeholder="Selecione um produto">
+					      <select  class="form-control"  id="produtoOferta" data-placeholder="Selecione um produto">
 					         <option value="-1">Selecione um produto</option>
 					       </select>
 					   </div>				
@@ -492,7 +505,7 @@
 					<i class="fa fa-plus"></i>
 				</button>
                 <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;">Cancelar</button>
-                <button type="button" class="btn btn-primary btn-cadastrar p-2" onclick="cadastrarProduto()" data-dismiss="modal">Cadastrar</button>
+                <button type="button" class="btn btn-primary btn-cadastrar p-2" onclick="cadastrarOferta()" data-dismiss="modal">Cadastrar</button>
             </div>
         </div>
     </div>
@@ -675,8 +688,12 @@
 			$("#etapas").click(function(){
 				$("#central").load(dominio + "/etapa/paginaEtapas");
 			});
+			
+			$("#listarOfertas").click(function(){
+				$("#central").load(dominio + "/oferta/listarTodasAsOfertas");
+			});
 						
-						
+			
 			
 			$("#botaoAdicionarNovoCampo").click(function(){
 				var idCategoria = $("#camposComplementaresSelecionar option:selected").val();
@@ -909,27 +926,74 @@
 	        
 		}
 		
+		var listaDeProdutos = new Array();
 		function carregarModalCadastroOfertas(){
 			
+			$.ajax({
+				type: "GET",
+				url: dominio + "/produtoREST/obterProduto",
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					listaDeProdutos = response;	
+					$(".form-ofertas").find("#produtoOferta option").remove();
+					$(".form-ofertas").find("#produtoOferta").append('<option value="-1">Selecione um Produto</option>');
+					
+					$.each(listaDeProdutos, function(index, value) {
+						$(".form-ofertas").find("#produtoOferta").append('<option value="'+value.id+'">'+value.descricao+'</option>');
+					});	
+					}
+				});
 			
 			
-			$("#modal-ofertas > div > div > div.modal-body > form.form-ofertas").find("select#produto");
+		}
+		
+		function cadastrarOferta(){
+			var formularioDeOfertas = $(".form-ofertas");
+			var objeto = new Object();
+			objeto.id = null;
+			objeto.codigo = formularioDeOfertas.find("input#codigo").val();
+			objeto.descricao = formularioDeOfertas.find("input#descricao").val();
+			objeto.preco = formularioDeOfertas.find("input#preco").val();
+			objeto.dataInicio = formularioDeOfertas.find("div > input#dataInicio").val();
+			objeto.dataFim = formularioDeOfertas.find("div > input#dataFim").val();
+			objeto.status = "1";
+			objeto.produtoId = new Object();
+			objeto.produtoId.id = formularioDeOfertas.find("select#produtoOferta option:selected").val();
+			
+			var ofertaJSON = JSON.stringify(objeto);
+			
+			$.ajax({
+				type: "POST",
+				url: dominio + "/ofertaREST/cadastrarOferta",
+				data: ofertaJSON,
+				contentType: "application/json",
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					console.log(response);
+					//$('#modal-categoriaCliente').modal('hide').delay(100);
+					//zerarTodosOsCampos();	
+					//setTimeout(function(){ $("#central").load(dominio + "/produto/listagemProdutos"); }, 1000);
+					
+					}
+				});
 			
 		}
 	
 		/*
 		var lista = new Array();
 
-var form = $("#modal-cliente > div > div > div.modal-body > form > div > input");
-
-$.each(form, function(index, value) {
-var objeto = new Object();
-objeto.descricao = value['name'];
-objeto.valor = value['value'];
-lista.push(objeto);
-
-				console.log(lista);
-			});
+			var form = $("#modal-cliente > div > div > div.modal-body > form > div > input");
+			
+			$.each(form, function(index, value) {
+			var objeto = new Object();
+			objeto.descricao = value['name'];
+			objeto.valor = value['value'];
+			lista.push(objeto);
+			
+							console.log(lista);
+						});
 		*/
 		
 		

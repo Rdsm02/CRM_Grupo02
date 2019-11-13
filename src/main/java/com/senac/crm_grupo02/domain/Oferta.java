@@ -1,13 +1,20 @@
 package com.senac.crm_grupo02.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -17,7 +24,11 @@ public class Oferta implements Serializable{
 	
 	@Id
 	@Column(name = "oferta_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(name = "oferta_codigo")
+	private String codigo;
 	
 	@Column(name = "oferta_descricao")
 	private String descricao;
@@ -36,6 +47,7 @@ public class Oferta implements Serializable{
 	@Column(name = "oferta_status")
 	private String status;
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "oferta_produto_id", nullable = false)
 	private Produto produtoId;
@@ -48,6 +60,14 @@ public class Oferta implements Serializable{
 		this.id = id;
 	}
 
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -55,25 +75,32 @@ public class Oferta implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-/*
-	public LocalDate getDataInicio() {
+
+	public void setDataInicio(String dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+	
+	public String getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(String dataInicio) {
-		String[] dataInicioFS = dataInicio.toString().split("-");		
-		this.dataInicio = LocalDate.of(Integer.parseInt(dataInicioFS[0]), Integer.parseInt(dataInicioFS[1]), Integer.parseInt(dataInicioFS[2]));
-	}
-
-	public LocalDate getDataFim() {
+	public String getDataFim() {
 		return dataFim;
 	}
 
-	public void setDataFim(String dataFim) {
-		String[] dataFimFS = dataFim.toString().split("-");
-		this.dataFim = LocalDate.of(Integer.parseInt(dataFimFS[0]), Integer.parseInt(dataFimFS[1]), Integer.parseInt(dataFimFS[2]));
+	@DateTimeFormat(pattern="dd-MM-YYYY")
+	public Date getDataInicioFormatada() {
+		return new Date(dataInicio);
 	}
-*/
+	@DateTimeFormat(pattern="dd-MM-YYYY")
+	public Date getDataFimFormatada() {
+		return new Date(dataFim);
+	}
+
+	public void setDataFim(String dataFim) {
+		this.dataFim = dataFim;
+	}
+
 	public Double getPreco() {
 		return preco;
 	}
@@ -96,22 +123,6 @@ public class Oferta implements Serializable{
 
 	public void setProdutoId(Produto produtoId) {
 		this.produtoId = produtoId;
-	}
-
-	public String getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(String dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public String getDataFim() {
-		return dataFim;
-	}
-
-	public void setDataFim(String dataFim) {
-		this.dataFim = dataFim;
 	}
 
 }

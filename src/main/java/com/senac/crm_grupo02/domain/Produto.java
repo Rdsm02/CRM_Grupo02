@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 public class Produto implements Serializable{
 
@@ -27,6 +29,7 @@ public class Produto implements Serializable{
 	@Column(name = "produto_status")
 	private String status;
 	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "nivel_instrucao_id", nullable = false)
 	private NivelInstrucao nivelInstrucao;

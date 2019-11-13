@@ -24,9 +24,9 @@ public class OfertaController {
 	@Autowired
 	ProdutoService servicoProdruto;
 
-	@GetMapping("/listarTodosOfertas")
+	@GetMapping("/listarTodasAsOfertas")
 	public ModelAndView listarTodosOsOfertas() {
-		ModelAndView mv = new ModelAndView("oferta/paginaDeOferta");
+		ModelAndView mv = new ModelAndView("paginas/oferta/listagemOfertas");
 		mv.addObject("ofertas", servicoOferta.searchAll());
 		return mv;
 	}
