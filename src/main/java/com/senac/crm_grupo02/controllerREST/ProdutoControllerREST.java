@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.senac.crm_grupo02.domain.Acao;
-import com.senac.crm_grupo02.domain.ClienteDadoTipo;
 import com.senac.crm_grupo02.domain.NivelInstrucao;
 import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.service.NivelInstrucaoService;
@@ -83,5 +81,20 @@ public class ProdutoControllerREST {
 		
         return produtoNovo;
     }
+	
+	@RequestMapping(value = "/obterProduto", method = RequestMethod.GET)
+	public ResponseEntity<List<Produto>> obterProduto() throws ObjectNotFoundException {
+		
+		List<Produto> listaProduto = new ArrayList<Produto>();
+		listaProduto = servicoProduto.searchAll();		
+		Map<Integer, Produto> listaProdutohas = new HashMap<Integer, Produto>();
+		int cont = 1;
+		
+		for (Produto itemProduto : listaProduto) {							
+			listaProdutohas.put(cont, itemProduto);	
+			cont++;							
+		}
+		return new ResponseEntity<List<Produto>>(new ArrayList<Produto>(listaProdutohas.values()), HttpStatus.OK);		
+	}
 
 }

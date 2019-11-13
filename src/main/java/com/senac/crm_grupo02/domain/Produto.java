@@ -30,28 +30,35 @@ public class Produto implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "nivel_instrucao_id", nullable = false)
 	private NivelInstrucao nivelInstrucao;
-	
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
 	public NivelInstrucao getNivelInstrucao() {
 		return nivelInstrucao;
 	}
+
 	public void setNivelInstrucao(NivelInstrucao nivelInstrucao) {
 		this.nivelInstrucao = nivelInstrucao;
 	}	
