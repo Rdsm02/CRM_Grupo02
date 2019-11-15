@@ -187,8 +187,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		cpf.setCodigo(null);
 		cpf.setDescricao("CPF");
 		cpf.setStatus("1");	
-		cpf.setObrigatorio(1);
-		cpf.setPadrao(1);
+		cpf.setObrigatorio("1");
+		cpf.setPadrao("1");
 		cpf.setMascara("000.000.000-00");
 		cpf.setCliente_dado_tipo_categoria(principal);
 
@@ -196,8 +196,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		nome.setCodigo(null);
 		nome.setDescricao("Nome");
 		nome.setStatus("1");	
-		nome.setObrigatorio(1);
-		nome.setPadrao(1);
+		nome.setObrigatorio("1");
+		nome.setPadrao("1");
 		nome.setMascara("0");
 		nome.setCliente_dado_tipo_categoria(principal);
 
@@ -205,8 +205,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		sobrenome.setCodigo(null);
 		sobrenome.setDescricao("Sobrenome");
 		sobrenome.setStatus("1");	
-		sobrenome.setObrigatorio(1);
-		sobrenome.setPadrao(1);
+		sobrenome.setObrigatorio("1");
+		sobrenome.setPadrao("1");
 		sobrenome.setMascara("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		sobrenome.setCliente_dado_tipo_categoria(principal);
 		
@@ -214,8 +214,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		cep.setCodigo(null);
 		cep.setDescricao("CEP");
 		cep.setStatus("1");	
-		cep.setObrigatorio(1);
-		cep.setPadrao(1);
+		cep.setObrigatorio("1");
+		cep.setPadrao("1");
 		cep.setMascara("00000-000");
 		cep.setCliente_dado_tipo_categoria(endereco);		
 		
@@ -223,8 +223,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		rua.setCodigo(null);
 		rua.setDescricao("Rua");
 		rua.setStatus("1");	
-		rua.setObrigatorio(1);
-		rua.setPadrao(1);
+		rua.setObrigatorio("1");
+		rua.setPadrao("1");
 		rua.setMascara("SSSS");
 		rua.setCliente_dado_tipo_categoria(endereco);
 		
@@ -232,8 +232,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		telefone.setCodigo(null);
 		telefone.setDescricao("Telefone");
 		telefone.setStatus("1");	
-		telefone.setObrigatorio(1);
-		telefone.setPadrao(1);
+		telefone.setObrigatorio("1");
+		telefone.setPadrao("1");
 		telefone.setMascara("00 0 0000-0000");
 		telefone.setCliente_dado_tipo_categoria(contato);
 		
@@ -241,8 +241,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		email.setCodigo(null);
 		email.setDescricao("email");
 		email.setStatus("1");	
-		email.setObrigatorio(1);
-		email.setPadrao(1);
+		email.setObrigatorio("1");
+		email.setPadrao("1");
 		email.setMascara("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		email.setCliente_dado_tipo_categoria(contato);
 		

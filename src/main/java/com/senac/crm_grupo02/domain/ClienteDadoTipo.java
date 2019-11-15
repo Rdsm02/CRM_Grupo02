@@ -28,10 +28,10 @@ public class ClienteDadoTipo implements Serializable {
 	private String status;
 
 	@Column(name = "cliente_dado_tipo_obrigatorio")
-	private Integer obrigatorio;
+	private String obrigatorio;
 
 	@Column(name = "cliente_dado_tipo_padrao")
-	private Integer padrao;
+	private String padrao;
 
 	@Column(name = "cliente_dado_tipo_mascara")
 	private String mascara;
@@ -57,19 +57,19 @@ public class ClienteDadoTipo implements Serializable {
 		this.status = status;
 	}
 
-	public Integer getObrigatorio() {
+	public String getObrigatorio() {
 		return obrigatorio;
 	}
 
-	public void setObrigatorio(Integer obrigatorio) {
+	public void setObrigatorio(String obrigatorio) {
 		this.obrigatorio = obrigatorio;
 	}
 
-	public Integer getPadrao() {
+	public String getPadrao() {
 		return padrao;
 	}
 
-	public void setPadrao(Integer padrao) {
+	public void setPadrao(String padrao) {
 		this.padrao = padrao;
 	}
 

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.senac.crm_grupo02.service.ClienteDadoTipoCategoriaService;
 import com.senac.crm_grupo02.service.ClienteDadoTipoService;
 
 @Controller
@@ -15,10 +16,14 @@ public class ClienteDadoTipoController {
 	@Autowired
 	ClienteDadoTipoService servicoClienteDadoTipo;
 	
-	@GetMapping("/listarDadoTipo")
-	public ModelAndView paginaPrincipal() {
-		ModelAndView mv = new ModelAndView("paginas/parametrizacao/DadoTipoCliente");
+	@Autowired
+	ClienteDadoTipoCategoriaService servicoClienteDadoTipoCategoria;
+	
+	@GetMapping("/paginaDadoTipoCliente")
+	public ModelAndView paginaDadoTipoCliente() {
+		ModelAndView mv = new ModelAndView("paginas/parametrizacao/paginaDadoTipoCliente");
 		mv.addObject("tipoDados", servicoClienteDadoTipo.searchAll());
+		mv.addObject("CategoriaDadosLista", servicoClienteDadoTipoCategoria.searchAll());
 		return mv;
 	}
 

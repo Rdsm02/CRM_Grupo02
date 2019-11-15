@@ -1,0 +1,464 @@
+<div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app ">
+
+	<!-- /col-md-3 col-lg-3 -->
+	<!------------------------------- /Section Negócios ------------------------------------------------------------------------>
+
+
+	<div class="col-md-12 col-lg-12">
+
+		<!------------------------------- Section Notas e Atividades -------------------------------------------------------------->
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
+					<div class="kt-portlet__head kt-portlet__head--noborder">
+						<div class="kt-portlet__head-label col-xl-12">
+							<h3 class="kt-portlet__head-title" style="margin-left: auto; margin-right: auto;">Cadastro de Tipos de Dados do Cliente</h3>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="body-box-padrao kt-portlet__body kt-portlet__body--fluid kt-portlet__body--fit" style="">
+					<div class="form-group" style="margin-left: 5%; padding-top: 3%;">
+						
+						<div class="row">
+						<div class="col-md-5">
+						<div class="input-group">
+						<input type="text" class="form-control" id="campoCadastroObjeto" placeholder="Insira o Tipo do dado..." aria-describedby="basic-addon1" style="border-top: none; border-right: none; border-left: none; border-bottom-color: black;">
+						</div>
+						<span class="form-text text-muted">Não é permitido caracteres especiais. ex: !@#$%¨&amp;*()</span>
+						</div>
+						<div class="col-md-3">
+					      <select  class="form-control"  id="nivelInstrucaoComboCadastro" data-placeholder="Selecione um nivel" style="border-top: none;border-left: none;border-right: none;border-bottom-color: black;">
+					         <option value="-1">Selecione uma categoria</option>
+					         <option th:each="categoriaDado : ${CategoriaDadosLista}" th:if="${categoriaDado.status.equals('1')}" th:value="${categoriaDado.codigo}" th:text="${categoriaDado.descricao}" />
+					       </select>
+						</div>
+						<div class="col-md-2" style="text-align: center;">
+						<label class="form-check-label" for="padrao">Campo Obrigatorio?</label>
+							<div class="form-check">
+							    <input type="checkbox" class="form-check-input" id="obrigatorio">
+							    <label class="form-check-label" for="obrigatorio">SIM</label>
+						  </div>
+						</div>
+						<div class="col-md-2" style="text-align: center;">
+						<label class="form-check-label" for="padrao">Campo Padrao?</label>
+							<div class="form-check">
+							    <input type="checkbox" class="form-check-input" id="padrao">
+							    <label class="form-check-label" for="padrao">SIM</label>
+						  </div>
+						</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="footer-box-padrao kt-portlet kt-portlet--footer--noborder ">
+					<div class="box-botao-salvar" style="padding-top: 0px;">
+						<button type="button" id="cadastroNivelInstrucao" class="btn btn-salvar btn-brand" onclick="cadastrarTipoDeDado()">SALVAR</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!------------------------------- /Section Notas e Atividades ------------------------------------------------------------------------>
+
+		<!------------------------------- Section Linha do Tempo ------------------------------------------------------------------------>
+		<div class="kt-portlet lista" style="margin: 0 0px;">
+
+			<div class="kt-portlet__head lista-header"></div>
+
+			<div class="kt-portlet__body body-list">
+
+				<div class="kt-section">
+					<div class="kt-section__content">
+						<table class="table table-striped filtro">
+							<thead>
+								<tr>
+									<th>IDENTIFICADOR</th>
+									<th>DESCRICAO</th>
+									<th>CATEGORIA DO DADOS</th>
+									<th>OBRIGATORIO</th>
+									<th>PADRAO</th>
+									<th>STATUS</th>
+									<th>ACOES</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="tipoDado : ${tipoDados}">
+									<th scope="row"><span class="nome-lista" th:text="${tipoDado.codigo}"></span></th>
+									<td>
+										<h6 th:text="${tipoDado.descricao}"></h6>
+									</td>
+									<td>
+										 <input type="hidden" id="ClienteDadoTipoId" name="clienteDadoTipoId" th:value="${tipoDado.cliente_dado_tipo_categoria.codigo}">
+										<h6 th:text="${tipoDado.cliente_dado_tipo_categoria.descricao}">
+										</h6>
+									</td>
+									<td>
+										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchObrigatorio" style="width: 106px;">
+											<div class="bootstrap-switch-container" id="switchObrigatorioMover" style="width: 185px;margin-left: 0px;" th:style="${(tipoDado.obrigatorio).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
+												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Sim</span>
+												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
+												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Nao</span>
+												<input type="checkbox" th:checked="${(tipoDado.obrigatorio).equals('1')} ? 'true' : 'false'">
+												 <input type="hidden" id="status" name="status" th:value="${tipoDado.obrigatorio}">
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchPadrao" style="width: 106px;">
+											<div class="bootstrap-switch-container" id="switchPadraoMover" style="width: 185px;margin-left: 0px;" th:style="${(tipoDado.padrao).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
+												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Sim</span>
+												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
+												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Nao</span>
+												<input type="checkbox" th:checked="${(tipoDado.padrao).equals('1')} ? 'true' : 'false'">
+												 <input type="hidden" id="status" name="status" th:value="${tipoDado.padrao}">
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchStatus" style="width: 106px;">
+											<div class="bootstrap-switch-container" id="switchMover" style="width: 185px;margin-left: 0px;" th:style="${(tipoDado.status).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
+												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Ativo</span>
+												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
+												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Inativo</span>
+												<input type="checkbox" th:checked="${(tipoDado.status).equals('1')} ? 'true' : 'false'">
+												 <input type="hidden" id="status" name="status" th:value="${tipoDado.status}">
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="kt-demo-icon__preview">
+											<i class="flaticon-edit" id="botaoeditarCamposTabela" style="cursor: pointer;"></i>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="row">
+							<div class="col-md-4">
+								<label style="margin-left: 15%;">Itens por página: </label>
+								<div class="dropdown dropdown-inline">
+
+									<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">10</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" x-placement="top-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 0px, 0px);">
+										<a class="dropdown-item" style="cursor: pointer;">10</a> <a class="dropdown-item" style="cursor: pointer;">20</a> <a class="dropdown-item" style="cursor: pointer;">50</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div style="float: right; margin-right: 3%;">
+									<button type="button" id="anterior" class="btn btn-info" style="border-radius: 50%;">&lt;</button>
+									<div class="btn-group btn-pill" role="group" aria-label="Button group with nested dropdown">
+										<button type="button" class="btn btn-info">1</button>
+										<button type="button" class="btn btn-info selected">2</button>
+										<button type="button" class="btn btn-info">3</button>
+										<button type="button" class="btn btn-info">4</button>
+										<button type="button" class="btn btn-info">5</button>
+										<button type="button" class="btn btn-info">6</button>
+										<button type="button" class="btn btn-info">7</button>
+										<button type="button" class="btn btn-info">8</button>
+										<button type="button" class="btn btn-info">9</button>
+									</div>
+									<button type="button" id="proximo" class="btn btn-info" style="border-radius: 50%;">&gt;</button>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div style="float: right; margin-right: 5%; position: relative; width: 100%; height: 100%; text-align: center; padding-top: 5%;">
+									<label style="margin: 0px;" id="quantidadeDeRegistroLabel">Total de Registros:</label><label style="margin: 0px;" id="quantidaDeRegistrosCampo">20</label>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+
+
+
+		<!------------------------------- /Section Linha do Tempo ------------------------------------------------------------------------>
+
+	</div>
+	<!-- /col-md-9 col-lg-9 -->
+
+</div>
+
+<script>
+	var url = window.location.origin;
+
+	var nomePath = window.location.pathname;
+
+	var array = nomePath.split("/");
+
+	//var dominio = url+"/"+array[1];
+		
+	var textoEditarTabela;
+	var textoEditarTabela3;
+	
+	var verificarCampoAberto = false;
+	
+	
+	$(document).ready(function() {		
+
+		chamarElementos();
+
+	});
+	
+	function chamarElementos(){
+		
+		var comboDeNivelInstrucao = "<div class='row'>"
+		+ "<div class='col-md-7'>"
+				+"<select  class='form-control'  id='nivelInstrucao' data-placeholder='Selecione um nivel'>"
+					 +"<option value=''-1'>Selecione um nivel</option>"
+					      +"</select>"
+		  +"</div>"				
+					  
+		+"</div>";
+		
+		$("table.filtro > tbody > tr > td").on( "click", "div > #botaoeditarCamposTabela", function(){
+			if((verificarCampoAberto == false)){
+				verificarCampoAberto = true;
+				var botaoEditar = $(this);
+				var linhaTabelaEditar = $(this).closest("tr");
+				var idNivelInstrucaoTabela = $(this).closest("tr").find("td:nth-child(3) > #nivelInstrucaoId").val();
+				textoEditarTabela = linhaTabelaEditar.find("td:nth-child(2)").children().text();
+				linhaTabelaEditar.find("td:nth-child(2) > h6").text('');
+				
+				linhaTabelaEditar.find("td:nth-child(2)").children().append('<input type="text" name="lname">');
+				linhaTabelaEditar.find("td:nth-child(2) > h6 > input").val(textoEditarTabela);		
+				
+				$.ajax({
+					type: "GET",
+					url: dominio + "/produtoREST/produtoNivelInstrucao",
+					dataType: "JSON",
+					async: false,
+					success: function (response) {
+						listaDeNiveis = response;									            
+						}
+					});
+				textoEditarTabela3 = linhaTabelaEditar.find("td:nth-child(3)").children().text();
+				linhaTabelaEditar.find("td:nth-child(3) > h6").text('');
+				
+				linhaTabelaEditar.find("td:nth-child(3)").children().append(comboDeNivelInstrucao);
+				linhaTabelaEditar.find("td:nth-child(3) > h6 > input").val(textoEditarTabela);	
+				
+				$("#nivelInstrucao option").remove();
+				//$("#nivelInstrucao").append('<option value="-1">Selecione uma Categoria</option>');
+				
+				$.each(listaDeNiveis, function(index, value) {
+					
+					if(idNivelInstrucaoTabela == value.id){
+						
+						linhaTabelaEditar.find("td:nth-child(3) > h6").find("#nivelInstrucao").append('<option value="'+value.id+'" selected>'+value.descricao+'</option>');
+						
+					}else if(value.status == "0"){
+						
+					}else{
+						
+						linhaTabelaEditar.find("td:nth-child(3) > h6").find("#nivelInstrucao").append('<option value="'+value.id+'">'+value.descricao+'</option>');
+					}
+				});	
+				
+				linhaTabelaEditar.find("td:nth-child(5) > div").children().remove();
+				linhaTabelaEditar.find("td:nth-child(5) > div").append('<i class="flaticon-like" id="botaoSalvarAlteracaoTabela" style="margin-right:10%; cursor: pointer;"></i>');
+				linhaTabelaEditar.find("td:nth-child(5) > div").append('<i class="flaticon-circle" id="botaoCancelarAlteracaoTabela" style="cursor: pointer;"></i>');
+			}else{
+				alert("Ha outro campo aberto. Feche o campo aberto para prosseguir!!!");
+			}
+			
+			
+		});
+		
+		$("table.filtro > tbody > tr > td > div").on( "click", "#botaoSalvarAlteracaoTabela", function(){
+			var botaoSalvarAlteracao = $(this);
+			var linhaTabelaEditar = $(this).closest("tr");
+			var idLinhaTabela = linhaTabelaEditar.find(".nome-lista").text();
+			var textoInputAlteracaoTabela = linhaTabelaEditar.find("td:nth-child(2) > h6 > input").val();
+			var nivelInstrucaoTabela = $(this).closest("tr").find("td:nth-child(3) > #nivelInstrucaoId").val();
+			var textoInputAlteracaoTabelaCombo = $(this).closest("tr").find("td:nth-child(3) > h6").find("#nivelInstrucao option:selected").text(); 
+			var statusLinhaTabela = linhaTabelaEditar.find("td:nth-child(4) > div > div > input#status").val();
+			
+			var objeto = new Object();
+			objeto.nivelInstrucao = new Object();
+			objeto.id = idLinhaTabela;
+			objeto.descricao = textoInputAlteracaoTabela;
+			objeto.nivelInstrucao.id = linhaTabelaEditar.find("td:nth-child(3) > h6").find("#nivelInstrucao option:selected").val();
+			objeto.status = statusLinhaTabela;
+			
+			var objetoJSON = JSON.stringify(objeto);			
+			
+			$.ajax({
+				type : "POST",
+				url : dominio + "/produtoREST/editarProduto",
+				data : objetoJSON,
+				contentType : "application/json",
+				dataType : "JSON",
+				async : false,
+				success : function(response) {
+					console.log("ok!");
+						setTimeout(function() {
+							var inputTabela = linhaTabelaEditar.find("td:nth-child(2) > h6");
+							var inputTabela3 = linhaTabelaEditar.find("td:nth-child(3) > h6");
+							inputTabela.text(textoInputAlteracaoTabela);
+							inputTabela3.text(textoInputAlteracaoTabelaCombo);
+							linhaTabelaEditar.find("td:nth-child(3) > h6").find("#nivelInstrucao").remove();
+							linhaTabelaEditar.find("td:nth-child(5) > div").children().remove();
+							linhaTabelaEditar.find("td:nth-child(5) > div").append('<i class="flaticon-edit" id="botaoeditarCamposTabela" style="cursor: pointer;"></i>');
+							verificarCampoAberto = false;
+					}, 1000);
+ 
+				}
+			});
+			
+		});
+		
+		$("table.filtro > tbody > tr > td > div").on( "click", "#botaoCancelarAlteracaoTabela", function(){
+			var botaoCancelarAlteracao = $(this);
+			var linhaTabelaEditar = $(this).closest("tr");
+			var inputTabela = linhaTabelaEditar.find("td:nth-child(2) > h6");
+			var imputTabela3 = linhaTabelaEditar.find("td:nth-child(3) > h6");
+			inputTabela.children().remove();
+			imputTabela3.find("#nivelInstrucao").remove();
+			inputTabela.text(textoEditarTabela);
+			imputTabela3.text(textoEditarTabela3);
+			linhaTabelaEditar.find("td:nth-child(5) > div").children().remove();
+			linhaTabelaEditar.find("td:nth-child(5) > div").append('<i class="flaticon-edit" id="botaoeditarCamposTabela" style="cursor: pointer;"></i>');
+			verificarCampoAberto = false;
+		});
+		
+		$("table.filtro > tbody > tr > td:nth-child(4)").on( "click", "#switchStatus", function(){
+	
+			var switchPrincipal = $(this);
+			if($(this).find("#switchMover > input[type=checkbox]:nth-child(4):checked").length == 1){
+				var objeto = new Object();
+				objeto.nivelInstrucao = new Object();
+				objeto.id = $(this).closest("tr").find(".nome-lista").text();
+				objeto.descricao = $(this).closest("tr").find("td:nth-child(2) > h6").text();
+				objeto.nivelInstrucao.id = $(this).closest("tr").find("td:nth-child(3) > #nivelInstrucaoId").val();
+				objeto.status = 0;
+				
+				var objetoJSON = JSON.stringify(objeto);
+				
+				$.ajax({
+					type : "POST",
+					url : dominio + "/produtoREST/editarProduto",
+					data : objetoJSON,
+					contentType : "application/json",
+					dataType : "JSON",
+					async : false,
+					success : function(response) {
+						switchPrincipal.find("#switchMover").css("margin-left", "-80px");
+						switchPrincipal.find("#switchMover > input[type=checkbox]:nth-child(4)").removeAttr("checked");
+						}
+				});
+				
+				
+			}else{
+				
+				var objeto = new Object();
+				objeto.nivelInstrucao = new Object();
+				objeto.id = $(this).closest("tr").find(".nome-lista").text();
+				objeto.descricao = $(this).closest("tr").find("td:nth-child(2) > h6").text();
+				objeto.nivelInstrucao.id = $(this).closest("tr").find("td:nth-child(3) > #nivelInstrucaoId").val();
+				objeto.status = 1;
+				
+				var objetoJSON = JSON.stringify(objeto);
+				
+				$.ajax({
+					type : "POST",
+					url : dominio + "/produtoREST/editarProduto",
+					data : objetoJSON,
+					contentType : "application/json",
+					dataType : "JSON",
+					async : false,
+					success : function(response) {
+						switchPrincipal.find("#switchMover").css("margin-left", "0px");
+						switchPrincipal.find("#switchMover > input[type=checkbox]:nth-child(4)").attr("checked", "checked");
+					}
+				});
+			}
+			
+		});
+	}
+	
+	function abrirModalNivelInstrucao(id){
+		$('#modal-nivelInstrucao').modal('show');
+		alert(id);
+		
+	}
+	
+	function cadastrarTipoDeDado() {
+		var objeto = new Object();
+		objeto.nivelInstrucao = new Object();
+		objeto.id = null;
+		objeto.descricao = $("#campoCadastroObjeto").val();
+		objeto.nivelInstrucao.id = $("#nivelInstrucaoComboCadastro").val();
+		objeto.status = "1";
+
+		var objetoJSON = JSON.stringify(objeto);
+		$.ajax({
+			type : "POST",
+			url : dominio + "/produtoREST/cadastrarProduto",
+			data : objetoJSON,
+			contentType : "application/json",
+			dataType : "JSON",
+			async : false,
+			success : function(response) {
+
+				setTimeout(function() {
+					$("#central").load(dominio + "/produto/paginaProdutos");
+				}, 1000);
+
+			}
+		});		
+		
+	}
+	
+	 
+		$(".dropdown-inline > div > a").click(function(){
+		
+		var valorSelecionado = $(this).text();
+		$(".dropdown-inline > button").text(valorSelecionado);
+		
+		paginator(valorSelecionado);
+		
+		
+		});
+	
+	
+	
+	
+	var tamanhoLinhas;
+	var listaDeTuplas = new Array();
+	function paginator(tamanhoLinhas){// = 20;
+		
+		var tamanhoTotalTabela = $("table.filtro > tbody > tr").length; // 40
+		
+		for(var i = 1; i <= tamanhoTotalTabela; i++){
+			listaDeTuplas.push($("table.filtro > tbody > tr:nth-child("+ i +")"));
+		}
+		$("table.filtro > tbody").children().remove();
+		for(var i = 0; i < tamanhoLinhas; i++){
+			
+			$("table.filtro > tbody").append(listaDeTuplas[i]);
+		}
+		chamarElementos();
+		
+	} 
+</script>
