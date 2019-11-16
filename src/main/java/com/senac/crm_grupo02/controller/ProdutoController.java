@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.senac.crm_grupo02.domain.NivelInstrucao;
 import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.service.NivelInstrucaoService;
 import com.senac.crm_grupo02.service.ProdutoService;

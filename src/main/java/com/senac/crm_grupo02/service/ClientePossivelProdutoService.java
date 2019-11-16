@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.ClientePossivelProduto;
 import com.senac.crm_grupo02.domain.ClientePossivelProdutoId;
-import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.repository.ClientePossivelProdutoRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;

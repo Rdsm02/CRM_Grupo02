@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.senac.crm_grupo02.domain.CategoriasClienteRetornoConsultaNativeQuery;
 import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.repository.ClienteRepository;
 

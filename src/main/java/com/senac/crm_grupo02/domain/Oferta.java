@@ -1,7 +1,6 @@
 package com.senac.crm_grupo02.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -88,14 +85,13 @@ public class Oferta implements Serializable{
 		return dataFim;
 	}
 
-	@DateTimeFormat(pattern="dd-MM-YYYY")
-	public Date getDataInicioFormatada() {
-		return new Date(dataInicio);
-	}
-	@DateTimeFormat(pattern="dd-MM-YYYY")
-	public Date getDataFimFormatada() {
-		return new Date(dataFim);
-	}
+	/*
+	 * @DateTimeFormat(pattern="dd-MM-YYYY") public Date getDataInicioFormatada() {
+	 * return new Date(dataInicio); }
+	 * 
+	 * @DateTimeFormat(pattern="dd-MM-YYYY") public Date getDataFimFormatada() {
+	 * return new Date(dataFim); }
+	 */
 
 	public void setDataFim(String dataFim) {
 		this.dataFim = dataFim;

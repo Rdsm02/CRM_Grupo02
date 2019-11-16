@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.senac.crm_grupo02.domain.ClienteDadoTipoCategoria;
-import com.senac.crm_grupo02.domain.EtapaFunil;
-import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.service.ClienteDadoTipoCategoriaService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
