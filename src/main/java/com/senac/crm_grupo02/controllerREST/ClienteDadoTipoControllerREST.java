@@ -26,8 +26,29 @@ public class ClienteDadoTipoControllerREST {
 	ClienteDadoTipoCategoriaService servicoClienteDadoTipoCategoria;
 	
 	@ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value ="/cadastrarProduto", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ClienteDadoTipo cadastrarCliente(@RequestBody ClienteDadoTipo clienteDadoTipo) throws ObjectNotFoundException{
+    @RequestMapping(value ="/cadastrarClienteDadoTipo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ClienteDadoTipo cadastrarClienteDadoTipo(@RequestBody ClienteDadoTipo clienteDadoTipo) throws ObjectNotFoundException{
+		
+		ClienteDadoTipo clienteDadoTipoNovo = new ClienteDadoTipo();
+		clienteDadoTipoNovo.setCodigo(clienteDadoTipo.getCodigo());
+		clienteDadoTipoNovo.setDescricao(clienteDadoTipo.getDescricao());
+		clienteDadoTipoNovo.setStatus(clienteDadoTipo.getStatus());
+		clienteDadoTipoNovo.setObrigatorio(clienteDadoTipo.getObrigatorio());
+		clienteDadoTipoNovo.setPadrao(clienteDadoTipo.getPadrao());
+		clienteDadoTipoNovo.setMascara(clienteDadoTipo.getMascara());
+		
+		clienteDadoTipoNovo.setCliente_dado_tipo_categoria(servicoClienteDadoTipoCategoria.search(clienteDadoTipo.getCliente_dado_tipo_categoria().getCodigo()));
+	
+		
+
+		servicoClienteDadoTipo.save(clienteDadoTipoNovo);
+		
+        return clienteDadoTipoNovo;
+    }
+	
+	@ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value ="/editarClienteDadoTipo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ClienteDadoTipo editarClienteDadoTipo(@RequestBody ClienteDadoTipo clienteDadoTipo) throws ObjectNotFoundException{
 		
 		ClienteDadoTipo clienteDadoTipoNovo = new ClienteDadoTipo();
 		clienteDadoTipoNovo.setCodigo(clienteDadoTipo.getCodigo());
