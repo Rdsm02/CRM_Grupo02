@@ -76,8 +76,9 @@ $( document ).ready(function() {
 	});	
 	
 	$("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").click(function(){
-		var idCliente = $(this).find('#clienteId').val();
-		carregarDetalheCliente(idCliente); //Método se encontra dentro de paginas -> cliente -> index.html 
+		var produtoId = $(this).find('#produtoId').val();
+		$("#central").load(dominio + "/oferta/detalharOferta/"+produtoId);
+		//carregarDetalheProduto(produtoId); //Método se encontra dentro de paginas -> cliente -> index.html 
 	});
 	
 });

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.senac.crm_grupo02.domain.Oferta;
+import com.senac.crm_grupo02.service.AcaoService;
 import com.senac.crm_grupo02.service.OfertaService;
 import com.senac.crm_grupo02.service.ProdutoService;
 
@@ -23,6 +24,17 @@ public class OfertaController {
 	
 	@Autowired
 	ProdutoService servicoProdruto;
+	
+	@Autowired
+	AcaoService servicoAcao;
+	
+	@GetMapping("/detalharOferta/{id}")
+	public ModelAndView detalharOferta(@PathVariable("id") Integer id) throws ObjectNotFoundException {
+		ModelAndView mv = new ModelAndView("paginas/oferta/detalheOfertas");
+		mv.addObject("ofertaSelecionada", servicoOferta.search(id));
+		mv.addObject("atividadeLista", servicoAcao.searchAll());
+		return mv;
+	}
 
 	@GetMapping("/listarTodasAsOfertas")
 	public ModelAndView listarTodosOsOfertas() {
