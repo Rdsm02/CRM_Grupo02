@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.AcaoCliente;
 import com.senac.crm_grupo02.repository.AcaoClienteRepository;
+import com.senac.crm_grupo02.repository.ClienteRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -16,6 +17,15 @@ public class AcaoClienteService {
 	
 	@Autowired
 	AcaoClienteRepository repoAcaoCliente;
+	
+	@Autowired
+	ClienteService servicoCliente;
+	
+	public List<AcaoCliente>listarHistoricoCliente(Integer idCliente) throws ObjectNotFoundException {
+		
+		return repoAcaoCliente.findByClienteId(servicoCliente.search(idCliente));
+		
+	}
 	
 	public AcaoCliente search(Integer id) throws ObjectNotFoundException{
 		Optional<AcaoCliente> acaoCliente = repoAcaoCliente.findById(id);
@@ -42,4 +52,5 @@ public class AcaoClienteService {
 	public void delete(Integer id) {
 		repoAcaoCliente.deleteById(id);
 	}
+	
 }

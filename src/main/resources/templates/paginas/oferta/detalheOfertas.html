@@ -36,98 +36,81 @@
 									</div><!-- /kt-portlet -->
 <!------------------------------- /Section Produto ------------------------------------------------------------------------>								
 <!------------------------------- Section Cliente ------------------------------------------------------------------------>
-									<div class="negocios">
-										
-										<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
-											<div class="kt-portlet__head kt-portlet__head--noborder">
-												<div class="kt-portlet__head-label col-xl-3">
-													<h3 class="kt-portlet__head-title">
-														CLIENTES
-													</h3>
-												</div>
-											</div>
-										</div>
+		<div class="negocios">
 
-			<div
-				class="body-box-padrao kt-portlet__body kt-portlet__body--fluid kt-portlet__body--fit">
-				
+			<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
+				<div class="kt-portlet__head kt-portlet__head--noborder">
+					<div class="kt-portlet__head-label col-xl-3">
+						<h3 class="kt-portlet__head-title">CLIENTES</h3>
+					</div>
+				</div>
 			</div>
+
+			<div class="body-box-padrao kt-portlet__body kt-portlet__body--fluid kt-portlet__body--fit"></div>
 
 		</div>
 
-								</div><!-- /col-md-3 col-lg-3 -->
+	</div><!-- /col-md-3 col-lg-3 -->
 <!------------------------------- /Section Negócios ------------------------------------------------------------------------>
 
 
 								<div class="col-md-9 col-lg-9">
 
 <!------------------------------- Section Notas e Atividades -------------------------------------------------------------->
-									<div class="row">
-										<div class="col-xl-12">
-											<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
-											
-												<div class="kt-portlet__head kt-portlet__head--noborder">
-													<div class="kt-portlet__head-label col-xl-3">
-														<h3 class="kt-portlet__head-title">
-															NOTAS
-														</h3>
-													</div>
-													<div class="kt-portlet__head-label col-xl-3">
-														<h3 class="kt-portlet__head-title">
-															ATIVIDADES
-														</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
 
-									<div class="row">
-										<div class="col-xl-12">
-											<div class="body-box-padrao kt-portlet__body kt-portlet__body--fluid kt-portlet__body--fit">
+					<div class="kt-portlet__head kt-portlet__head--noborder">
+						<div class="kt-portlet__head-label col-xl-3">
+							<h3 class="kt-portlet__head-title">NOTAS</h3>
+						</div>
+						<div class="kt-portlet__head-label col-xl-3">
+							<h3 class="kt-portlet__head-title">ATIVIDADES</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="body-box-padrao kt-portlet__body kt-portlet__body--fluid kt-portlet__body--fit">
 					<div id="areaAtiviaddes">
 						<div class="row mr-0 ml-0 pt-3">
 							<div class="col-md-5" style="margin-top: 1%;">
-								<label for="exampleFormControlTextarea6" class="float-right">Atividade
-									a ser Executada:</label>
+								<label for="exampleFormControlTextarea6" class="float-right">Atividade a ser Executada:</label>
 							</div>
 							<div class="col-md-5" style="">
-								<select class="form-control" id="atividadeOferta"
-									data-placeholder="Selecione uma atividade"
-									style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+								<select class="form-control" id="atividadeOferta" data-placeholder="Selecione uma atividade" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
 									<option value="-1">Selecione uma Atividade</option>
-									<option th:each="atividade : ${atividadeLista}"
-										th:if="${atividade.status.equals('1')}"
-										th:value="${atividade.id}" th:text="${atividade.descricao}" />
+									<option th:each="atividade : ${atividadeLista}" th:if="${atividade.status.equals('1')}" th:value="${atividade.id}" th:text="${atividade.descricao}" />
 								</select>
 
 							</div>
 						</div>
 						<div class="form-group shadow-textarea ml-2 mr-2">
 
-							<textarea class="form-control z-depth-1"
-								id="exampleFormControlTextarea6" rows="3"
-								placeholder="Descreva a atividade a ser executada..."
-								style="margin-top: 0px; margin-bottom: 0px; height: 85px;"></textarea>
+							<textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Descreva a atividade a ser executada..." style="margin-top: 0px; margin-bottom: 0px; height: 85px;"></textarea>
 						</div>
 					</div>
-					
-					<div id="areaNotas"></div>
-					
-				</div>
-										</div>
-									</div>
 
-									<div class="row">
-										<div class="col-xl-12">
-											<div class="footer-box-padrao kt-portlet kt-portlet--footer--noborder ">
-												<div class="box-botao-salvar">
-													<button type="button" class="btn btn-salvar btn-brand">SALVAR</button>
-												</div>
-											</div>
-										</div>
-									</div>
-<!------------------------------- /Section Notas e Atividades ------------------------------------------------------------------------>
+					<div id="areaNotas"></div>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xl-12">
+				<div class="footer-box-padrao kt-portlet kt-portlet--footer--noborder ">
+					<div class="box-botao-salvar">
+						<button type="button" class="btn btn-salvar btn-brand">SALVAR</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!------------------------------- /Section Notas e Atividades ------------------------------------------------------------------------>
 
 <!------------------------------- Section Linha do Tempo ------------------------------------------------------------------------>
 									<div class="row">

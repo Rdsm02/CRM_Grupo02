@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.senac.crm_grupo02.domain.Cliente;
+import com.senac.crm_grupo02.service.AcaoClienteService;
+import com.senac.crm_grupo02.service.AcaoService;
 import com.senac.crm_grupo02.service.ClienteService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -20,6 +22,12 @@ public class ClienteController {
 	@Autowired
 	private ClienteService servicoCliente;
 	
+	@Autowired
+	private AcaoService servicoAcao;
+	
+	@Autowired
+	private AcaoClienteService servicoAcaoCliente;
+	
 	@GetMapping("/listagemClientes")
 	public ModelAndView listagemCliente() {
 		ModelAndView mv = new ModelAndView("paginas/cliente/listagemClientes");
@@ -27,9 +35,11 @@ public class ClienteController {
 		return mv;
 	}
 	
-	@GetMapping("/detalheClientes")
-	public ModelAndView detalheCliente() {
+	@GetMapping("/detalheClientes/{id}")
+	public ModelAndView detalheCliente(@PathVariable("id") Integer idCliente) throws ObjectNotFoundException {
 		ModelAndView mv = new ModelAndView("paginas/cliente/detalheClientes");
+		mv.addObject("atividadeLista", servicoAcao.searchAll());
+		mv.addObject("listaAcaoCliente", servicoAcaoCliente.listarHistoricoCliente(idCliente));
 		return mv;
 	}
 
