@@ -26,12 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static String [] PUBLIC_MATCHERS = {"/h2-console/**","/menu", };
 	private static String [] PUBLIC_MATCHERS_GET = {"/aluno/**", "/login/**"};
 	private static String [] PAGINA_LOGIN_LOGOUT_ERRO = {"/login/**"};
-	
-	//TODO - apagar posteriormente!!!!!!!
-	private static String [] SOLUCAO_CONTENCAO = {"/cliente/**","/produto/**","/clienteDadoTipoCategoria/**","/clienteDadotipo/**","/funil/**","/dashboard/**","/nivelInstrucao/**","/acao/**","/etapa/**","/oferta/**"};
-	private static String [] SOLUCAO_CONTENCAO_REST = {"/acaoClienteREST/**","/acaoREST/**","/clienteREST/**","/dadoREST/**","/clienteDadoTipoCategoriaREST/**","/clienteDadoTipoREST/**","/etapaFunilREST/**","/nivelInstrucaoREST/**","/ofertaREST/**","/produtoREST/**"};
-	
-	
+		
 	@Autowired
 	private CurrentUserDetailsService userDetailsService;
 	
@@ -52,17 +47,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(PAGINA_LOGIN_LOGOUT_ERRO).permitAll()
 		
 		
-		//TODO - solucao de contencao - APAGAR POSTERIORMENTE - RODRIGO MOREIRA
-		.antMatchers(SOLUCAO_CONTENCAO).permitAll()
 		
-		
-		
-		.and().formLogin().loginPage("/login/autenticacao").permitAll()
-		.failureUrl("/index?error=true")
+		.and().formLogin()
+		.usernameParameter("login")
+		.passwordParameter("senha")
+		.loginProcessingUrl("/login/autenticacao")
+		.loginPage("/login/autenticacao").permitAll()
+		.failureUrl("/login/autenticacao").permitAll()
 		.defaultSuccessUrl("/principal/index", true).permitAll()
      
 		
-		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/desconectar/logout"));
 		
 		http.csrf().disable();
         http.headers().frameOptions().disable();
@@ -74,10 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception{
 		web.ignoring().antMatchers("/css/**", "/js/**","/img/**","/media/**","/vendors/**");
-		
-		//TODO - solucao de contecao apagar posteriormente!!!
-		web.ignoring().antMatchers(SOLUCAO_CONTENCAO);
-		web.ignoring().antMatchers(SOLUCAO_CONTENCAO_REST);
+	
 	}
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
