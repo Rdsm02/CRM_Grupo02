@@ -106,8 +106,8 @@
 										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchObrigatorio" style="width: 106px;">
 											<div class="bootstrap-switch-container" id="switchObrigatorioMover" style="width: 185px;margin-left: 0px;" th:style="${(tipoDado.obrigatorio).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
 												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Sim</span>
-												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
-												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Nao</span>
+												<span class="bootstrap-switch-label" style="width: 52px;">&nbsp;</span>
+												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 10px;">Nao</span>
 												<input type="checkbox" th:checked="${(tipoDado.obrigatorio).equals('1')} ? 'true' : 'false'">
 												 <input type="hidden" id="status" name="status" th:value="${tipoDado.obrigatorio}">
 											</div>
@@ -117,8 +117,8 @@
 										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchPadrao" style="width: 106px;">
 											<div class="bootstrap-switch-container" id="switchPadraoMover" style="width: 185px;margin-left: 0px;" th:style="${(tipoDado.padrao).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
 												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Sim</span>
-												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
-												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Nao</span>
+												<span class="bootstrap-switch-label" style="width: 52px;">&nbsp;</span>
+												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 10px;">Nao</span>
 												<input type="checkbox" th:checked="${(tipoDado.padrao).equals('1')} ? 'true' : 'false'">
 												 <input type="hidden" id="status" name="status" th:value="${tipoDado.padrao}">
 											</div>
@@ -128,8 +128,8 @@
 										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchStatus" style="width: 106px;">
 											<div class="bootstrap-switch-container" id="switchMover" style="width: 185px;margin-left: 0px;" th:style="${(tipoDado.status).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
 												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Ativo</span>
-												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
-												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Inativo</span>
+												<span class="bootstrap-switch-label" style="width: 52px;">&nbsp;</span>
+												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 10px;">Inativo</span>
 												<input type="checkbox" th:checked="${(tipoDado.status).equals('1')} ? 'true' : 'false'">
 												 <input type="hidden" id="status" name="status" th:value="${tipoDado.status}">
 											</div>

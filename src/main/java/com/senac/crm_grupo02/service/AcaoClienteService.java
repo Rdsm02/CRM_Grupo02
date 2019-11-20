@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.AcaoCliente;
 import com.senac.crm_grupo02.repository.AcaoClienteRepository;
-import com.senac.crm_grupo02.repository.ClienteRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 

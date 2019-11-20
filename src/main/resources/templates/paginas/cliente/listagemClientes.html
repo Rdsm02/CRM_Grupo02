@@ -14,7 +14,7 @@
 							<th>CPF</th>
 							<th>OFERTA RELACINADA</th>
 						</tr>
-					</thead>
+					</thead>	
 					<tbody>
 						<tr th:each="cliente : ${clientes}" style="cursor: pointer;">
 							<th scope="row"><span class="foto-lista"> <img
@@ -63,7 +63,7 @@ $( document ).ready(function() {
 	
 	$("#central > div > div.kt-portlet__body.body-list > div > div.kt-section__content > table > tbody > tr").click(function(){
 		var idCliente = $(this).find('#clienteId').val();
-		carregarDetalheCliente(idCliente); //Método se encontra dentro de paginas -> cliente -> index.html 
+		carregarDetalheCliente(idCliente); //Mï¿½todo se encontra dentro de paginas -> cliente -> index.html 
 	});
 	
 });

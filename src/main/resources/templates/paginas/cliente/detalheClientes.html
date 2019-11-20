@@ -96,14 +96,14 @@
 								<label for="exampleFormControlTextarea6" class="float-right">Atividade a ser Executada:</label>
 							</div>
 							<div class="col-md-5" style="">
-								<select class="form-control" id="atividadeOferta" data-placeholder="Selecione uma atividade" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+								<select class="form" id="atividadeOferta" data-placeholder="Selecione uma atividade" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
 									<option value="-1">Selecione uma Atividade</option>
 									<option th:each="atividade : ${atividadeLista}" th:if="${atividade.status.equals('1')}" th:value="${atividade.id}" th:text="${atividade.descricao}" />
 								</select>
 
 							</div>
 						</div>
-						<div class="form-group shadow-textarea ml-2 mr-2">
+						<div class="form shadow-textarea ml-5 mr-5">
 
 							<textarea class="form-control z-depth-1" id="descricaoAcao" rows="3" placeholder="Descreva a atividade a ser executada..." style="margin-top: 0px; margin-bottom: 0px; height: 85px;"></textarea>
 						</div>
