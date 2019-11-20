@@ -74,8 +74,8 @@
 										<div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-animate bootstrap-switch-on" id="switchStatus" style="width: 106px;">
 											<div class="bootstrap-switch-container" id="switchMover" style="width: 185px;margin-left: 0px;" th:style="${(etapa.status).equals('1')} ? 'width: 185px; margin-left: 0px;' : 'width: 185px; margin-left: -80px;'">
 												<span class="bootstrap-switch-handle-on bootstrap-switch-success" style="width: 52px;">Ativo</span>
-												<span class="bootstrap-switch-label" style="width: 52px;padding-left: 14%;">&nbsp;</span>
-												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 15px;">Inativo</span>
+												<span class="bootstrap-switch-label" style="width: 52px;">&nbsp;</span>
+												<span class="bootstrap-switch-handle-off bootstrap-switch-danger" style="width: 52px;padding-left: 10px;">Inativo</span>
 												<input type="checkbox" th:checked="${(etapa.status).equals('1')} ? 'true' : 'false'">
 												 <input type="hidden" id="status" name="status" th:value="${etapa.status}">
 											</div>
