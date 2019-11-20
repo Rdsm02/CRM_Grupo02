@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <div class="kt-grid kt-grid--desktop kt-grid--ver kt-grid--ver-desktop kt-app ">
 
 	<div class="col-md-3 col-lg-3">
@@ -23,7 +24,7 @@
 			<div class="kt-portlet__body kt-portlet__body-form">
 
 				<form action="" method="" class="form-cliente detalhamentoCliente">
-
+					<input type="hidden" id="idCliente" name="idCliente" value="">
 					<label for="cpf">CPF</label> 
 					<input class="form-control" type="text" name="cpf" id="cpf"> 
 					
@@ -46,26 +47,26 @@
 		</div>
 		<!-- /kt-portlet -->
 		<!------------------------------- /Section Cliente ------------------------------------------------------------------------>
-		<!------------------------------- Section Negócios ------------------------------------------------------------------------>
+		<!------------------------------- Section NegÃ³cios ------------------------------------------------------------------------>
 		<div class="negocios">
 
 			<div class="header-box-padrao kt-portlet kt-portlet--head--noborder kt-portlet--height-fluid">
 				<div class="kt-portlet__head kt-portlet__head--noborder">
 					<div class="kt-portlet__head-label col-xl-3">
-						<h3 class="kt-portlet__head-title">NEGÓCIOS</h3>
+						<h3 class="kt-portlet__head-title">NEGÃ“CIOS</h3>
 					</div>
 				</div>
 			</div>
 
 			<div class="body-box-negocios kt-portlet__body kt-portlet__body--fluid kt-portlet__body--fit">
-				<!-- Conteúdo aqui -->
+				<!-- ConteÃºdo aqui -->
 			</div>
 
 		</div>
 
 	</div>
 	<!-- /col-md-3 col-lg-3 -->
-	<!------------------------------- /Section Negócios ------------------------------------------------------------------------>
+	<!------------------------------- /Section NegÃ³cios ------------------------------------------------------------------------>
 
 
 	<div class="col-md-9 col-lg-9">
@@ -104,7 +105,7 @@
 						</div>
 						<div class="form-group shadow-textarea ml-2 mr-2">
 
-							<textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" placeholder="Descreva a atividade a ser executada..." style="margin-top: 0px; margin-bottom: 0px; height: 85px;"></textarea>
+							<textarea class="form-control z-depth-1" id="descricaoAcao" rows="3" placeholder="Descreva a atividade a ser executada..." style="margin-top: 0px; margin-bottom: 0px; height: 85px;"></textarea>
 						</div>
 					</div>
 				</div>
@@ -115,7 +116,7 @@
 			<div class="col-xl-12">
 				<div class="footer-box-padrao kt-portlet kt-portlet--footer--noborder ">
 					<div class="box-botao-salvar">
-						<button type="button" class="btn btn-salvar btn-brand">SALVAR</button>
+						<button type="button" class="btn btn-salvar btn-brand" onclick="salvarAcaoCliente()">SALVAR</button>
 					</div>
 				</div>
 			</div>
@@ -202,8 +203,55 @@
 
 
 <script>
+	window.onload = function() {
+	}
 
-							window.onload = function(){
-								
-							}
+	$(document).ready(function() {
+		
+	});
+
+	function salvarAcaoCliente() {
+		
+		var data = new Date();
+
+		// Guarda cada pedaÃ§o em uma variÃ¡vel
+		var dia     = data.getDate();           // 1-31
+		var mes     = data.getMonth();          // 0-11 (zero=janeiro)
+		var ano    = data.getFullYear();       // 4 dÃ­gitos
+		var hora    = data.getHours();          // 0-23
+		var min     = data.getMinutes();        // 0-59
+		var seg     = data.getSeconds();  
+		
+		var dataFormatada = dia + "/"+mes+"/"+ano;
+		var horaFormatada = hora+":"+min+":"+seg;
+		
+		var objeto = new Object();
+		objeto.id = null;
+		objeto.descricao = $("#descricaoAcao").text();
+		objeto.data = dataFormatada;
+		objeto.hora = horaFormatada;
+		objeto.acaoId = new Object();
+		objeto.acaoId.id = $("#atividadeOferta").val();
+		objeto.clienteId = new Object();
+		objeto.clienteId.cpf =  $("#cpf").val();		
+		
+		var acaoClienteJSON = JSON.stringify(objeto);
+		
+		var idCliente = $('.detalhamentoCliente > #idCliente').val();
+		
+		$.ajax({
+			type: "POST",
+			url: dominio + "/acaoClienteREST/cadastrarAcaoCliente",
+			data: acaoClienteJSON,
+			contentType: "application/json",
+			dataType: "JSON",
+			async: false,
+			success: function (response) {	
+				console.log("ok");
+				carregarDetalheCliente(idCliente);
+				}
+			});
+		
+
+	}
 </script>

@@ -861,12 +861,13 @@
 					
 					}
 				});
-			setTimeout(function(){ carregarValoresCamposDetalhamentoCliente(dadosCliente); }, 500);
+			setTimeout(function(){ carregarValoresCamposDetalhamentoCliente(dadosCliente, idCliente); }, 500);
 			
 		}
 		
-		function carregarValoresCamposDetalhamentoCliente(dadosCliente){
+		function carregarValoresCamposDetalhamentoCliente(dadosCliente, idCliente){
 			console.log(dadosCliente[0].sobrenome);
+			$('.detalhamentoCliente > #idCliente').val(idCliente);
 			$('.detalhamentoCliente > #cpf').val(dadosCliente[0].cpf);
 			$('.detalhamentoCliente > #nome').val(dadosCliente[0].nome);
 			$('.detalhamentoCliente > #sobreNome').val(dadosCliente[0].sobrenome);

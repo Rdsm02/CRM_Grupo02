@@ -17,6 +17,10 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository repoCliente;
 	
+	public Cliente procurarPorCPFCliente(String cpf) {
+		return repoCliente.findByCpf(cpf);
+	}
+	
 	public Cliente search(Integer id) throws ObjectNotFoundException{
 		Optional<Cliente> cliente = repoCliente.findById(id);
 		return cliente.orElseThrow(() -> new ObjectNotFoundException(
