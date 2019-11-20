@@ -10303,7 +10303,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  color: #646c9a; }
+  color: white; }
 
 router-outlet {
   display: none; }

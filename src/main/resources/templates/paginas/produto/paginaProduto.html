@@ -175,10 +175,18 @@
 	
 	var verificarCampoAberto = false;
 	
+	$(window).load(function() {
+		$('#filtro').DataTable()( {
+	        "paging":   false,
+	        "ordering": false,
+	        "info":     false
+	    } );
+	});
 	
 	$(document).ready(function() {		
 
 		chamarElementos();
+
 
 	});
 	
@@ -423,4 +431,5 @@
 		chamarElementos();
 		
 	} 
+	
 </script>
