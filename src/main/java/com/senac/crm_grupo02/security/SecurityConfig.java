@@ -23,10 +23,21 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Order
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private static String [] PUBLIC_MATCHERS = {"/h2-console/**","/menu", };
-	private static String [] PUBLIC_MATCHERS_GET = {"/aluno/**", "/login/**"};
+	private static String [] PUBLIC_MATCHERS = {"/h2-console/**"};
+	private static String [] PUBLIC_MATCHERS_GET = {"/login/**"};
 	private static String [] PAGINA_LOGIN_LOGOUT_ERRO = {"/login/**"};
-		
+	
+	private static String [] ACESSO_CLIENTE = {"/cliente/**","/clienteDadoTipoCategoria/**","/clienteDadotipo/**","/acao/**"};
+	private static String [] ACESSO_PRODUTO = {"/produto/**","/nivelInstrucao/**"};
+	private static String [] ACESSO_OFERTA = {"/acao/**","/oferta/**"};
+	private static String [] ACESSO_DASHBOARD_FUNIL = {"/funil/**","/dashboard/**","/etapa/**"};	
+	
+	private static String [] ACESSO_CLIENTE_REST = {"/acaoClienteREST/**","/clienteREST/**","/dadoREST/**","/clienteDadoTipoCategoriaREST/**","/clienteDadoTipoREST/**"};
+	private static String [] ACESSO_PRODUTO_REST = {"/nivelInstrucaoREST/**","/produtoREST/**"};
+	private static String [] ACESSO_OFERTA_REST = {"/acaoClienteREST/**","/acaoREST/**"};
+	private static String [] ACESSO_DASHBOARD_FUNIL_REST = {"/etapaFunilREST/**","/ofertaREST/**"};
+	
+	
 	@Autowired
 	private CurrentUserDetailsService userDetailsService;
 	
@@ -35,17 +46,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		
 		.antMatchers(PUBLIC_MATCHERS).permitAll()
-		//.antMatchers(PUBLIC_MATCHERS).hasRole("ADMIN")
 		
 		.antMatchers(HttpMethod.GET,PUBLIC_MATCHERS_GET).permitAll()
 		
-		//.antMatchers("/curso/formInserirCurso").permitAll()
-		//.antMatchers("/curso/formInserirCurso").hasRole("USER")
+		.antMatchers(ACESSO_DASHBOARD_FUNIL).hasRole("ADMIN")
+		.antMatchers(ACESSO_DASHBOARD_FUNIL_REST).hasRole("ADMIN")
+		
+		.antMatchers(ACESSO_CLIENTE).hasRole("USER")
+		.antMatchers(ACESSO_PRODUTO).hasRole("USER")
+		.antMatchers(ACESSO_OFERTA).hasRole("USER")
+		.antMatchers(ACESSO_CLIENTE_REST).hasRole("USER")
+		.antMatchers(ACESSO_PRODUTO_REST).hasRole("USER")
+		.antMatchers(ACESSO_OFERTA_REST).hasRole("USER")
 		
 		
 		.anyRequest().authenticated()
-		.antMatchers(PAGINA_LOGIN_LOGOUT_ERRO).permitAll()
-		
+		.antMatchers(PAGINA_LOGIN_LOGOUT_ERRO).permitAll()		
 		
 		
 		.and().formLogin()
@@ -62,14 +78,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
         http.headers().frameOptions().disable();
 		
-
-		
 	}
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception{
 		web.ignoring().antMatchers("/css/**", "/js/**","/img/**","/media/**","/vendors/**");
-	
 	}
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
