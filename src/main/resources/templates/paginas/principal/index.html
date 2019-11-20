@@ -341,7 +341,7 @@
 											</div>
 										</a>
 										<div class="kt-notification__custom kt-space-between">
-											<a href="#" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Sair</a>
+											<a class="btn btn-label btn-label-brand btn-sm btn-bold" onclick="deslogarDoSistema()">Sair</a>
 										</div>
 									</div>
 
@@ -726,6 +726,10 @@
 			$("input#cpf.form-control").mask('000.000.000-00', {reverse: true});
 			
 		});
+		
+		function deslogarDoSistema(){
+			window.location.href="logout";
+		}
 		
 		
 		function carregarClienteDadoCategorias(){

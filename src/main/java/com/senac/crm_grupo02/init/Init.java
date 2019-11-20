@@ -1,11 +1,13 @@
 package com.senac.crm_grupo02.init;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.senac.crm_grupo02.domain.Acao;
@@ -18,6 +20,8 @@ import com.senac.crm_grupo02.domain.EtapaFunil;
 import com.senac.crm_grupo02.domain.NivelInstrucao;
 import com.senac.crm_grupo02.domain.Oferta;
 import com.senac.crm_grupo02.domain.Produto;
+import com.senac.crm_grupo02.domain.Role;
+import com.senac.crm_grupo02.domain.Usuario;
 import com.senac.crm_grupo02.service.AcaoClienteService;
 import com.senac.crm_grupo02.service.AcaoService;
 import com.senac.crm_grupo02.service.ClienteDadoTipoCategoriaService;
@@ -28,6 +32,9 @@ import com.senac.crm_grupo02.service.EtapaFunilService;
 import com.senac.crm_grupo02.service.NivelInstrucaoService;
 import com.senac.crm_grupo02.service.OfertaService;
 import com.senac.crm_grupo02.service.ProdutoService;
+import com.senac.crm_grupo02.service.RoleService;
+import com.senac.crm_grupo02.service.UsuarioService;
+
 
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent>{
@@ -61,6 +68,12 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
 	@Autowired
 	EtapaFunilService servicoEtapaFunil;
+	
+	@Autowired
+	UsuarioService servicoUsuario;
+	
+	@Autowired
+	RoleService servicoRole;
 	
 	
 	public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -276,6 +289,38 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		etapaFunil1.setStatus("1");
 		
 		servicoEtapaFunil.save(etapaFunil1);
+		
+		
+		/*=====[Acessos Spring Security]=====*/
+		
+		Role roleAdmin = new Role();
+		roleAdmin.setNomeRole("ROLE_ADMIN");
+		servicoRole.save(roleAdmin);
+		
+		Role roleUser = new Role();
+		roleUser.setNomeRole("ROLE_USER");
+		servicoRole.save(roleUser);
+		
+		Usuario usuario = new Usuario();
+		usuario.setLogin("admin");
+		usuario.setNomeCompleto("Teste");
+		usuario.setSenha(new BCryptPasswordEncoder().encode("123"));		
+		usuario.setRoles(Arrays.asList(roleAdmin));		
+		servicoUsuario.save(usuario);
+		
+		Usuario usuario2 = new Usuario();
+		usuario2.setLogin("SemAcesso");
+		usuario2.setNomeCompleto("AcessoNegado");
+		usuario2.setSenha(new BCryptPasswordEncoder().encode("123"));		
+		usuario2.setRoles(Arrays.asList(roleUser));
+		servicoUsuario.save(usuario2);
+		
+		Usuario usuarioMaster = new Usuario();
+		usuarioMaster.setLogin("master");
+		usuarioMaster.setNomeCompleto("Master Nivel Master");
+		usuarioMaster.setSenha(new BCryptPasswordEncoder().encode("123"));
+		usuarioMaster.setRoles(Arrays.asList(roleAdmin,roleUser));		
+		servicoUsuario.save(usuarioMaster);
 		
 		
 	}
