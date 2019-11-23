@@ -265,7 +265,7 @@ legend {
   margin-bottom: .5rem;
   font-size: 1.5rem;
   line-height: inherit;
-  color: inherit;
+  color: #4F4F4F;
   white-space: normal; }
 
 progress {
@@ -10303,7 +10303,7 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  color: white; }
+  color: #4F4F4F; }
 
 router-outlet {
   display: none; }
