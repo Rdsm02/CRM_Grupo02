@@ -624,6 +624,7 @@ rect{
 .kanban-dragdrop .content-coluna {
 	background-color: rgba(199, 206, 209, 0.7)!important;
     height: auto!important;
+    padding-bottom: 1px;
 }
 
 .kanban-dragdrop .header-coluna {
@@ -631,7 +632,7 @@ rect{
 	color: #fff;
 	padding: 15px;
    
-    border-radius: 4px 4px 0 0;
+    border-radius: 15px 15px 0 0;
 }
 
 .card-kanban{
