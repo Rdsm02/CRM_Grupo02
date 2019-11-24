@@ -148,17 +148,17 @@
 							
 								<div class="card card-accordion-linha-tempo" style="border-top: 1px solid #005594 !important;" th:each="acaoCliente : ${listaAcaoCliente}">
 									<div class="card-header" id="headingOne3">
-										<div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="false" aria-controls="collapseOne3">
+										<div class="card-title collapsed" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne3">
 
 											<span class="foto-linha-tempo"> <img src="img/user/default.jpg">
 											</span> <span class="nome-linha-tempo">
-												<h5>Administrador</h5>
+												<h5>Administrador <span th:text="${acaoCliente.data}"></span><span class="ml-2" th:text="${acaoCliente.hora}"></span></h5>
 												<h6 th:text="${acaoCliente.acaoId.descricao}">Atividade</h6>
 											</span>
 
 										</div>
 									</div>
-									<div id="collapseOne3" class="collapse" aria-labelledby="headingOne3" data-parent="#accordionExample3" style="">
+									<div id="collapseOne3" class="collapse show" aria-labelledby="headingOne3" data-parent="#accordionExample3" style="">
 										<div class="card-body" th:text="${acaoCliente.descricao}"></div>
 									</div>
 								</div>
@@ -227,7 +227,7 @@
 		
 		var objeto = new Object();
 		objeto.id = null;
-		objeto.descricao = $("#descricaoAcao").text();
+		objeto.descricao = $("#descricaoAcao").val();
 		objeto.data = dataFormatada;
 		objeto.hora = horaFormatada;
 		objeto.acaoId = new Object();

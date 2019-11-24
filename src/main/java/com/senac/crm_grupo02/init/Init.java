@@ -340,7 +340,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		servicoUsuario.save(usuario2);
 		
 		Usuario usuarioMaster = new Usuario();
-		usuarioMaster.setLogin("master");
+		usuarioMaster.setLogin("mister");
 		usuarioMaster.setNomeCompleto("Master Nivel Master");
 		usuarioMaster.setSenha(new BCryptPasswordEncoder().encode("123"));
 		usuarioMaster.setRoles(Arrays.asList(roleAdmin,roleUser));		
