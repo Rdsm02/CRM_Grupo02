@@ -1,11 +1,21 @@
 <div class="row mr-0 ml-0">
-	<div class="col-md-5" style="margin-top: 1%;">
+	<div class="col-md-2" style="margin-top: 1%;">
+		<label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
+	</div>
+	<div class="col-md-4" style="">
+		<select class="form-control" id="ProdutoSelect" data-placeholder="Selecione um Produto" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+			<option value="-1">Selecione um Produto</option>
+			<option th:each="produto : ${produtoLista}" th:if="${produto.status.equals('1')}" th:value="${produto.id}" th:text="${produto.descricao}" />
+		</select>
+
+	</div>
+	<div class="col-md-2" style="margin-top: 1%;">
 		<label for="exampleFormControlTextarea6" class="float-right">Oferta:</label>
 	</div>
-	<div class="col-md-5" style="">
+	<div class="col-md-4" style="">
 		<select class="form-control" id="OfertaSelect" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
 			<option value="-1">Selecione uma Oferta</option>
-			<option th:each="oferta : ${ofertaLista}" th:if="${oferta.status.equals('1')}" th:value="${oferta.id}" th:text="${oferta.descricao}" />
+			<!-- <option th:each="oferta : ${ofertaLista}" th:if="${oferta.status.equals('1')}" th:value="${oferta.id}" th:text="${oferta.descricao}" /> -->
 		</select>
 
 	</div>
@@ -482,6 +492,23 @@
 				start: function(event, ui) {
 					$(this).css("z-index", "20");
 				}				
+			});
+			
+			$("#ProdutoSelect").change(function(){
+				console.log($(this).find("option:selected").val());
+				$.ajax({
+					type: "GET",
+					url: dominio + "/ofertaREST/obterOferta",
+					dataType: "JSON",
+					async: false,
+					success: function (response) {
+						listaDeOfertas = response;									            
+						}
+					});
+				$.each(listaDeOfertas, function(index, value) {
+					$("#OfertaSelect").children().remove();
+					$("#OfertaSelect").append('<option value="'+value.id+'">'+value.descricao+'</option>');
+				});		
 			});
 			
 			var tamanhoEtapas = $("#kt_sortable_portlets > div").size();
