@@ -1,3 +1,16 @@
+<div class="row mr-0 ml-0">
+	<div class="col-md-5" style="margin-top: 1%;">
+		<label for="exampleFormControlTextarea6" class="float-right">Oferta:</label>
+	</div>
+	<div class="col-md-5" style="">
+		<select class="form-control" id="OfertaSelect" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+			<option value="-1">Selecione uma Oferta</option>
+			<option th:each="oferta : ${ofertaLista}" th:if="${oferta.status.equals('1')}" th:value="${oferta.id}" th:text="${oferta.descricao}" />
+		</select>
+
+	</div>
+</div>
+
 <meta charset="UTF-8">
 <div class="row kanban-dragdrop ui-sortable" id="kt_sortable_portlets">
 

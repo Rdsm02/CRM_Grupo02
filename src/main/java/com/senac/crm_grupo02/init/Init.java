@@ -283,12 +283,36 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		acaoCliente1.setHora("13:00");
 		acaoClienteService.save(acaoCliente1);
 		
-		EtapaFunil etapaFunil1 = new EtapaFunil();
-		etapaFunil1.setId(null);
-		etapaFunil1.setDescricao("Iniciante");
-		etapaFunil1.setStatus("1");
+		EtapaFunil etapaFunilCaptacao = new EtapaFunil();
+		etapaFunilCaptacao.setId(null);
+		etapaFunilCaptacao.setDescricao("Captacao");
+		etapaFunilCaptacao.setStatus("1");
 		
-		servicoEtapaFunil.save(etapaFunil1);
+		EtapaFunil etapaFunilNegociacaoIniciada = new EtapaFunil();
+		etapaFunilNegociacaoIniciada.setId(null);
+		etapaFunilNegociacaoIniciada.setDescricao("Negociação Iniciada");
+		etapaFunilNegociacaoIniciada.setStatus("1");
+		
+		EtapaFunil etapaFunilNEmEspera = new EtapaFunil();
+		etapaFunilNEmEspera.setId(null);
+		etapaFunilNEmEspera.setDescricao("Em Espera");
+		etapaFunilNEmEspera.setStatus("1");
+		
+		EtapaFunil etapaFunilNegociacaoDescartada = new EtapaFunil();
+		etapaFunilNegociacaoDescartada.setId(null);
+		etapaFunilNegociacaoDescartada.setDescricao("Negociacao Descartada");
+		etapaFunilNegociacaoDescartada.setStatus("1");
+		
+		EtapaFunil etapaFunilNegociacaoFechada = new EtapaFunil();
+		etapaFunilNegociacaoFechada.setId(null);
+		etapaFunilNegociacaoFechada.setDescricao("Negociacao Fechada");
+		etapaFunilNegociacaoFechada.setStatus("1");
+		
+		servicoEtapaFunil.save(etapaFunilCaptacao);
+		servicoEtapaFunil.save(etapaFunilNegociacaoIniciada);
+		servicoEtapaFunil.save(etapaFunilNEmEspera);
+		servicoEtapaFunil.save(etapaFunilNegociacaoDescartada);
+		servicoEtapaFunil.save(etapaFunilNegociacaoFechada);
 		
 		
 		/*=====[Acessos Spring Security]=====*/
