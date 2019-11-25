@@ -37,7 +37,7 @@
 					<label for="email">E-mail</label> 
 					<input class="form-control" type="email" name="email" id="email">
 
-					<button type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="kt-tooltip" data-placement="right" data-original-title="Adicionar contato">
+					<button id="atribuirOferta" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="modal" data-target="#modalExemplo" data-placement="right" data-original-title="Atribuir Oferta" onclick="atualizarModalAtribuicaoDeOferta()">
 						<i class="fa fa-plus"></i>
 					</button>
 
@@ -201,6 +201,47 @@
 
 </div>
 
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Atribuição de Oferta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+			<div class="modal-body">
+			<div class="row mr-0 ml-0 pt-3">
+					<div class="col-md-5" style="margin-top: 1%;">
+						<label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
+					</div>
+					<div class="col-md-5" style="">
+						<select class="form-control" id="produtoAtribuido" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+							<option value="-1">Selecione um Produto</option>
+						</select>
+
+					</div>
+				</div>
+				<div class="row mr-0 ml-0 pt-3">
+					<div class="col-md-5" style="margin-top: 1%;">
+						<label for="exampleFormControlTextarea6" class="float-right">Oferta a Ser Atribuída:</label>
+					</div>
+					<div class="col-md-5" style="">
+						<select class="form-control" id="OfertaAtribuida" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+							<option value="-1">Selecione uma Oferta</option>
+						</select>
+
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" onclick="salvarClienteOferta">Salvar mudanças</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script>
 	window.onload = function() {
@@ -254,4 +295,75 @@
 		
 
 	}
+	
+	function salvarClienteOferta(){
+		
+		var objeto = new Object();
+		objeto.clienteId = new Object();
+		objeto.ofertaId = new Object();
+		objeto.funilEtapa = new Object();
+		objeto.clienteId.id = $("#idCliente").val();
+		objeto.ofertaId.id = $("#OfertaAtribuida").find("option:selected").val();
+		objeto.funilEtapa.id = "1";
+		
+		var ClienteOfertaJSON = JSON.stringify(objeto);
+		
+		$.ajax({
+			type: "POST",
+			url: dominio + "/clienteClienteOfertaREST/cadastrarClienteOferta",
+			data: ClienteOfertaJSON,
+			contentType: "application/json",
+			dataType: "JSON",
+			async: false,
+			success: function (response) {	
+				console.log("ok");				
+				},
+				error: function(request, status, error){
+					console.log(error);
+					
+				}
+			});
+		
+	}
+	
+	function atualizarModalAtribuicaoDeOferta(){
+		
+		$.ajax({
+			type: "GET",
+			url: dominio + "/produtoREST/obterProduto",
+			dataType: "JSON",
+			async: false,
+			success: function (response) {
+				listaDeProdutos = response;	
+				$("#produtoAtribuido option").remove();				
+				$("#produtoAtribuido").append('<option value="-1">Selecione um Produto</option>');
+				$.each(listaDeProdutos, function(index, value) {
+					$("#produtoAtribuido").append('<option value="'+value.id+'">'+value.descricao+'</option>');
+				});	
+				}
+			});
+		
+	}
+	
+	$("#produtoAtribuido").change(function(){
+		console.log($(this).find("option:selected").val());
+		$.ajax({
+			type: "GET",
+			url: dominio + "/ofertaREST/obterOfertaPorProduto?produtoId=" + $(this).find("option:selected").val(),
+			dataType: "JSON",
+			async: false,
+			success: function (response) {
+				listaDeOfertas = response;	
+				$("#OfertaAtribuida").children().remove();
+				$("#OfertaAtribuida").append('<option value="-1">Selecione uma Oferta</option>');
+				},
+				error: function(request, status, error){
+					$("#OfertaAtribuida").children().remove();
+					$("#OfertaAtribuida").append('<option value="-1">Sem dados a listar</option>');
+				}
+			});
+		$.each(listaDeOfertas, function(index, value) {
+			$("#OfertaAtribuida").append('<option value="'+value.id+'">'+value.descricao+'</option>');
+		});		
+	});
 </script>

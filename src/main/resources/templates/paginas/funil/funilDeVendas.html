@@ -498,15 +498,20 @@
 				console.log($(this).find("option:selected").val());
 				$.ajax({
 					type: "GET",
-					url: dominio + "/ofertaREST/obterOferta",
+					url: dominio + "/ofertaREST/obterOfertaPorProduto?produtoId=" + $(this).find("option:selected").val(),
 					dataType: "JSON",
 					async: false,
 					success: function (response) {
-						listaDeOfertas = response;									            
+						listaDeOfertas = response;	
+						$("#OfertaSelect").children().remove();
+						$("#OfertaSelect").append('<option value="-1">Selecione uma Oferta</option>');
+						},
+						error: function(request, status, error){
+							$("#OfertaSelect").children().remove();
+							$("#OfertaSelect").append('<option value="-1">Sem dados a listar</option>');
 						}
 					});
 				$.each(listaDeOfertas, function(index, value) {
-					$("#OfertaSelect").children().remove();
 					$("#OfertaSelect").append('<option value="'+value.id+'">'+value.descricao+'</option>');
 				});		
 			});

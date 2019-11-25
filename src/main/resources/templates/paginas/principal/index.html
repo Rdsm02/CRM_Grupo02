@@ -504,6 +504,9 @@
 </div>
 <!------------------- Modal Produto ---------------------------------->
 
+
+<!-- Modal Atribuicao Cliente a Oferta -->
+
 <!-- modalCategorias -->
 
 <div class="modal fade modal-cliente" id="modal-categorias" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
@@ -671,10 +674,12 @@
 			});
 			
 			$("#dashboard").click(function(){
+				$("#navegacaoTitulo > span").text("DashBoard");
 				$("#central").load(dominio + "/dashboard/dashboard");
 			});
 			
 			$("#nivelInstrucaoChamar").click(function(){
+				$("#navegacaoTitulo > span").text("Ofertas: Niveis de Instrucao");
 				$("#central").load(dominio + "/nivelInstrucao/cadastrarNivelInstrucao");
 			});
 			
@@ -683,10 +688,12 @@
 			});
 			
 			$("#etapas").click(function(){
+				$("#navegacaoTitulo > span").text("Funil de Vendas: Fases");
 				$("#central").load(dominio + "/etapa/paginaEtapas");
 			});
 			
 			$("#listarOfertas").click(function(){
+				$("#navegacaoTitulo > span").text("Ofertas: Listagem");
 				$("#central").load(dominio + "/oferta/listarTodasAsOfertas");
 			});
 						
