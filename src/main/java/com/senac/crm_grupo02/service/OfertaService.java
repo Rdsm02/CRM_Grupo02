@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.Oferta;
+import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.repository.OfertaRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -17,6 +18,9 @@ public class OfertaService {
 	@Autowired
 	OfertaRepository repoOferta;
 	
+	@Autowired
+	ProdutoService servicoProduto;
+	
 	/*
 	 * public Oferta procurarPorId(Integer id) { Optional<Oferta> oferta =
 	 * repoOferta.findById(id);
@@ -24,6 +28,12 @@ public class OfertaService {
 	 * 
 	 * }
 	 */
+	
+	public List<Oferta> trazerOfertaPorProduto(Integer idProduto) throws ObjectNotFoundException {
+		Produto p = servicoProduto.search(idProduto);
+		List<Oferta> oferta = repoOferta.findByProdutoId(p);
+		return oferta;
+	}
 	
 	public Oferta search(Integer id) throws ObjectNotFoundException{
 		Optional<Oferta> oferta = repoOferta.findById(id);

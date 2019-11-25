@@ -10,6 +10,8 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @IdClass(ClienteOfertaId.class)
 public class ClienteOferta implements Serializable{
@@ -28,7 +30,7 @@ public class ClienteOferta implements Serializable{
 	
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "produto_id", nullable = false)
+    @JoinColumn(name = "produto_id", nullable = true)
 	private Produto produtoId;
 	
 	@Column(name = "cliente_oferta_preco")
@@ -39,6 +41,11 @@ public class ClienteOferta implements Serializable{
 	
 	@Column(name = "cliente_oferta_status")
 	private String status;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "funil_Etapa_Id", nullable = false)
+    @JsonIgnore
+    private EtapaFunil funilEtapa;
 	
 	public Cliente getClienteId() {
 		return clienteId;
@@ -75,6 +82,12 @@ public class ClienteOferta implements Serializable{
 	}
 	public void setProdutoId(Produto produtoId) {
 		this.produtoId = produtoId;
+	}
+	public EtapaFunil getFunilEtapa() {
+		return funilEtapa;
+	}
+	public void setFunilEtapa(EtapaFunil funilEtapa) {
+		this.funilEtapa = funilEtapa;
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,11 +52,11 @@ public class OfertaControllerREST {
         return ofertaNova;
     }
 	
-	@RequestMapping(value = "/obterOferta", method = RequestMethod.GET)
-	public ResponseEntity<List<Oferta>> obterOferta() throws ObjectNotFoundException {
+	@RequestMapping(value = "/obterOfertaPorProduto", method = RequestMethod.GET)
+	public ResponseEntity<List<Oferta>> obterOfertaPorProduto(@RequestParam("produtoId") int produtoId) throws ObjectNotFoundException {
 		
 		List<Oferta> listaOferta = new ArrayList<Oferta>();
-		listaOferta = servicoOferta.searchAll();		
+		listaOferta = servicoOferta.trazerOfertaPorProduto(produtoId);		
 		Map<Integer, Oferta> listaOfertahas = new HashMap<Integer, Oferta>();
 		int cont = 1;
 		
