@@ -19,17 +19,17 @@ public class ClienteOferta implements Serializable{
 	private static final long serialVersionUID = -4119377936067083997L;
 	
 	@Id
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cliente_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "cliente_id", nullable = true)
 	private Cliente clienteId;
 	
 	@Id
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "oferta_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "oferta_id", nullable = true)
 	private Oferta ofertaId;
 	
 	@Id
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "produto_id", nullable = true)
 	private Produto produtoId;
 	
@@ -44,7 +44,6 @@ public class ClienteOferta implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "funil_Etapa_Id", nullable = false)
-    @JsonIgnore
     private EtapaFunil funilEtapa;
 	
 	public Cliente getClienteId() {

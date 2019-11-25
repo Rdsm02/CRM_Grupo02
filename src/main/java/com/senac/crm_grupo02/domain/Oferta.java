@@ -44,9 +44,9 @@ public class Oferta implements Serializable{
 	@Column(name = "oferta_status")
 	private String status;
 	
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "oferta_produto_id", nullable = false)
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "oferta_produto_id", nullable = true)
 	private Produto produtoId;
 
 	public Integer getId() {

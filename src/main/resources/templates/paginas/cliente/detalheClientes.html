@@ -236,7 +236,7 @@
 			</div>
 			<div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button" class="btn btn-primary" onclick="salvarClienteOferta">Salvar mudanças</button>
+        <button type="button" class="btn btn-primary" onclick="salvarClienteOferta()" data-dismiss="modal">Salvar mudanças</button>
       </div>
     </div>
   </div>
@@ -302,9 +302,9 @@
 		objeto.clienteId = new Object();
 		objeto.ofertaId = new Object();
 		objeto.funilEtapa = new Object();
-		objeto.clienteId.id = $("#idCliente").val();
-		objeto.ofertaId.id = $("#OfertaAtribuida").find("option:selected").val();
-		objeto.funilEtapa.id = "1";
+		objeto.clienteId.id = parseInt($("#idCliente").val());
+		objeto.ofertaId.id = parseInt($("#OfertaAtribuida").find("option:selected").val());
+		objeto.funilEtapa.id = 1;
 		
 		var ClienteOfertaJSON = JSON.stringify(objeto);
 		

@@ -143,7 +143,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="row">
+						<!-- <div class="row">
 							<div class="col-md-4">
 								<label style="margin-left: 15%;">Itens por página: </label>
 								<div class="dropdown dropdown-inline">
@@ -177,7 +177,7 @@
 								</div>
 							</div>
 
-						</div>
+						</div> -->
 					</div>
 
 
@@ -200,13 +200,19 @@
 </div>
 
 <script>
+
 	var url = window.location.origin;
+	var nomePath = window.location.pathname;
+	var array = nomePath.split("/");
+	var dominio = url+"/"+array[1];
+
+/* 	var url = window.location.origin;
 
 	var nomePath = window.location.pathname;
 
 	var array = nomePath.split("/");
 
-	//var dominio = url+"/"+array[1];
+	//var dominio = url+"/"+array[1]; */
 		
 	var textoEditarTabela;
 	var textoEditarTabela3;

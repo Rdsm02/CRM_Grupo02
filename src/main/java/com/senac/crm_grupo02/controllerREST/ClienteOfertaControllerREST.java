@@ -14,6 +14,7 @@ import com.senac.crm_grupo02.service.ClienteOfertaService;
 import com.senac.crm_grupo02.service.ClienteService;
 import com.senac.crm_grupo02.service.EtapaFunilService;
 import com.senac.crm_grupo02.service.OfertaService;
+import com.senac.crm_grupo02.service.ProdutoService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
 
@@ -33,6 +34,9 @@ public class ClienteOfertaControllerREST {
 	@Autowired
 	EtapaFunilService servicoEtapaFunil;
 	
+	@Autowired
+	ProdutoService servicoProduto;
+	
 	@ResponseStatus(HttpStatus.OK)
     @RequestMapping(value ="/cadastrarClienteOferta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ClienteOferta cadastrarClienteOferta(@RequestBody ClienteOferta clienteOferta) throws ObjectNotFoundException{
@@ -40,6 +44,7 @@ public class ClienteOfertaControllerREST {
 		ClienteOferta clienteOfertaNova = new ClienteOferta();
 		clienteOfertaNova.setClienteId(servicoCliente.search(clienteOferta.getClienteId().getId()));
 		clienteOfertaNova.setOfertaId(servicoOferta.search(clienteOferta.getOfertaId().getId()));
+		clienteOfertaNova.setProdutoId(clienteOfertaNova.getOfertaId().getProdutoId());
 		clienteOfertaNova.setFunilEtapa(servicoEtapaFunil.search(clienteOferta.getFunilEtapa().getId()));
 
 		servicoClienteOferta.save(clienteOfertaNova);

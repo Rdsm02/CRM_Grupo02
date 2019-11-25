@@ -630,15 +630,14 @@
 		<script type="text/javascript" th:src="@{/vendors/custom/jquery-ui/jquery-ui.bundle.js}"></script>	
 		
 		<script>
+		
 		var url = window.location.origin;
-
 		var nomePath = window.location.pathname;
-
 		var array = nomePath.split("/");
+		var dominio = url+"/"+array[1];
 
-		var dominio = url;
 		//var dominio = window.location.origin;
-		//var dominio = url+"/"+array[1];
+		//var dominio = url;
 		console.log(window.location.href);
 		console.log(window.location);
 		
