@@ -9,7 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.senac.crm_grupo02.domain.Cliente;
 import com.senac.crm_grupo02.domain.ClienteOferta;
+import com.senac.crm_grupo02.domain.EtapaFunil;
+import com.senac.crm_grupo02.domain.Oferta;
+import com.senac.crm_grupo02.domain.Produto;
 import com.senac.crm_grupo02.service.ClienteOfertaService;
 import com.senac.crm_grupo02.service.ClienteService;
 import com.senac.crm_grupo02.service.EtapaFunilService;
@@ -39,17 +43,21 @@ public class ClienteOfertaControllerREST {
 	
 	@ResponseStatus(HttpStatus.OK)
     @RequestMapping(value ="/cadastrarClienteOferta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ClienteOferta cadastrarClienteOferta(@RequestBody ClienteOferta clienteOferta) throws ObjectNotFoundException{
+    public void cadastrarClienteOferta(@RequestBody ClienteOferta clienteOferta) throws ObjectNotFoundException{
 		
 		ClienteOferta clienteOfertaNova = new ClienteOferta();
-		clienteOfertaNova.setClienteId(servicoCliente.search(clienteOferta.getClienteId().getId()));
-		clienteOfertaNova.setOfertaId(servicoOferta.search(clienteOferta.getOfertaId().getId()));
-		clienteOfertaNova.setProdutoId(clienteOfertaNova.getOfertaId().getProdutoId());
-		clienteOfertaNova.setFunilEtapa(servicoEtapaFunil.search(clienteOferta.getFunilEtapa().getId()));
+		Cliente c1 = servicoCliente.search(clienteOferta.getClienteId().getId());
+		Produto p1 = clienteOfertaNova.getOfertaId().getProdutoId();
+		Oferta o1 = servicoOferta.search(clienteOferta.getOfertaId().getId());
+		EtapaFunil e1 = servicoEtapaFunil.search(clienteOferta.getFunilEtapa().getId());
+		clienteOfertaNova.setClienteId(c1);
+		clienteOfertaNova.setOfertaId(o1);
+		clienteOfertaNova.setProdutoId(p1);
+		clienteOfertaNova.setFunilEtapa(e1);
 
 		servicoClienteOferta.save(clienteOfertaNova);
 		
-        return clienteOfertaNova;
+       // return clienteOfertaNova;
     }
 	
 	
