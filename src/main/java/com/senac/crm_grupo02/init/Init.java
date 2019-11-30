@@ -39,10 +39,9 @@ import com.senac.crm_grupo02.service.UsuarioService;
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
-	public void onApplicationEvent(ContextRefreshedEvent event) {
+	/*public void onApplicationEvent(ContextRefreshedEvent event) {
 		
-	}
-	/*
+	}*/
 	@Autowired
 	ClienteService servicoCliente;
 	
@@ -141,11 +140,11 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		listaDeProdutos.add(p2);		
 		
 		servicoProduto.saveAll(listaDeProdutos);
-		*/
+		
 		
 		//LocalDate dataInicio = LocalDate.of(2019, 7, 1);
 		//LocalDate dataFim = LocalDate.of(2019, 12, 20);
-		/*
+		
 		Oferta o1 = new Oferta();
 		o1.setId(null);
 		o1.setCodigo("2019.2n");
@@ -176,9 +175,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		List<ClienteOferta> listaDeClienteOferta = new ArrayList<>();
 		listaDeClienteOferta.add(clienteOferta);
-		*/
+		
 		//servicoClienteOferta.saveAll(listaDeClienteOferta);
-		/*
+		
 		ClienteDadoTipoCategoria principal = new ClienteDadoTipoCategoria();
 		principal.setCodigo(null);
 		principal.setDescricao("Principal");
@@ -317,10 +316,10 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		servicoEtapaFunil.save(etapaFunilNEmEspera);
 		servicoEtapaFunil.save(etapaFunilNegociacaoDescartada);
 		servicoEtapaFunil.save(etapaFunilNegociacaoFechada);
-		*/
+		
 		
 		/*=====[Acessos Spring Security]=====*/
-		/*
+		
 		Role roleAdmin = new Role();
 		roleAdmin.setNomeRole("ROLE_ADMIN");
 		servicoRole.save(roleAdmin);
@@ -351,6 +350,6 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		servicoUsuario.save(usuarioMaster);
 		
 		
-	}*/
+	}
 
 }

@@ -28478,10 +28478,10 @@ body {
     transition: top 0.3s ease; }
   .kt-aside--enabled.kt-subheader--fixed .kt-subheader {
     left: 250px; }
-  .kt-subheader--fixed.kt-aside--minimize-hover .kt-subheader,
+  /* .kt-subheader--fixed.kt-aside--minimize-hover .kt-subheader,
   .kt-subheader--fixed.kt-aside--minimize .kt-subheader {
     left: 78px;
-    transition: all 0.3s ease; }
+    transition: all 0.3s ease; } */
   .kt-container {
     padding: 0 25px; }
   .kt-subheader--enabled:not(.kt-subheader--fixed) .kt-content {
@@ -30400,11 +30400,11 @@ body {
   .kt-aside--minimize .kt-aside {
     width: 78px;
     transition: all 0.3s ease; }
-  .kt-aside--minimizing .kt-aside {
-    overflow: hidden; }
-    .kt-aside--minimizing .kt-aside .kt-aside-menu .kt-menu__nav {
+  /* .kt-aside--minimizing .kt-aside {
+    overflow: hidden; } */
+    /* .kt-aside--minimizing .kt-aside .kt-aside-menu .kt-menu__nav {
       width: 250px;
-      overflow: hidden; }
+      overflow: hidden; } */
   .kt-aside .ps > .ps__rail-y {
     width: 6px; }
     .kt-aside .ps > .ps__rail-y:hover, .kt-aside .ps > .ps__rail-y:focus {
@@ -30415,7 +30415,7 @@ body {
       border-radius: 0; }
       .kt-aside .ps > .ps__rail-y > .ps__thumb-y:hover, .kt-aside .ps > .ps__rail-y > .ps__thumb-y:focus {
         width: 6px; }
-  .kt-aside--fixed.kt-aside--minimize-hover .kt-aside {
+  /* .kt-aside--fixed.kt-aside--minimize-hover .kt-aside {
     width: 250px;
     transition: all 0.3s ease; }
   .kt-aside--fixed.kt-aside--minimize-hover .kt-header {
@@ -30423,7 +30423,7 @@ body {
     left: 78px; }
   .kt-aside--fixed.kt-aside--minimize-hover .kt-wrapper {
     transition: all 0.3s ease;
-    padding-left: 78px; } }
+    padding-left: 78px; } */ }
 
 .kt-aside-menu .kt-menu__nav {
   margin: 0;
@@ -31703,10 +31703,10 @@ body {
     right: 0;
     left: 250px;
     box-shadow: 0px 0px 28px 0px rgba(82, 63, 105, 0.13); }
-  .kt-aside--minimize-hover.kt-footer--fixed .kt-footer,
+ /*  .kt-aside--minimize-hover.kt-footer--fixed .kt-footer,
   .kt-aside--minimize.kt-footer--fixed .kt-footer {
     transition: all 0.3s ease;
-    left: 78px; } }
+    left: 78px; }  */}
 
 @media (max-width: 1024px) {
   .kt-footer {

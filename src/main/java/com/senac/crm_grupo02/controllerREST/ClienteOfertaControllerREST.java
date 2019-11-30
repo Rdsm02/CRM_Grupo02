@@ -44,20 +44,15 @@ public class ClienteOfertaControllerREST {
 	@ResponseStatus(HttpStatus.OK)
     @RequestMapping(value ="/cadastrarClienteOferta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void cadastrarClienteOferta(@RequestBody ClienteOferta clienteOferta) throws ObjectNotFoundException{
-		
-		ClienteOferta clienteOfertaNova = new ClienteOferta();
-		Cliente c1 = servicoCliente.search(clienteOferta.getClienteId().getId());
-		Produto p1 = clienteOfertaNova.getOfertaId().getProdutoId();
-		Oferta o1 = servicoOferta.search(clienteOferta.getOfertaId().getId());
-		EtapaFunil e1 = servicoEtapaFunil.search(clienteOferta.getFunilEtapa().getId());
-		clienteOfertaNova.setClienteId(c1);
-		clienteOfertaNova.setOfertaId(o1);
-		clienteOfertaNova.setProdutoId(p1);
-		clienteOfertaNova.setFunilEtapa(e1);
 
-		servicoClienteOferta.save(clienteOfertaNova);
-		
-       // return clienteOfertaNova;
+		Integer c1 = clienteOferta.getClienteId().getId().intValue();
+		Integer o1 = clienteOferta.getOfertaId().getId();
+		Produto p1 = servicoProduto.search(o1);
+		Integer p2 = p1.getId();
+		Integer e1 = clienteOferta.getFunilEtapa().getId();
+
+		servicoClienteOferta.atribuirClienteOferta(o1, p2, c1, e1);
+
     }
 	
 	

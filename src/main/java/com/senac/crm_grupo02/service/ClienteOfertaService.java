@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.ClienteOferta;
@@ -17,6 +18,10 @@ public class ClienteOfertaService {
 
 	@Autowired
 	ClienteOfertaRepository repoClienteOferta;
+	
+	public void atribuirClienteOferta(Integer ofertaId, Integer produtoId, Integer clienteId, Integer funil_etapa_id) {
+		repoClienteOferta.atribuirClienteOferta(ofertaId, produtoId, clienteId, funil_etapa_id);		
+	}
 
 	public ClienteOferta search(ClienteOfertaId id) throws ObjectNotFoundException {
 		Optional<ClienteOferta> clienteOferta = repoClienteOferta.findById(id);
