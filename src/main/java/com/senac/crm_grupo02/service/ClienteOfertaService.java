@@ -22,6 +22,10 @@ public class ClienteOfertaService {
 	public void atribuirClienteOferta(Integer ofertaId, Integer produtoId, Integer clienteId, Integer funil_etapa_id) {
 		repoClienteOferta.atribuirClienteOferta(ofertaId, produtoId, clienteId, funil_etapa_id);		
 	}
+	
+	public List<List<Object>> buscarClienteOfertaPorOfertaId(Integer ofertaId){
+		return repoClienteOferta.buscarClienteOfertaPorOfertaId(ofertaId);
+	}
 
 	public ClienteOferta search(ClienteOfertaId id) throws ObjectNotFoundException {
 		Optional<ClienteOferta> clienteOferta = repoClienteOferta.findById(id);

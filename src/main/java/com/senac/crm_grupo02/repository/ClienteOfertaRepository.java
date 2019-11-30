@@ -1,5 +1,7 @@
 package com.senac.crm_grupo02.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +15,9 @@ import com.senac.crm_grupo02.domain.ClienteOfertaId;
 @Repository
 public interface ClienteOfertaRepository extends JpaRepository<ClienteOferta, ClienteOfertaId>{
 	
+	@Query(value = "SELECT * FROM CLIENTE_OFERTA WHERE OFERTA_ID = :ofertaId;", nativeQuery = true)
+	List<List<Object>> buscarClienteOfertaPorOfertaId(@Param("ofertaId") Integer ofertaId);
+	
 	@Modifying
 	@Query(
 	  value = "INSERT INTO "
@@ -22,7 +27,5 @@ public interface ClienteOfertaRepository extends JpaRepository<ClienteOferta, Cl
 	@Transactional
 	void atribuirClienteOferta(@Param("ofertaId") Integer ofertaId, @Param("produtoId") Integer produtoId, 
 	  @Param("clienteId") Integer clienteId, @Param("funil_etapa_id") Integer funil_etapa_id);
-	
-
 
 }
