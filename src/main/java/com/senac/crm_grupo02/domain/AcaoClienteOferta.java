@@ -35,6 +35,10 @@ public class AcaoClienteOferta implements Serializable{
 	@JoinColumn(name = "acao_id", nullable = false)
 	private Acao acaoId;
 	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "cliente_id", nullable = false)
+	private Cliente clienteId;	
+	
 
 	public Acao getAcaoId() {
 		return acaoId;
@@ -74,6 +78,14 @@ public class AcaoClienteOferta implements Serializable{
 
 	public void setHora(String hora) {
 		this.hora = hora;
+	}
+
+	public Cliente getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Cliente clienteId) {
+		this.clienteId = clienteId;
 	}
 	
 }
