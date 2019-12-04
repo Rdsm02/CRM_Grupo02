@@ -6944,7 +6944,8 @@ a.text-dark:hover, a.text-dark:focus {
   .accordion.accordion-light .card .card-body {
     padding: 0;
     margin-bottom: 1.25rem;
-    font-size: 1rem; }
+    font-size: 1rem;
+    color:black; }
   .accordion.accordion-light .card:first-child {
     border-top: 0; }
     .accordion.accordion-light .card:first-child .card-header {
