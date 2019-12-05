@@ -233,6 +233,32 @@
 
 					</div>
 				</div>
+				<div class="row mr-0 ml-0 pt-3">
+					<div class="col-md-5" style="margin-top: 1%;">
+						<label for="exampleFormControlTextarea6" class="float-right">Descricao
+							da Atribuição:</label>
+					</div>
+					<div class="col-md-5" style="">
+						<div class="form-group">
+							<input type="text" class="form-control" id="descricaoAtribuida"
+								placeholder="Digite uma descrição...">
+						</div>
+
+					</div>
+				</div>
+				<div class="row mr-0 ml-0 pt-3">
+					<div class="col-md-5" style="margin-top: 1%;">
+						<label for="exampleFormControlTextarea6" class="float-right">Valor da Oferta:</label>
+					</div>
+					<div class="col-md-5" style="">
+						<div class="form-group">
+							<input type="text" class="form-control" id="valorOfertaAtribuida"
+								placeholder="Digite um valor...">
+						</div>
+
+					</div>
+				</div>
+				
 			</div>
 			<div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -305,6 +331,8 @@
 		objeto.clienteId.id = parseInt($("#idCliente").val());
 		objeto.ofertaId.id = parseInt($("#OfertaAtribuida").find("option:selected").val());
 		objeto.funilEtapa.id = 1;
+		objeto.descricao = $("#descricaoAtribuida").val();
+		objeto.preco = $("#valorOfertaAtribuida").val();
 		
 		var ClienteOfertaJSON = JSON.stringify(objeto);
 		

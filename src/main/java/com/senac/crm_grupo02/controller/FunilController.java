@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.senac.crm_grupo02.service.EtapaFunilService;
 import com.senac.crm_grupo02.service.OfertaService;
 import com.senac.crm_grupo02.service.ProdutoService;
 
@@ -16,10 +17,14 @@ public class FunilController {
 	@Autowired
 	ProdutoService servicoProduto;
 	
+	@Autowired
+	EtapaFunilService servicoEtapaFunil;
+	
 	@GetMapping("/listarFunilVendas")
 	public ModelAndView paginaPrincipal() {
 		ModelAndView mv = new ModelAndView("paginas/funil/funilDeVendas");
 		mv.addObject("produtoLista", servicoProduto.searchAll());
+		mv.addObject("listaEtapas", servicoEtapaFunil.searchAll());
 		return mv;
 	}
 

@@ -1,0 +1,633 @@
+<div class="row mr-0 ml-0">
+	<div class="col-md-2" style="margin-top: 1%;">
+		<label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
+	</div>
+	<div class="col-md-4" style="">
+		<select class="form-control" id="ProdutoSelect" data-placeholder="Selecione um Produto" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+			<option value="-1">Selecione um Produto</option>
+			<option th:each="produto : ${produtoLista}" th:if="${produto.status.equals('1')}" th:value="${produto.id}" th:text="${produto.descricao}" />
+		</select>
+
+	</div>
+	<div class="col-md-2" style="margin-top: 1%;">
+		<label for="exampleFormControlTextarea6" class="float-right">Oferta:</label>
+	</div>
+	<div class="col-md-4" style="">
+		<select class="form-control" id="OfertaSelect" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+			<option value="-1">Selecione uma Oferta</option>
+			<!-- <option th:each="oferta : ${ofertaLista}" th:if="${oferta.status.equals('1')}" th:value="${oferta.id}" th:text="${oferta.descricao}" /> -->
+		</select>
+
+	</div>
+</div>
+
+<meta charset="UTF-8">
+<div class="kanban-dragdrop ui-sortable d-flex" id="kt_sortable_portlets">
+
+	<div class="col-md-2 col-lg-2 coluna">
+
+		<div class="header-coluna">
+			<div class="row">
+				<h6 class="col-md-12 text-center"><input type="hidden" id="idEtapa" name="IdEtapa" value="">CAPTAÇÃO</h6>
+			</div>
+			<div class="row">
+				<h6 class="col-md-5">
+					<span id="qtd-negocios">4</spam>&nbsp;Negócios 
+				</h6>
+				<h6 class="col-md-2">
+					<span id="espaco"> -> </spam>
+				</h6>
+				<h6 class="col-md-5 text-left">
+					<span id="qtd-valor">R$ 1250</spam>
+				</h6>
+			</div>
+		</div>
+
+		<div class="content-coluna">
+
+			<!-- CARD -->
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+
+
+
+			<!-- /CARD -->
+
+
+
+			<!-- <div class="kt-portlet kt-portlet--sortable-empty"></div> -->
+
+		</div>
+		<!-- /content-coluna -->
+
+	</div>
+	<!--  col-md-2 col-lg-2 coluna -->
+
+	<div class="col-md-2 col-lg-2 coluna">
+
+		<div class="header-coluna">
+			<div class="row">
+				<h6 class="col-md-12 text-center">NEGOCIAÇÃO INICIADA</h6>
+			</div>
+			<div class="row">
+				<h6 class="col-md-5">
+					<span id="qtd-negocios">4</spam>&nbsp;Negócios 
+				</h6>
+				<h6 class="col-md-2">
+					<span id="espaco"> -> </spam>
+				</h6>
+				<h6 class="col-md-5 text-left">
+					<span id="qtd-valor">R$ 1250</spam>
+				</h6>
+			</div>
+
+		</div>
+
+		<div class="content-coluna">
+
+			<!-- CARD -->
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<!-- /CARD -->
+
+
+
+			<!-- <div class="kt-portlet kt-portlet--sortable-empty"></div> -->
+
+		</div>
+		<!--  /content-coluna  -->
+
+	</div>
+	<!-- /col-md-3 col-lg-3 coluna -->
+
+	<div class="col-md-2 col-lg-2 coluna">
+
+		<div class="header-coluna">
+			<div class="row">
+				<h6 class="col-md-12 text-center">EM ESPERA</h6>
+			</div>
+			<div class="row">
+				<h6 class="col-md-5">
+					<span id="qtd-negocios">4</spam>&nbsp;Negócios 
+				</h6>
+				<h6 class="col-md-2">
+					<span id="espaco"> -> </spam>
+				</h6>
+				<h6 class="col-md-5 text-left">
+					<span id="qtd-valor">R$ 1250</spam>
+				</h6>
+			</div>
+		</div>
+
+		<div class="content-coluna">
+
+			<!-- CARD -->
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<!-- /CARD -->
+
+
+
+			<!-- <div class="kt-portlet kt-portlet--sortable-empty"></div> -->
+
+		</div>
+		<!--  /content-coluna  -->
+
+	</div>
+	<!-- /col-md-2 col-lg-2 coluna -->
+
+	<div class="col-md-2 col-lg-2 coluna">
+
+		<div class="header-coluna">
+
+			<div class="row">
+				<h6 class="col-md-12 text-center">NEGOCIAÇÃO DESCARTADA</h6>
+			</div>
+			<div class="row">
+				<h6 class="col-md-5">
+					<span id="qtd-negocios">4</spam>&nbsp;Negócios 
+				</h6>
+				<h6 class="col-md-2">
+					<span id="espaco"> -> </spam>
+				</h6>
+				<h6 class="col-md-5 text-left">
+					<span id="qtd-valor">R$ 1250</spam>
+				</h6>
+			</div>
+		</div>
+
+		<div class="content-coluna">
+
+			<!-- CARD -->
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<!-- /CARD -->
+
+
+
+			<!-- <div class="kt-portlet kt-portlet--sortable-empty"></div> -->
+
+		</div>
+		<!--  /content-coluna  -->
+
+	</div>
+	<!-- /col-md-2 col-lg-2 coluna -->
+
+	<div class="col-md-2 col-lg-2 coluna">
+
+		<div class="header-coluna">
+
+			<div class="row">
+				<h6 class="col-md-12 text-center">NEGOCIAÇÃO FECHADA</h6>
+			</div>
+			<div class="row">
+				<h6 class="col-md-5">
+					<span id="qtd-negocios">4</spam>&nbsp;Negócios 
+				</h6>
+				<h6 class="col-md-2">
+					<span id="espaco"> -> </spam>
+				</h6>
+				<h6 class="col-md-5 text-left">
+					<span id="qtd-valor">R$ 1250</spam>
+				</h6>
+			</div>
+		</div>
+
+		<div class="content-coluna">
+
+			<!-- CARD -->
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban card-kanban2" style="border-radius: 10px;">
+
+				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
+					<div class="col-md-4 mt-2">
+						<i class="la fa fa-suitcase"></i>
+					</div>
+					<div class="col-md-8 mt-2">
+						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
+						<p class="text-left">R$ 799.00</p>
+					</div>
+					<div class="col-md-4 mb-2">
+						<i class="la flaticon2-user"></i>
+					</div>
+					<div class="col-md-8 mt-3">
+						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
+					</div>
+
+
+				</div>
+			</div>
+			<!-- /CARD -->
+
+
+
+			<!-- <div class="kt-portlet kt-portlet--sortable-empty"></div> -->
+
+		</div>
+		<!--  /content-coluna  -->
+
+	</div>
+	<!-- /col-md-2 col-lg-2 coluna -->
+
+</div>
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+		$( document ).ready(function() {
+			atualizarValoresKanban();
+			$( ".card-kanban" ).css("z-index", "0");
+			$( ".card-kanban" ).draggable({
+				start: function(event, ui) {
+					$(this).css("z-index", "20");
+				}				
+			});
+			
+			$("#ProdutoSelect").change(function(){
+				console.log($(this).find("option:selected").val());
+				$.ajax({
+					type: "GET",
+					url: dominio + "/ofertaREST/obterOfertaPorProduto?produtoId=" + $(this).find("option:selected").val(),
+					dataType: "JSON",
+					async: false,
+					success: function (response) {
+						listaDeOfertas = response;	
+						$("#OfertaSelect").children().remove();
+						$("#OfertaSelect").append('<option value="-1">Selecione uma Oferta</option>');
+						},
+						error: function(request, status, error){
+							$("#OfertaSelect").children().remove();
+							$("#OfertaSelect").append('<option value="-1">Sem dados a listar</option>');
+						}
+					});
+				$.each(listaDeOfertas, function(index, value) {
+					$("#OfertaSelect").append('<option value="'+value.id+'">'+value.descricao+'</option>');
+				});		
+			});
+			
+			var tamanhoEtapas = $("#kt_sortable_portlets > div").size();
+			var teste = "1";
+			
+			$("#kt_sortable_portlets > div:nth-child(1)").droppable({
+				drop: function (event, ui){
+					$("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+					atualizarValoresKanban()
+				}
+
+				});
+			$("#kt_sortable_portlets > div:nth-child(2)").droppable({
+				drop: function (event, ui){
+					$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+					atualizarValoresKanban()
+				}
+
+				});
+			$("#kt_sortable_portlets > div:nth-child(3)").droppable({
+				drop: function (event, ui){
+					$("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+					atualizarValoresKanban()
+				}
+
+				});
+			$("#kt_sortable_portlets > div:nth-child(4)").droppable({
+				drop: function (event, ui){
+					$("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+					atualizarValoresKanban()
+				}
+
+				});
+			$("#kt_sortable_portlets > div:nth-child(5)").droppable({
+				drop: function (event, ui){
+					$("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+					atualizarValoresKanban()
+				}
+
+				});		
+			
+			
+			function atualizarValoresKanban(){
+				
+				/*=====[Coluna1]*/
+				var valorTotal1 = 0;
+				var coluna1= $("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna");
+				coluna1.find("div.card-kanban").each(function( index, element ) {
+					valorTotal1 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+				  });
+				
+				calcularTamanhoEtapaEPrecoColuna1(coluna1.find("div.card-kanban").size(),valorTotal1)
+				
+				/*=====[Coluna2]*/
+				var valorTotal2 = 0;
+				var coluna2 =$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna");
+				coluna2.find("div.card-kanban").each(function( index, element ) {
+					valorTotal2 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+				  });
+				
+				calcularTamanhoEtapaEPrecoColuna2(coluna2.find("div.card-kanban").size(),valorTotal2)
+					
+				/*=====[Coluna3]*/					
+				var valorTotal3 = 0;
+				var coluna3 = $("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna");
+				coluna3.find("div.card-kanban").each(function( index, element ) {
+					valorTotal3 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+				  });
+				
+				calcularTamanhoEtapaEPrecoColuna3(coluna3.find("div.card-kanban").size(),valorTotal3)
+					
+				/*=====[Coluna4]*/					
+				var valorTotal4 = 0;
+				var coluna4 = $("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna");
+				coluna4.find("div.card-kanban").each(function( index, element ) {
+					valorTotal4 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+				  });
+				
+				calcularTamanhoEtapaEPrecoColuna4(coluna4.find("div.card-kanban").size(),valorTotal4)
+				
+				/*=====[Coluna5]*/					
+					var valorTotal5 = 0;
+					var coluna5 = $("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna");
+					coluna5.find("div.card-kanban").each(function( index, element ) {
+						valorTotal5 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+					  });
+					
+					calcularTamanhoEtapaEPrecoColuna5(coluna5.find("div.card-kanban").size(),valorTotal5)
+				
+			}
+			
+
+			function calcularTamanhoEtapaEPrecoColuna1(qtdCards, valorCards){
+				$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+				$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+			}
+			function calcularTamanhoEtapaEPrecoColuna2(qtdCards, valorCards){
+				$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+				$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+			}
+			function calcularTamanhoEtapaEPrecoColuna3(qtdCards, valorCards){
+				$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+				$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+			}
+			function calcularTamanhoEtapaEPrecoColuna4(qtdCards, valorCards){
+				$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+				$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+			}
+			function calcularTamanhoEtapaEPrecoColuna5(qtdCards, valorCards){
+				$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+				$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+			}
+			
+			
+		
+		});
+		</script>

@@ -15,17 +15,26 @@ import com.senac.crm_grupo02.domain.ClienteOfertaId;
 @Repository
 public interface ClienteOfertaRepository extends JpaRepository<ClienteOferta, ClienteOfertaId>{
 	
-	@Query(value = "SELECT * FROM CLIENTE_OFERTA WHERE OFERTA_ID = :ofertaId;", nativeQuery = true)
-	List<List<Object>> buscarClienteOfertaPorOfertaId(@Param("ofertaId") Integer ofertaId);
+	@Query(value = 
+			"SELECT CO.FUNIL_ETAPA_ID, C.CLIENTE_NOME, CO.CLIENTE_OFERTA_PRECO, COUNT(ACAO_CLIENTE_ID)"
+			+ "FROM CLIENTE_OFERTA AS CO " 
+			+ "JOIN CLIENTE AS C ON "
+			+ "CO.CLIENTE_ID = C.CLIENTE_ID "
+			+ "LEFT JOIN ACAO_CLIENTE_OFERTA AS ACO "
+			+ "ON ACO.CLIENTE_ID = C.CLIENTE_ID "
+			+ "WHERE OFERTA_ID = :ofertaId ", nativeQuery = true)
+	List<List<Object>> buscarClienteOfertaPorOfertaId(@Param("ofertaId") Integer ofertaId);	
 	
 	@Modifying
 	@Query(
 	  value = "INSERT INTO "
 	  		+ "CLIENTE_OFERTA "
-	  		+ "(OFERTA_ID, PRODUTO_ID , CLIENTE_ID , FUNIL_ETAPA_ID)"
-	  		+ " VALUES (:ofertaId , :produtoId , :clienteId , :funil_etapa_id)", nativeQuery = true)
+	  		+ "(OFERTA_ID, PRODUTO_ID , CLIENTE_ID , FUNIL_ETAPA_ID, CLIENTE_OFERTA_DESCRICAO, CLIENTE_OFERTA_PRECO)"
+	  		+ " VALUES (:ofertaId , :produtoId , :clienteId , :funil_etapa_id, :cliente_oferta_descricao, :cliente_oferta_preco)", nativeQuery = true)
 	@Transactional
 	void atribuirClienteOferta(@Param("ofertaId") Integer ofertaId, @Param("produtoId") Integer produtoId, 
-	  @Param("clienteId") Integer clienteId, @Param("funil_etapa_id") Integer funil_etapa_id);
+	  @Param("clienteId") Integer clienteId, @Param("funil_etapa_id") Integer funil_etapa_id, 
+	  @Param("cliente_oferta_descricao") String cliente_oferta_descricao, 
+	  @Param("cliente_oferta_preco") double cliente_oferta_preco);
 
 }

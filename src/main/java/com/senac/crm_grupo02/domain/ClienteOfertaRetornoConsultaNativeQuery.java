@@ -6,55 +6,34 @@ public class ClienteOfertaRetornoConsultaNativeQuery implements Serializable{
 
 	private static final long serialVersionUID = 5381191299174748159L;
 
-	private Cliente clienteId;
-	private Oferta ofertaId;
-	private Produto produtoId;
-	private EtapaFunil funilEtapa;
-	private double preco;
-	private String descricao;
-	private String status;
+	private int funilEtapa;
+	private String clienteNome;
+	private double clienteOfertaPreco;
+	private int qtdAcoesClienteOferta;
 	
-	public Cliente getClienteId() {
-		return clienteId;
-	}
-	public void setClienteId(Cliente clienteId) {
-		this.clienteId = clienteId;
-	}
-	public Oferta getOfertaId() {
-		return ofertaId;
-	}
-	public void setOfertaId(Oferta ofertaId) {
-		this.ofertaId = ofertaId;
-	}
-	public Produto getProdutoId() {
-		return produtoId;
-	}
-	public void setProdutoId(Produto produtoId) {
-		this.produtoId = produtoId;
-	}
-	public EtapaFunil getFunilEtapa() {
+	public int getFunilEtapa() {
 		return funilEtapa;
 	}
-	public void setFunilEtapa(EtapaFunil funilEtapa) {
+	public void setFunilEtapa(int funilEtapa) {
 		this.funilEtapa = funilEtapa;
 	}
-	public double getPreco() {
-		return preco;
+	public String getClienteNome() {
+		return clienteNome;
 	}
-	public void setPreco(double preco) {
-		this.preco = preco;
+	public void setClienteNome(String clienteNome) {
+		this.clienteNome = clienteNome;
 	}
-	public String getDescricao() {
-		return descricao;
+	public double getClienteOfertaPreco() {
+		return clienteOfertaPreco;
 	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setClienteOfertaPreco(double clienteOfertaPreco) {
+		this.clienteOfertaPreco = clienteOfertaPreco;
 	}
-	public String getStatus() {
-		return status;
+	public int getQtdAcoesClienteOferta() {
+		return qtdAcoesClienteOferta;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setQtdAcoesClienteOferta(int qtdAcoesClienteOferta) {
+		this.qtdAcoesClienteOferta = qtdAcoesClienteOferta;
 	}
-
+	
 }

@@ -60,38 +60,33 @@ public class ClienteOfertaControllerREST {
 		Integer p2 = p1.getId();
 		Integer e1 = clienteOferta.getFunilEtapa().getId();
 
-		servicoClienteOferta.atribuirClienteOferta(o1, p2, c1, e1);
+		servicoClienteOferta.atribuirClienteOferta(o1, p2, c1, e1, clienteOferta.getDescricao(), clienteOferta.getPreco());
 
     }
 	
 	@RequestMapping(value = "/buscarClienteOfertaPorOfertaId", method = RequestMethod.GET)
-	public void buscarClienteOfertaPorOfertaId(@RequestParam("ofertaId") int ofertaId) throws ObjectNotFoundException {
+	public ResponseEntity<List<ClienteOfertaRetornoConsultaNativeQuery>> buscarClienteOfertaPorOfertaId(@RequestParam("ofertaId") int ofertaId) throws ObjectNotFoundException {
 		//CategoriasClienteRetornoConsultaNativeQuery ccrcnq = new CategoriasClienteRetornoConsultaNativeQuery();
 		List<List<Object>> listaClienteOferta = new ArrayList<List<Object>>();
 		listaClienteOferta = servicoClienteOferta.buscarClienteOfertaPorOfertaId(ofertaId);	
 		
-		Map<Integer, ClienteOferta> clienteOfertahas = new HashMap<Integer, ClienteOferta>();
+		Map<Integer, ClienteOfertaRetornoConsultaNativeQuery> clienteOfertahas = new HashMap<Integer, ClienteOfertaRetornoConsultaNativeQuery>();
 		
 		int cont = 1;
 		
 		for (List<Object> listaClienteOfertaItem: listaClienteOferta) {	
 			ClienteOfertaRetornoConsultaNativeQuery corcnq = new ClienteOfertaRetornoConsultaNativeQuery();
-			/*corcnq.setClienteId(listaClienteOfertaItem.get(5));
-			ccrcnq.setCliente_dado_tipo_categoria_id(Integer.parseInt(ClienteCategoriaLista.get(0).toString()));
-			ccrcnq.setCliente_dado_tipo_categoria_descricao(ClienteCategoriaLista.get(1).toString());
-			ccrcnq.setCliente_dado_tipo_id(Integer.parseInt(ClienteCategoriaLista.get(2).toString()));
-			ccrcnq.setCliente_dado_tipo_descricao(ClienteCategoriaLista.get(3).toString());
-			ccrcnq.setCliente_dado_tipo_mascara(ClienteCategoriaLista.get(4).toString());
-			ccrcnq.setCliente_dado_id(Integer.parseInt(ClienteCategoriaLista.get(5).toString()));
-			ccrcnq.setCliente_dado_descricao(ClienteCategoriaLista.get(6).toString());
 			
-			clienteCategoriahas.put(cont, ccrcnq);	
+			corcnq.setFunilEtapa(Integer.parseInt(listaClienteOfertaItem.get(0).toString()));
+			corcnq.setClienteNome(listaClienteOfertaItem.get(1).toString());
+			corcnq.setClienteOfertaPreco(Double.parseDouble(listaClienteOfertaItem.get(2).toString()));
+			corcnq.setQtdAcoesClienteOferta(Integer.parseInt(listaClienteOfertaItem.get(3).toString()));			
+			
+			clienteOfertahas.put(cont, corcnq);	
 			cont++;							
 		}	
 		
-		return new ResponseEntity<List<Object>>(new ArrayList<Object>(clienteCategoriahas.values()), HttpStatus.OK);		*/
+		return new ResponseEntity<List<ClienteOfertaRetornoConsultaNativeQuery>>(new ArrayList<ClienteOfertaRetornoConsultaNativeQuery>(clienteOfertahas.values()), HttpStatus.OK);
 	}
 	
-	
-	}
 }

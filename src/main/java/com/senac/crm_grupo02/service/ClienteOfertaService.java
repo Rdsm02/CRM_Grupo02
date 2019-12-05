@@ -19,8 +19,8 @@ public class ClienteOfertaService {
 	@Autowired
 	ClienteOfertaRepository repoClienteOferta;
 	
-	public void atribuirClienteOferta(Integer ofertaId, Integer produtoId, Integer clienteId, Integer funil_etapa_id) {
-		repoClienteOferta.atribuirClienteOferta(ofertaId, produtoId, clienteId, funil_etapa_id);		
+	public void atribuirClienteOferta(Integer ofertaId, Integer produtoId, Integer clienteId, Integer funil_etapa_id, String cliente_oferta_descricao, double cliente_oferta_preco) {
+		repoClienteOferta.atribuirClienteOferta(ofertaId, produtoId, clienteId, funil_etapa_id, cliente_oferta_descricao, cliente_oferta_preco);		
 	}
 	
 	public List<List<Object>> buscarClienteOfertaPorOfertaId(Integer ofertaId){
