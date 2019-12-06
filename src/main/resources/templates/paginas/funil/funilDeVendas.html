@@ -74,13 +74,10 @@
 
 <script>
 		$( document ).ready(function() {
+			tornarCardDraggavel();
+			tornarCardDroppavel();
 			atualizarValoresKanban();
-			$( ".card-kanban" ).css("z-index", "0");
-			$( ".card-kanban" ).draggable({
-				start: function(event, ui) {
-					$(this).css("z-index", "20");
-				}				
-			});
+			
 			
 			$("#ProdutoSelect").change(function(){
 				console.log($(this).find("option:selected").val());
@@ -117,8 +114,6 @@
 					success: function (response) {
 						responseAjax = response;
 						popularKanban(responseAjax);
-						
-						console.log(responseAjax);
 						},
 						error: function(request, status, error){
 							/* $("#OfertaSelect").children().remove();
@@ -159,52 +154,64 @@
 							+'</div>');
 				    		
 				    	}
-				    	
-				    	//realizar append na 'listaDeColunas' pois representa a etapa do funil.
-						//$("#OfertaSelect").append('<option value="'+value.id+'">'+value.descricao+'</option>');
 					});	
 				    
 				});
+				tornarCardDraggavel();
+				tornarCardDroppavel();
+				atualizarValoresKanban();
 			}
 			
 			var tamanhoEtapas = $("#kt_sortable_portlets > div").size();
 			var teste = "1";
 			
-			$("#kt_sortable_portlets > div:nth-child(1)").droppable({
-				drop: function (event, ui){
-					$("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-					atualizarValoresKanban()
-				}
+			function tornarCardDroppavel(){
+				$("#kt_sortable_portlets > div:nth-child(1)").droppable({
+					drop: function (event, ui){
+						$("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+						atualizarValoresKanban()
+					}
 
+					});
+				$("#kt_sortable_portlets > div:nth-child(2)").droppable({
+					drop: function (event, ui){
+						$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+						atualizarValoresKanban()
+					}
+
+					});
+				$("#kt_sortable_portlets > div:nth-child(3)").droppable({
+					drop: function (event, ui){
+						$("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+						atualizarValoresKanban()
+					}
+
+					});
+				$("#kt_sortable_portlets > div:nth-child(4)").droppable({
+					drop: function (event, ui){
+						$("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+						atualizarValoresKanban()
+					}
+
+					});
+				$("#kt_sortable_portlets > div:nth-child(5)").droppable({
+					drop: function (event, ui){
+						$("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
+						atualizarValoresKanban()
+					}
+
+					});	
+			}	
+			
+			
+			function tornarCardDraggavel(){
+				$( ".card-kanban" ).css("z-index", "0");
+				$( ".card-kanban" ).draggable({
+					start: function(event, ui) {
+						$(this).css("z-index", "20");
+					}				
 				});
-			$("#kt_sortable_portlets > div:nth-child(2)").droppable({
-				drop: function (event, ui){
-					$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-					atualizarValoresKanban()
-				}
-
-				});
-			$("#kt_sortable_portlets > div:nth-child(3)").droppable({
-				drop: function (event, ui){
-					$("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-					atualizarValoresKanban()
-				}
-
-				});
-			$("#kt_sortable_portlets > div:nth-child(4)").droppable({
-				drop: function (event, ui){
-					$("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-					atualizarValoresKanban()
-				}
-
-				});
-			$("#kt_sortable_portlets > div:nth-child(5)").droppable({
-				drop: function (event, ui){
-					$("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-					atualizarValoresKanban()
-				}
-
-				});		
+			}
 			
 			
 			function atualizarValoresKanban(){
