@@ -132,10 +132,38 @@
 			function popularKanban(reponseDoAjax){
 				var listaDeColunas = $("#kt_sortable_portlets > div");
 
-				$.each(listaDeColunas, function( index, value ) {
-				  console.log( index + ": " + value);
-				var coluna = value;
-				coluna.find('.header-coluna');//devo chegar em alguma parte para pegar o valor do id da etapa do funil para setar os cards que vieram do banco via ajax.
+				$(listaDeColunas).each(function() {
+				    var droppable = $(this);
+					var idEtapa = droppable.find('.header-coluna > div:nth-child(1) > input').val();
+				    
+				    $.each(reponseDoAjax, function(index, value) {
+				    	if(value.funilEtapa === parseInt(idEtapa)){
+				    		
+				    		droppable.find('div.content-coluna').append('<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">'
+
+							+ '<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">'
+							+'	<div class="col-md-4 mt-2">'
+							+'		<i class="la fa fa-suitcase"></i>'
+							+'	</div>'
+							+'	<div class="col-md-8 mt-2">'
+							+'		<p class="text-left font-weight-bold mb-2">'+value.clienteNome+'</p>'
+							+'		<p class="text-left">R$ '+value.clienteOfertaPreco+'</p>'
+							+'	</div>'
+							+'	<div class="col-md-4 mb-2">'
+							+'		<i class="la flaticon2-user"></i>'
+							+'	</div>'
+							+'	<div class="col-md-8 mt-3">'
+							+'		<p class="text-left font-weight-bold mb-0">'+value.qtdAcoesClienteOferta+' Atividades</p>'
+							+'	</div>'
+							+' </div>'
+							+'</div>');
+				    		
+				    	}
+				    	
+				    	//realizar append na 'listaDeColunas' pois representa a etapa do funil.
+						//$("#OfertaSelect").append('<option value="'+value.id+'">'+value.descricao+'</option>');
+					});	
+				    
 				});
 			}
 			
