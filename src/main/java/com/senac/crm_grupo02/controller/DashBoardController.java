@@ -11,7 +11,7 @@ public class DashBoardController {
 	
 	@GetMapping("/dashboard")
 	public ModelAndView paginaPrincipal() {
-		ModelAndView mv = new ModelAndView("paginas/dashboard/dashboard");
+		ModelAndView mv = new ModelAndView("paginas/dashboard/dashboardRelatorios");
 		//mv.addObject("clientes", servicoCliente.searchAll());
 		return mv;
 	}

@@ -46,26 +46,7 @@
 		<div class="content-coluna">
 
 			<!-- CARD -->
-			<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">
-
-				<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">
-					<div class="col-md-4 mt-2">
-						<i class="la fa fa-suitcase"></i>
-					</div>
-					<div class="col-md-8 mt-2">
-						<p class="text-left font-weight-bold mb-2">Negócio da Maria</p>
-						<p class="text-left">R$ 799.00</p>
-					</div>
-					<div class="col-md-4 mb-2">
-						<i class="la flaticon2-user"></i>
-					</div>
-					<div class="col-md-8 mt-3">
-						<p class="text-left font-weight-bold mb-0">4 Atividades</p>
-					</div>
-
-
-				</div>
-			</div>
+			
 		</div>
 	</div>
 </div>
@@ -130,6 +111,7 @@
 				$(listaDeColunas).each(function() {
 				    var droppable = $(this);
 					var idEtapa = droppable.find('.header-coluna > div:nth-child(1) > input').val();
+					droppable.find('div.content-coluna').children().remove();
 				    
 				    $.each(reponseDoAjax, function(index, value) {
 				    	if(value.funilEtapa === parseInt(idEtapa)){
@@ -220,7 +202,7 @@
 				var valorTotal1 = 0;
 				var coluna1= $("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna");
 				coluna1.find("div.card-kanban").each(function( index, element ) {
-					valorTotal1 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+					valorTotal1 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
 				  });
 				
 				calcularTamanhoEtapaEPrecoColuna1(coluna1.find("div.card-kanban").size(),valorTotal1)
@@ -229,7 +211,7 @@
 				var valorTotal2 = 0;
 				var coluna2 =$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna");
 				coluna2.find("div.card-kanban").each(function( index, element ) {
-					valorTotal2 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+					valorTotal2 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
 				  });
 				
 				calcularTamanhoEtapaEPrecoColuna2(coluna2.find("div.card-kanban").size(),valorTotal2)
@@ -238,7 +220,7 @@
 				var valorTotal3 = 0;
 				var coluna3 = $("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna");
 				coluna3.find("div.card-kanban").each(function( index, element ) {
-					valorTotal3 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+					valorTotal3 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
 				  });
 				
 				calcularTamanhoEtapaEPrecoColuna3(coluna3.find("div.card-kanban").size(),valorTotal3)
@@ -247,7 +229,7 @@
 				var valorTotal4 = 0;
 				var coluna4 = $("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna");
 				coluna4.find("div.card-kanban").each(function( index, element ) {
-					valorTotal4 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+					valorTotal4 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
 				  });
 				
 				calcularTamanhoEtapaEPrecoColuna4(coluna4.find("div.card-kanban").size(),valorTotal4)
@@ -256,7 +238,7 @@
 					var valorTotal5 = 0;
 					var coluna5 = $("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna");
 					coluna5.find("div.card-kanban").each(function( index, element ) {
-						valorTotal5 += parseInt($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
+						valorTotal5 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
 					  });
 					
 					calcularTamanhoEtapaEPrecoColuna5(coluna5.find("div.card-kanban").size(),valorTotal5)
