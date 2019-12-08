@@ -1,43 +1,40 @@
 <div class="row mr-0 ml-0">
-	<div class="col-md-2" style="margin-top: 1%;">
-		<label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
-	</div>
-	<div class="col-md-4" style="">
-		<select class="form-control" id="ProdutoSelect" data-placeholder="Selecione um Produto"
-			style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+    <div class="col-md-2" style="margin-top: 1%;">
+        <label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
+    </div>
+    <div class="col-md-4" style="">
+        <select class="form-control" id="ProdutoSelect" data-placeholder="Selecione um Produto" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
 			<option value="-1">Selecione um Produto</option>
 			<option th:each="produto : ${produtoLista}" th:if="${produto.status.equals('1')}" th:value="${produto.id}"
 				th:text="${produto.descricao}" />
 		</select>
 
-	</div>
-	<div class="col-md-2" style="margin-top: 1%;">
-		<label for="exampleFormControlTextarea6" class="float-right">Oferta:</label>
-	</div>
-	<div class="col-md-4" style="">
-		<select class="form-control" id="OfertaSelect" data-placeholder="Selecione uma Oferta"
-			style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+    </div>
+    <div class="col-md-2" style="margin-top: 1%;">
+        <label for="exampleFormControlTextarea6" class="float-right">Oferta:</label>
+    </div>
+    <div class="col-md-4" style="">
+        <select class="form-control" id="OfertaSelect" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
 			<option value="-1">Selecione uma Oferta</option>
 			<!-- <option th:each="oferta : ${ofertaLista}" th:if="${oferta.status.equals('1')}" th:value="${oferta.id}" th:text="${oferta.descricao}" /> -->
 		</select>
 
-	</div>
+    </div>
 </div>
 
 <meta charset="UTF-8">
 <div class="kanban-dragdrop ui-sortable d-flex" id="kt_sortable_portlets">
 
-	<div class="col-md-2 col-lg-2 coluna" th:each="etapaInformacoes : ${listaEtapas}"
-		th:if="${etapaInformacoes.status.equals('1')}">
+    <div class="col-md-2 col-lg-2 coluna" th:each="etapaInformacoes : ${listaEtapas}" th:if="${etapaInformacoes.status.equals('1')}">
 
-		<div class="header-coluna">
-			<div class="row">
-				<input type="hidden" id="idEtapa" name="IdEtapa" th:value="${etapaInformacoes.id}"></input>
-				<h6 class="col-md-12 text-center" th:text="${etapaInformacoes.descricao}"></h6>
-			</div>
-			<div class="row">
-				<h6 class="col-md-5">
-					<span id="qtd-negocios">0</spam>&nbsp;Negócios
+        <div class="header-coluna">
+            <div class="row">
+                <input type="hidden" id="idEtapa" name="IdEtapa" th:value="${etapaInformacoes.id}"></input>
+                <h6 class="col-md-12 text-center" th:text="${etapaInformacoes.descricao}"></h6>
+            </div>
+            <div class="row">
+                <h6 class="col-md-5">
+                    <span id="qtd-negocios">0</spam>&nbsp;Negócios
 				</h6>
 				<h6 class="col-md-2">
 					<span id="espaco"> -> </spam>
@@ -63,10 +60,21 @@
 		tornarCardDroppavel();
 		atualizarValoresKanban();
 
-		// $(".card-kanban").click(function (e) {
-		// 	$(this)
+		function ativarCliqueNoCard() {
+			console.log("testandos..")
+			
+			$(".card-kanban").click(function (e) { 
+	
+				var idCliente = $(this).find("div > div.col-md-8.mt-2 > #idCliente").val();
+				var idOferta = $("#ProdutoSelect").find("option:selected").val();
+				localStorage.setItem("idCliente",idCliente);
+				localStorage.setItem("idOferta",idOferta);
+				$("#central").load(dominio + "/cliente/detalheClienteOferta/" + idCliente);
+				$("#navegacaoTitulo > span").text("Cliente Oferta: Detalhamento");
+			});
+		}
 
-		// });
+
 
 
 		$("#ProdutoSelect").change(function () {
@@ -95,6 +103,12 @@
 		$("#OfertaSelect").change(function () {
 			console.log("teste");
 			var ofertaId = $(this).find("option:selected").val();
+			abrirKanban(ofertaId);
+
+
+		});
+
+		function abrirKanban(ofertaId) {
 			var responseAjax = null;
 			$.ajax({
 				type: "GET",
@@ -106,16 +120,26 @@
 					popularKanban(responseAjax);
 				},
 				error: function (request, status, error) {
-					/* $("#OfertaSelect").children().remove();
-					$("#OfertaSelect").append('<option value="-1">Sem dados a listar</option>'); */
+					Swal.fire({
+					icon: 'warning',
+					title: 'Oops...',
+					text: 'Sem dados a Listar!'					
+					})
 				}
 			});
-
-
-		});
+			
+		}
 
 		function popularKanban(reponseDoAjax) {
 			var listaDeColunas = $("#kt_sortable_portlets > div");
+
+			if(reponseDoAjax.length === 0){
+				Swal.fire({
+					icon: 'warning',
+					title: 'Oops...',
+					text: 'Sem dados a Listar!'					
+				})
+			}
 
 			$(listaDeColunas).each(function () {
 				var droppable = $(this);
@@ -152,6 +176,7 @@
 			tornarCardDraggavel();
 			tornarCardDroppavel();
 			atualizarValoresKanban();
+			ativarCliqueNoCard();
 		}
 
 		var tamanhoEtapas = $("#kt_sortable_portlets > div").size();
@@ -201,45 +226,6 @@
 			})
 		}
 
-
-
-		// $("#kt_sortable_portlets > div:nth-child(1)").droppable({
-		// 		drop: function (event, ui) {
-		// 			$("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
-		// 			atualizarValoresKanban()
-		// 		}
-
-		// 	});
-		// $("#kt_sortable_portlets > div:nth-child(2)").droppable({
-		// 	drop: function (event, ui) {
-		// 		$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
-		// 		atualizarValoresKanban()
-		// 	}
-
-		// });
-		// $("#kt_sortable_portlets > div:nth-child(3)").droppable({
-		// 	drop: function (event, ui) {
-		// 		$("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
-		// 		atualizarValoresKanban()
-		// 	}
-
-		// });
-		// $("#kt_sortable_portlets > div:nth-child(4)").droppable({
-		// 	drop: function (event, ui) {
-		// 		$("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
-		// 		atualizarValoresKanban()
-		// 	}
-
-		// });
-		// $("#kt_sortable_portlets > div:nth-child(5)").droppable({
-		// 	drop: function (event, ui) {
-		// 		$("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
-		// 		atualizarValoresKanban()
-		// 	}
-
-		// });
-
-
 		function tornarCardDraggavel() {
 			$(".card-kanban").css("z-index", "0");
 			$(".card-kanban").draggable({
@@ -269,78 +255,7 @@
 				droppable3.find("div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
 
 			})
-		}
-
-		// /*=====[Coluna1]*/
-		// var valorTotal1 = 0;
-		// var coluna1 = $("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna");
-		// coluna1.find("div.card-kanban").each(function (index, element) {
-		// 	valorTotal1 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
-		// });
-
-		// calcularTamanhoEtapaEPrecoColuna1(coluna1.find("div.card-kanban").size(), valorTotal1)
-
-		// /*=====[Coluna2]*/
-		// var valorTotal2 = 0;
-		// var coluna2 = $("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna");
-		// coluna2.find("div.card-kanban").each(function (index, element) {
-		// 	valorTotal2 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
-		// });
-
-		// calcularTamanhoEtapaEPrecoColuna2(coluna2.find("div.card-kanban").size(), valorTotal2)
-
-		// /*=====[Coluna3]*/
-		// var valorTotal3 = 0;
-		// var coluna3 = $("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna");
-		// coluna3.find("div.card-kanban").each(function (index, element) {
-		// 	valorTotal3 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
-		// });
-
-		// calcularTamanhoEtapaEPrecoColuna3(coluna3.find("div.card-kanban").size(), valorTotal3)
-
-		// /*=====[Coluna4]*/
-		// var valorTotal4 = 0;
-		// var coluna4 = $("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna");
-		// coluna4.find("div.card-kanban").each(function (index, element) {
-		// 	valorTotal4 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
-		// });
-
-		// calcularTamanhoEtapaEPrecoColuna4(coluna4.find("div.card-kanban").size(), valorTotal4)
-
-		// /*=====[Coluna5]*/
-		// var valorTotal5 = 0;
-		// var coluna5 = $("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna");
-		// coluna5.find("div.card-kanban").each(function (index, element) {
-		// 	valorTotal5 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
-		// });
-
-		// calcularTamanhoEtapaEPrecoColuna5(coluna5.find("div.card-kanban").size(), valorTotal5)
-
-		//}
-
-		/*
-				function calcularTamanhoEtapaEPrecoColuna1(qtdCards, valorCards) {
-					$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-					$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-				}
-				function calcularTamanhoEtapaEPrecoColuna2(qtdCards, valorCards) {
-					$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-					$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-				}
-				function calcularTamanhoEtapaEPrecoColuna3(qtdCards, valorCards) {
-					$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-					$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-				}
-				function calcularTamanhoEtapaEPrecoColuna4(qtdCards, valorCards) {
-					$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-					$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-				}
-				function calcularTamanhoEtapaEPrecoColuna5(qtdCards, valorCards) {
-					$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-					$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-				}
-		*/
-
+		}		
 
 	});
 </script>

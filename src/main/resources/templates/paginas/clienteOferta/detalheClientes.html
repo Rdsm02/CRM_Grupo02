@@ -23,19 +23,16 @@
 
             <div class="kt-portlet__body kt-portlet__body-form">
 
-                <form action="" method="" class="form-cliente detalhamentoCliente">
-                    <input type="hidden" id="idCliente" name="idCliente" value="">
+                <form action="" method="" class="form-cliente detalhamentoCliente" th:object="${cliente}">
+                    <input type="hidden" id="idCliente" name="idCliente" th:value="*{id}">
                     <label for="cpf" class="formDetalhamentoClientes">CPF</label>
-                    <input class="form-control" type="text" name="cpf" id="cpf">
+                    <input class="form-control" type="text" name="cpf" id="cpf" th:field="*{cpf}">
 
                     <label for="nome" class="formDetalhamentoClientes">Nome</label>
-                    <input class="form-control" type="text" name="nome" id="nome">
+                    <input class="form-control" type="text" name="nome" id="nome" th:field="*{nome}">
 
                     <label for="whats" class="formDetalhamentoClientes">SobreNome</label>
-                    <input class="form-control" type="text" name="sobreNome" id="sobreNome">
-
-                    <!-- <label for="email" class="formDetalhamentoClientes">E-mail</label> 
-					<input class="form-control" type="email" name="email" id="email"> -->
+                    <input class="form-control" type="text" name="sobreNome" id="sobreNome" th:field="*{sobrenome}">
 
                     <button id="atribuirOferta" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="modal" data-target="#modalExemplo" data-placement="right" data-original-title="Atribuir Oferta" onclick="atualizarModalAtribuicaoDeOferta()">
 						<i class="fa fa-plus"></i>
@@ -60,7 +57,10 @@
 
             <div class="body-box-negocios kt-portlet__body kt-portlet__body--fluid kt-portlet__body--fit">
                 <!-- Conteúdo aqui -->
-
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="oferta : ${ofertas}" th:text="*{oferta.produtoDescricao + ' | ' + oferta.ofertaDescricao}"></li>
+                    <!-- th:attr="text=*{oferta.produtoDescricao + ' | ' + oferta.ofertaDescricao}" -->
+                </ul>
             </div>
 
         </div>
@@ -306,14 +306,14 @@
 
         $.ajax({
             type: "POST",
-            url: dominio + "/acaoClienteREST/cadastrarAcaoCliente",
+            url: dominio + "/acaoClienteOfertaREST/cadastrarAcaoClienteOferta",
             data: acaoClienteJSON,
             contentType: "application/json",
             dataType: "JSON",
             async: false,
             success: function(response) {
                 console.log("ok");
-                carregarDetalheCliente(idCliente);
+                $("#central").load(dominio + "/cliente/detalheClienteOferta/" + idCliente);
             }
         });
 

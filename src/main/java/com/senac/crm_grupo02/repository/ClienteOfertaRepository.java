@@ -16,6 +16,15 @@ import com.senac.crm_grupo02.domain.ClienteOfertaId;
 public interface ClienteOfertaRepository extends JpaRepository<ClienteOferta, ClienteOfertaId>{
 	
 	@Query(value = 
+			"SELECT  P.PRODUTO_DESCRICAO, O.OFERTA_DESCRICAO, O.OFERTA_PRECO, CO.CLIENTE_OFERTA_PRECO  FROM CLIENTE_OFERTA AS CO "
+			+ "JOIN OFERTA AS O ON " 
+			+ "CO.OFERTA_ID = O.OFERTA_ID "			
+			+ "JOIN PRODUTO AS P ON "			
+			+ "CO.PRODUTO_ID = P.PRODUTO_ID "			
+			+ "WHERE CO.CLIENTE_ID = :clienteId", nativeQuery = true)
+	List<List<Object>> buscarNegociosporClienteId(@Param("clienteId") Integer clienteId);
+	
+	@Query(value = 
 			"SELECT CO.FUNIL_ETAPA_ID, C.CLIENTE_NOME, CO.CLIENTE_OFERTA_PRECO, COUNT(ACAO_CLIENTE_ID), C.CLIENTE_ID "
 			+ "FROM CLIENTE_OFERTA AS CO " 
 			+ "JOIN CLIENTE AS C ON "

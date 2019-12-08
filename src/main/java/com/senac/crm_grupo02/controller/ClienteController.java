@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.senac.crm_grupo02.domain.Cliente;
+import com.senac.crm_grupo02.service.AcaoClienteOfertaService;
 import com.senac.crm_grupo02.service.AcaoClienteService;
 import com.senac.crm_grupo02.service.AcaoService;
+import com.senac.crm_grupo02.service.ClienteOfertaService;
 import com.senac.crm_grupo02.service.ClienteService;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -26,12 +28,29 @@ public class ClienteController {
 	private AcaoService servicoAcao;
 	
 	@Autowired
-	private AcaoClienteService servicoAcaoCliente;
+	private AcaoClienteService servicoAcaoCliente;	
+	
+	@Autowired
+	private AcaoClienteOfertaService servicoClienteOferta;
+	
+	@Autowired
+	private ClienteOfertaService servicoClienteOferta2;
+	
 	
 	@GetMapping("/listagemClientes")
 	public ModelAndView listagemCliente() {
 		ModelAndView mv = new ModelAndView("paginas/cliente/listagemClientes");
 		mv.addObject("clientes", servicoCliente.searchAll());
+		return mv;
+	}
+	
+	@GetMapping("/detalheClienteOferta/{id}")
+	public ModelAndView detalheClienteOferta(@PathVariable("id") Integer idCliente) throws ObjectNotFoundException {
+		ModelAndView mv = new ModelAndView("paginas/clienteOferta/detalheClientes");
+		mv.addObject("cliente", servicoCliente.search(idCliente));
+		mv.addObject("ofertas", servicoClienteOferta2.buscarNegociosporClienteId(idCliente));
+		mv.addObject("atividadeLista", servicoAcao.searchAll());
+		mv.addObject("listaAcaoCliente", servicoClienteOferta.listarHistoricoClienteOferta(idCliente));
 		return mv;
 	}
 	

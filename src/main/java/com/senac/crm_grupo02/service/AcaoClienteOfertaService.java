@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.senac.crm_grupo02.domain.AcaoCliente;
 import com.senac.crm_grupo02.domain.AcaoClienteOferta;
 import com.senac.crm_grupo02.repository.AcaoClienteOfertaRepository;
 
@@ -16,6 +17,15 @@ public class AcaoClienteOfertaService {
 	
 	@Autowired
 	AcaoClienteOfertaRepository repoAcaoClienteOferta;
+	
+	@Autowired
+	ClienteService servicoCliente;
+	
+public List<AcaoClienteOferta>listarHistoricoClienteOferta(Integer idCliente) throws ObjectNotFoundException {
+		
+		return repoAcaoClienteOferta.findByClienteId(servicoCliente.search(idCliente));
+		
+	}
 	
 	public AcaoClienteOferta search(Integer id) throws ObjectNotFoundException{
 		Optional<AcaoClienteOferta> acaoClienteOferta = repoAcaoClienteOferta.findById(id);

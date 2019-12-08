@@ -1,14 +1,15 @@
 package com.senac.crm_grupo02.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.senac.crm_grupo02.domain.ClienteOferta;
 import com.senac.crm_grupo02.domain.ClienteOfertaId;
+import com.senac.crm_grupo02.domain.NegocioClienteRetornoConsultaNativeQuery;
 import com.senac.crm_grupo02.repository.ClienteOfertaRepository;
 
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -18,6 +19,26 @@ public class ClienteOfertaService {
 
 	@Autowired
 	ClienteOfertaRepository repoClienteOferta;
+	
+	public List<NegocioClienteRetornoConsultaNativeQuery> buscarNegociosporClienteId(Integer clienteId) {
+		List<List<Object>> listaNegocioCliente = new ArrayList<List<Object>>();
+		listaNegocioCliente = repoClienteOferta.buscarNegociosporClienteId(clienteId);
+		
+		List<NegocioClienteRetornoConsultaNativeQuery> listaNegocioClienteNativeQuery = new ArrayList<>();
+		
+		for (List<Object> listaClienteOfertaItem: listaNegocioCliente) {	
+			NegocioClienteRetornoConsultaNativeQuery ncrcnq = new NegocioClienteRetornoConsultaNativeQuery();
+			
+			ncrcnq.setProdutoDescricao(listaClienteOfertaItem.get(0).toString());
+			ncrcnq.setOfertaDescricao(listaClienteOfertaItem.get(1).toString());
+			ncrcnq.setOfertaPreco(Double.parseDouble(listaClienteOfertaItem.get(2).toString()));
+			ncrcnq.setClienteOfertaPreco(Double.parseDouble(listaClienteOfertaItem.get(3).toString()));
+			
+			listaNegocioClienteNativeQuery.add(ncrcnq);
+										
+		}	
+		return listaNegocioClienteNativeQuery;
+	}
 	
 	public void atualizarEtapaDoClienteOferta(Integer ofertaId, Integer clienteId, Integer funil_etapa_id) {
 		repoClienteOferta.atualizarEtapaDoClienteOferta(ofertaId, clienteId, funil_etapa_id);
