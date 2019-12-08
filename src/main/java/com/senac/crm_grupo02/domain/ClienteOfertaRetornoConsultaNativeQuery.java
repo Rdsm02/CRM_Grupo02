@@ -6,6 +6,7 @@ public class ClienteOfertaRetornoConsultaNativeQuery implements Serializable{
 
 	private static final long serialVersionUID = 5381191299174748159L;
 
+	private Integer idCliente;
 	private int funilEtapa;
 	private String clienteNome;
 	private double clienteOfertaPreco;
@@ -34,6 +35,12 @@ public class ClienteOfertaRetornoConsultaNativeQuery implements Serializable{
 	}
 	public void setQtdAcoesClienteOferta(int qtdAcoesClienteOferta) {
 		this.qtdAcoesClienteOferta = qtdAcoesClienteOferta;
+	}
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 	
 }

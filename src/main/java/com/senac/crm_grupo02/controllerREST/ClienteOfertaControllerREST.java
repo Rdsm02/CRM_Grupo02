@@ -64,6 +64,18 @@ public class ClienteOfertaControllerREST {
 
     }
 	
+	@ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value ="/atualizarEtapaDoClienteOferta", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void atualizarEtapaDoClienteOferta(@RequestBody ClienteOferta clienteOferta) throws ObjectNotFoundException{
+
+		Integer c1 = clienteOferta.getClienteId().getId().intValue();
+		Integer o1 = clienteOferta.getOfertaId().getId();
+		Integer e1 = clienteOferta.getFunilEtapa().getId();
+
+		servicoClienteOferta.atualizarEtapaDoClienteOferta(o1, c1, e1);
+
+    }
+	
 	@RequestMapping(value = "/buscarClienteOfertaPorOfertaId", method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteOfertaRetornoConsultaNativeQuery>> buscarClienteOfertaPorOfertaId(@RequestParam("ofertaId") int ofertaId) throws ObjectNotFoundException {
 		//CategoriasClienteRetornoConsultaNativeQuery ccrcnq = new CategoriasClienteRetornoConsultaNativeQuery();
@@ -80,7 +92,8 @@ public class ClienteOfertaControllerREST {
 			corcnq.setFunilEtapa(Integer.parseInt(listaClienteOfertaItem.get(0).toString()));
 			corcnq.setClienteNome(listaClienteOfertaItem.get(1).toString());
 			corcnq.setClienteOfertaPreco(Double.parseDouble(listaClienteOfertaItem.get(2).toString()));
-			corcnq.setQtdAcoesClienteOferta(Integer.parseInt(listaClienteOfertaItem.get(3).toString()));			
+			corcnq.setQtdAcoesClienteOferta(Integer.parseInt(listaClienteOfertaItem.get(3).toString()));
+			corcnq.setIdCliente(Integer.parseInt(listaClienteOfertaItem.get(4).toString()));
 			
 			clienteOfertahas.put(cont, corcnq);	
 			cont++;							

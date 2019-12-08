@@ -3,9 +3,11 @@
 		<label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
 	</div>
 	<div class="col-md-4" style="">
-		<select class="form-control" id="ProdutoSelect" data-placeholder="Selecione um Produto" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+		<select class="form-control" id="ProdutoSelect" data-placeholder="Selecione um Produto"
+			style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
 			<option value="-1">Selecione um Produto</option>
-			<option th:each="produto : ${produtoLista}" th:if="${produto.status.equals('1')}" th:value="${produto.id}" th:text="${produto.descricao}" />
+			<option th:each="produto : ${produtoLista}" th:if="${produto.status.equals('1')}" th:value="${produto.id}"
+				th:text="${produto.descricao}" />
 		</select>
 
 	</div>
@@ -13,7 +15,8 @@
 		<label for="exampleFormControlTextarea6" class="float-right">Oferta:</label>
 	</div>
 	<div class="col-md-4" style="">
-		<select class="form-control" id="OfertaSelect" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+		<select class="form-control" id="OfertaSelect" data-placeholder="Selecione uma Oferta"
+			style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
 			<option value="-1">Selecione uma Oferta</option>
 			<!-- <option th:each="oferta : ${ofertaLista}" th:if="${oferta.status.equals('1')}" th:value="${oferta.id}" th:text="${oferta.descricao}" /> -->
 		</select>
@@ -24,7 +27,8 @@
 <meta charset="UTF-8">
 <div class="kanban-dragdrop ui-sortable d-flex" id="kt_sortable_portlets">
 
-	<div class="col-md-2 col-lg-2 coluna" th:each="etapaInformacoes : ${listaEtapas}" th:if="${etapaInformacoes.status.equals('1')}">
+	<div class="col-md-2 col-lg-2 coluna" th:each="etapaInformacoes : ${listaEtapas}"
+		th:if="${etapaInformacoes.status.equals('1')}">
 
 		<div class="header-coluna">
 			<div class="row">
@@ -33,7 +37,7 @@
 			</div>
 			<div class="row">
 				<h6 class="col-md-5">
-					<span id="qtd-negocios">0</spam>&nbsp;Negócios 
+					<span id="qtd-negocios">0</spam>&nbsp;Negócios
 				</h6>
 				<h6 class="col-md-2">
 					<span id="espaco"> -> </spam>
@@ -46,7 +50,7 @@
 		<div class="content-coluna">
 
 			<!-- CARD -->
-			
+
 		</div>
 	</div>
 </div>
@@ -54,220 +58,289 @@
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
-		$( document ).ready(function() {
+	$(document).ready(function () {
+		tornarCardDraggavel();
+		tornarCardDroppavel();
+		atualizarValoresKanban();
+
+		// $(".card-kanban").click(function (e) {
+		// 	$(this)
+
+		// });
+
+
+		$("#ProdutoSelect").change(function () {
+			console.log($(this).find("option:selected").val());
+			$.ajax({
+				type: "GET",
+				url: dominio + "/ofertaREST/obterOfertaPorProduto?produtoId=" + $(this).find("option:selected").val(),
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					listaDeOfertas = response;
+					$("#OfertaSelect").children().remove();
+					$("#OfertaSelect").append('<option value="-1">Selecione uma Oferta</option>');
+				},
+				error: function (request, status, error) {
+					$("#OfertaSelect").children().remove();
+					$("#OfertaSelect").append('<option value="-1">Sem dados a listar</option>');
+				}
+			});
+			$.each(listaDeOfertas, function (index, value) {
+				$("#OfertaSelect").append('<option value="' + value.id + '">' + value.descricao + '</option>');
+			});
+		});
+
+
+		$("#OfertaSelect").change(function () {
+			console.log("teste");
+			var ofertaId = $(this).find("option:selected").val();
+			var responseAjax = null;
+			$.ajax({
+				type: "GET",
+				url: dominio + "/clienteClienteOfertaREST/buscarClienteOfertaPorOfertaId?ofertaId=" + ofertaId,
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					responseAjax = response;
+					popularKanban(responseAjax);
+				},
+				error: function (request, status, error) {
+					/* $("#OfertaSelect").children().remove();
+					$("#OfertaSelect").append('<option value="-1">Sem dados a listar</option>'); */
+				}
+			});
+
+
+		});
+
+		function popularKanban(reponseDoAjax) {
+			var listaDeColunas = $("#kt_sortable_portlets > div");
+
+			$(listaDeColunas).each(function () {
+				var droppable = $(this);
+				var idEtapa = droppable.find('.header-coluna > div:nth-child(1) > input').val();
+				droppable.find('div.content-coluna').children().remove();
+
+				$.each(reponseDoAjax, function (index, value) {
+					if (value.funilEtapa === parseInt(idEtapa)) {
+
+						droppable.find('div.content-coluna').append('<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">'
+
+							+ '<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">'
+							+ '	<div class="col-md-4 mt-2">'
+							+ '		<i class="la fa fa-suitcase"></i>'
+							+ '	</div>'
+							+ '	<div class="col-md-8 mt-2">'
+							+ '		<input type="hidden" id="idCliente" name="idCliente" value="' + value.idCliente.toString() + '"> '
+							+ '		<p class="text-left font-weight-bold mb-2">' + value.clienteNome + '</p>'
+							+ '		<p class="text-left">R$ ' + value.clienteOfertaPreco + '</p>'
+							+ '	</div>'
+							+ '	<div class="col-md-4 mb-2">'
+							+ '		<i class="la flaticon2-user"></i>'
+							+ '	</div>'
+							+ '	<div class="col-md-8 mt-3">'
+							+ '		<p class="text-left font-weight-bold mb-0">' + value.qtdAcoesClienteOferta + ' Atividades</p>'
+							+ '	</div>'
+							+ ' </div>'
+							+ '</div>');
+
+					}
+				});
+
+			});
 			tornarCardDraggavel();
 			tornarCardDroppavel();
 			atualizarValoresKanban();
-			
-			
-			$("#ProdutoSelect").change(function(){
-				console.log($(this).find("option:selected").val());
-				$.ajax({
-					type: "GET",
-					url: dominio + "/ofertaREST/obterOfertaPorProduto?produtoId=" + $(this).find("option:selected").val(),
-					dataType: "JSON",
-					async: false,
-					success: function (response) {
-						listaDeOfertas = response;	
-						$("#OfertaSelect").children().remove();
-						$("#OfertaSelect").append('<option value="-1">Selecione uma Oferta</option>');
-						},
-						error: function(request, status, error){
-							$("#OfertaSelect").children().remove();
-							$("#OfertaSelect").append('<option value="-1">Sem dados a listar</option>');
-						}
-					});
-				$.each(listaDeOfertas, function(index, value) {
-					$("#OfertaSelect").append('<option value="'+value.id+'">'+value.descricao+'</option>');
-				});		
+		}
+
+		var tamanhoEtapas = $("#kt_sortable_portlets > div").size();
+		var teste = "1";
+
+		function tornarCardDroppavel() {
+
+			var listaDeColunas2 = $("#kt_sortable_portlets > div");
+
+			$(listaDeColunas2).each(function () {
+				var droppable2 = $(this);
+				droppable2.droppable({
+					drop: function (event, ui) {
+						droppable2.find("div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
+						var idEtapa = droppable2.find('.header-coluna > div:nth-child(1) > input').val();
+						var idClienteOferta =  $(this).find("div > div.col-md-8.mt-2 > #idCliente").val();
+						var ofertaId = $("#ProdutoSelect").find("option:selected").val();
+						
+						var objeto = new Object();
+						objeto.clienteId = new Object();
+						objeto.ofertaId = new Object();
+						objeto.funilEtapa = new Object();
+						objeto.clienteId.id = idClienteOferta;
+						objeto.ofertaId.id = ofertaId;
+						objeto.funilEtapa.id = idEtapa;
+
+						var ClienteOfertaAtualizarEtapaJSON = JSON.stringify(objeto);
+
+						$.ajax({
+							type: "POST",
+							url: dominio + "/clienteClienteOfertaREST/atualizarEtapaDoClienteOferta",
+							data: ClienteOfertaAtualizarEtapaJSON,
+							contentType: "application/json",
+							dataType: "JSON",
+							async: false,
+							success: function (response) {
+								console.log("ok");
+							},
+							error: function (request, status, error) {
+								console.log(error);
+
+							}
+						});
+						atualizarValoresKanban();
+					}
+				})
+			})
+		}
+
+
+
+		// $("#kt_sortable_portlets > div:nth-child(1)").droppable({
+		// 		drop: function (event, ui) {
+		// 			$("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
+		// 			atualizarValoresKanban()
+		// 		}
+
+		// 	});
+		// $("#kt_sortable_portlets > div:nth-child(2)").droppable({
+		// 	drop: function (event, ui) {
+		// 		$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
+		// 		atualizarValoresKanban()
+		// 	}
+
+		// });
+		// $("#kt_sortable_portlets > div:nth-child(3)").droppable({
+		// 	drop: function (event, ui) {
+		// 		$("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
+		// 		atualizarValoresKanban()
+		// 	}
+
+		// });
+		// $("#kt_sortable_portlets > div:nth-child(4)").droppable({
+		// 	drop: function (event, ui) {
+		// 		$("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
+		// 		atualizarValoresKanban()
+		// 	}
+
+		// });
+		// $("#kt_sortable_portlets > div:nth-child(5)").droppable({
+		// 	drop: function (event, ui) {
+		// 		$("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna").append(ui.draggable.css({ left: "0", top: "10px" }));
+		// 		atualizarValoresKanban()
+		// 	}
+
+		// });
+
+
+		function tornarCardDraggavel() {
+			$(".card-kanban").css("z-index", "0");
+			$(".card-kanban").draggable({
+				start: function (event, ui) {
+					$(this).css("z-index", "20");
+				}
 			});
-			
-			
-			$("#OfertaSelect").change(function(){
-				console.log("teste");
-				var ofertaId = $(this).find("option:selected").val();
-				var responseAjax = null;
-				$.ajax({
-					type: "GET",
-					url: dominio + "/clienteClienteOfertaREST/buscarClienteOfertaPorOfertaId?ofertaId=" + ofertaId,
-					dataType: "JSON",
-					async: false,
-					success: function (response) {
-						responseAjax = response;
-						popularKanban(responseAjax);
-						},
-						error: function(request, status, error){
-							/* $("#OfertaSelect").children().remove();
-							$("#OfertaSelect").append('<option value="-1">Sem dados a listar</option>'); */
-						}
-					});
-				
+		}
 
-			});
-			
-			function popularKanban(reponseDoAjax){
-				var listaDeColunas = $("#kt_sortable_portlets > div");
 
-				$(listaDeColunas).each(function() {
-				    var droppable = $(this);
-					var idEtapa = droppable.find('.header-coluna > div:nth-child(1) > input').val();
-					droppable.find('div.content-coluna').children().remove();
-				    
-				    $.each(reponseDoAjax, function(index, value) {
-				    	if(value.funilEtapa === parseInt(idEtapa)){
-				    		
-				    		droppable.find('div.content-coluna').append('<div class="kt-portlet kt-portlet--tabs kt-portlet--sortable card-kanban" style="border-radius: 10px;">'
+		function atualizarValoresKanban() {
 
-							+ '<div class="row" style="margin: 0px; border-radius: 10px; padding: 0px; background-color: #838849;">'
-							+'	<div class="col-md-4 mt-2">'
-							+'		<i class="la fa fa-suitcase"></i>'
-							+'	</div>'
-							+'	<div class="col-md-8 mt-2">'
-							+'		<p class="text-left font-weight-bold mb-2">'+value.clienteNome+'</p>'
-							+'		<p class="text-left">R$ '+value.clienteOfertaPreco+'</p>'
-							+'	</div>'
-							+'	<div class="col-md-4 mb-2">'
-							+'		<i class="la flaticon2-user"></i>'
-							+'	</div>'
-							+'	<div class="col-md-8 mt-3">'
-							+'		<p class="text-left font-weight-bold mb-0">'+value.qtdAcoesClienteOferta+' Atividades</p>'
-							+'	</div>'
-							+' </div>'
-							+'</div>');
-				    		
-				    	}
-					});	
-				    
-				});
-				tornarCardDraggavel();
-				tornarCardDroppavel();
-				atualizarValoresKanban();
-			}
-			
-			var tamanhoEtapas = $("#kt_sortable_portlets > div").size();
-			var teste = "1";
-			
-			function tornarCardDroppavel(){
-				$("#kt_sortable_portlets > div:nth-child(1)").droppable({
-					drop: function (event, ui){
-						$("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-						atualizarValoresKanban()
-					}
+			var listaDeColunas3 = $("#kt_sortable_portlets > div");
 
-					});
-				$("#kt_sortable_portlets > div:nth-child(2)").droppable({
-					drop: function (event, ui){
-						$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-						atualizarValoresKanban()
-					}
-
-					});
-				$("#kt_sortable_portlets > div:nth-child(3)").droppable({
-					drop: function (event, ui){
-						$("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-						atualizarValoresKanban()
-					}
-
-					});
-				$("#kt_sortable_portlets > div:nth-child(4)").droppable({
-					drop: function (event, ui){
-						$("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-						atualizarValoresKanban()
-					}
-
-					});
-				$("#kt_sortable_portlets > div:nth-child(5)").droppable({
-					drop: function (event, ui){
-						$("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna").append(ui.draggable.css({left: "0", top: "10px"}));
-						atualizarValoresKanban()
-					}
-
-					});	
-			}	
-			
-			
-			function tornarCardDraggavel(){
-				$( ".card-kanban" ).css("z-index", "0");
-				$( ".card-kanban" ).draggable({
-					start: function(event, ui) {
-						$(this).css("z-index", "20");
-					}				
-				});
-			}
-			
-			
-			function atualizarValoresKanban(){
-				
-				/*=====[Coluna1]*/
+			$(listaDeColunas3).each(function () {
+				var droppable3 = $(this);
+				var colunaAtual = droppable3.find("div.content-coluna");
 				var valorTotal1 = 0;
-				var coluna1= $("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna");
-				coluna1.find("div.card-kanban").each(function( index, element ) {
-					valorTotal1 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
-				  });
-				
-				calcularTamanhoEtapaEPrecoColuna1(coluna1.find("div.card-kanban").size(),valorTotal1)
-				
-				/*=====[Coluna2]*/
-				var valorTotal2 = 0;
-				var coluna2 =$("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna");
-				coluna2.find("div.card-kanban").each(function( index, element ) {
-					valorTotal2 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
-				  });
-				
-				calcularTamanhoEtapaEPrecoColuna2(coluna2.find("div.card-kanban").size(),valorTotal2)
-					
-				/*=====[Coluna3]*/					
-				var valorTotal3 = 0;
-				var coluna3 = $("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna");
-				coluna3.find("div.card-kanban").each(function( index, element ) {
-					valorTotal3 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
-				  });
-				
-				calcularTamanhoEtapaEPrecoColuna3(coluna3.find("div.card-kanban").size(),valorTotal3)
-					
-				/*=====[Coluna4]*/					
-				var valorTotal4 = 0;
-				var coluna4 = $("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna");
-				coluna4.find("div.card-kanban").each(function( index, element ) {
-					valorTotal4 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
-				  });
-				
-				calcularTamanhoEtapaEPrecoColuna4(coluna4.find("div.card-kanban").size(),valorTotal4)
-				
-				/*=====[Coluna5]*/					
-					var valorTotal5 = 0;
-					var coluna5 = $("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna");
-					coluna5.find("div.card-kanban").each(function( index, element ) {
-						valorTotal5 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3,20));
-					  });
-					
-					calcularTamanhoEtapaEPrecoColuna5(coluna5.find("div.card-kanban").size(),valorTotal5)
-				
-			}
-			
+				var cards = colunaAtual.find("div.card-kanban");
+				cards.each(function () {
+					valorTotal1 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(3)").text().substring(3, 20));
+				});
+				var qtdCards = colunaAtual.find("div.card-kanban").size();
+				var valorCards = valorTotal1;
 
-			function calcularTamanhoEtapaEPrecoColuna1(qtdCards, valorCards){
-				$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-				$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-			}
-			function calcularTamanhoEtapaEPrecoColuna2(qtdCards, valorCards){
-				$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-				$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-			}
-			function calcularTamanhoEtapaEPrecoColuna3(qtdCards, valorCards){
-				$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-				$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-			}
-			function calcularTamanhoEtapaEPrecoColuna4(qtdCards, valorCards){
-				$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-				$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-			}
-			function calcularTamanhoEtapaEPrecoColuna5(qtdCards, valorCards){
-				$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
-				$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
-			}
-			
-			
-		
-		});
-		</script>
+				droppable3.find("div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+				droppable3.find("div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+
+			})
+		}
+
+		// /*=====[Coluna1]*/
+		// var valorTotal1 = 0;
+		// var coluna1 = $("#kt_sortable_portlets > div:nth-child(1) > div.content-coluna");
+		// coluna1.find("div.card-kanban").each(function (index, element) {
+		// 	valorTotal1 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
+		// });
+
+		// calcularTamanhoEtapaEPrecoColuna1(coluna1.find("div.card-kanban").size(), valorTotal1)
+
+		// /*=====[Coluna2]*/
+		// var valorTotal2 = 0;
+		// var coluna2 = $("#kt_sortable_portlets > div:nth-child(2) > div.content-coluna");
+		// coluna2.find("div.card-kanban").each(function (index, element) {
+		// 	valorTotal2 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
+		// });
+
+		// calcularTamanhoEtapaEPrecoColuna2(coluna2.find("div.card-kanban").size(), valorTotal2)
+
+		// /*=====[Coluna3]*/
+		// var valorTotal3 = 0;
+		// var coluna3 = $("#kt_sortable_portlets > div:nth-child(3) > div.content-coluna");
+		// coluna3.find("div.card-kanban").each(function (index, element) {
+		// 	valorTotal3 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
+		// });
+
+		// calcularTamanhoEtapaEPrecoColuna3(coluna3.find("div.card-kanban").size(), valorTotal3)
+
+		// /*=====[Coluna4]*/
+		// var valorTotal4 = 0;
+		// var coluna4 = $("#kt_sortable_portlets > div:nth-child(4) > div.content-coluna");
+		// coluna4.find("div.card-kanban").each(function (index, element) {
+		// 	valorTotal4 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
+		// });
+
+		// calcularTamanhoEtapaEPrecoColuna4(coluna4.find("div.card-kanban").size(), valorTotal4)
+
+		// /*=====[Coluna5]*/
+		// var valorTotal5 = 0;
+		// var coluna5 = $("#kt_sortable_portlets > div:nth-child(5) > div.content-coluna");
+		// coluna5.find("div.card-kanban").each(function (index, element) {
+		// 	valorTotal5 += parseFloat($(this).find("div > div.col-md-8.mt-2 > p:nth-child(2)").text().substring(3, 20));
+		// });
+
+		// calcularTamanhoEtapaEPrecoColuna5(coluna5.find("div.card-kanban").size(), valorTotal5)
+
+		//}
+
+		/*
+				function calcularTamanhoEtapaEPrecoColuna1(qtdCards, valorCards) {
+					$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+					$("#kt_sortable_portlets > div:nth-child(1) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+				}
+				function calcularTamanhoEtapaEPrecoColuna2(qtdCards, valorCards) {
+					$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+					$("#kt_sortable_portlets > div:nth-child(2) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+				}
+				function calcularTamanhoEtapaEPrecoColuna3(qtdCards, valorCards) {
+					$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+					$("#kt_sortable_portlets > div:nth-child(3) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+				}
+				function calcularTamanhoEtapaEPrecoColuna4(qtdCards, valorCards) {
+					$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+					$("#kt_sortable_portlets > div:nth-child(4) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+				}
+				function calcularTamanhoEtapaEPrecoColuna5(qtdCards, valorCards) {
+					$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-negocios").text(qtdCards + " Negócios");
+					$("#kt_sortable_portlets > div:nth-child(5) > div.header-coluna").find("#qtd-valor").text("R$ " + valorCards);
+				}
+		*/
+
+
+	});
+</script>
