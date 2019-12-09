@@ -93,13 +93,13 @@ body {
 
 #graficoBarrasEstilo {
     width: 5%;
-    -webkit-animation: graficoBarrasEstilo 2s;
-    animation: graficoBarrasEstilo 2s;
+    /*-webkit-animation: graficoBarrasEstilo 2s;
+    animation: graficoBarrasEstilo 2s;*/
     /*animation-fill-mode: forwards;*/
 }
 
 #graficoBarrasEstilo:after {
-    content: ' 10 ';
+    /*content: ' 10 ';
     position: absolute;
     right: -24px;
     color: black;
@@ -108,7 +108,7 @@ body {
     -webkit-animation: see 2s;
     animation: see 2s;
     animation-delay: .5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards;*/
 }
 
 #graficoBarrasEstilo:before {
@@ -409,7 +409,7 @@ svg .inner {
 }
 
 #circle:after {
-    content: 'Brasil';
+    /*content: 'Brasil';
     position: absolute;
     opacity: 0;
     border-right: 3px solid #F08418;
@@ -425,7 +425,7 @@ svg .inner {
     -webkit-animation: see 2s;
     animation: see 2s;
     animation-delay: 1.5s;
-    animation-fill-mode: forwards;
+    animation-fill-mode: forwards;*/
 }
 
 #pizza:after {
@@ -531,9 +531,9 @@ svg .inner {
 /* Set the initial values for the animation */
 
 .chart[data-percent='75'] .outer {
-    stroke-dashoffset: -100%;
+    /*stroke-dashoffset: -100%;
     -webkit-animation: show75 2s;
-    animation: show75 2s;
+    animation: show75 2s;*/
 }
 
 .chart[data-percent='pizza'] .outer {

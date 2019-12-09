@@ -17,6 +17,10 @@ public class EtapaFunilService {
 	@Autowired
 	EtapaFunilRepository repoEtapaFunil;
 	
+	public Integer buscarQuantidadeClientesNasEtapasporEtapaFunilId(Integer etapaFunilId) {
+		return repoEtapaFunil.buscarQuantidadeClientesNasEtapasporEtapaFunilId(etapaFunilId);
+	}
+	
 	public EtapaFunil search(Integer id) throws ObjectNotFoundException{
 		Optional<EtapaFunil> etapaFunil = repoEtapaFunil.findById(id);
 		return etapaFunil.orElseThrow(() -> new ObjectNotFoundException(

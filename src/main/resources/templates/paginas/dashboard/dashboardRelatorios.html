@@ -18,9 +18,11 @@
 					</svg>
 
                     <figcaption>
-                        <h2>34%</h2>
-                        <p>Refugiados<br> nas <br>Américas</p>
+                        <h2>0%</h2>
+                        <p></p>  
+                        <p>Teste</p>               
                     </figcaption>
+                    <!-- <div style="margin-top: 84%;margin-right: 84%;width: 40%;float: right;">Teste</div> -->
                 </figure>
             </div>
 
@@ -38,7 +40,7 @@
                 <div class="column gringo" id="graficoBarrasEstilo" th:each="ofertaEtapa : ${ofertasPorEtapa}">
                     <div style="margin-left: -160px;padding-top: 1.5%;">
                         <div style="height: 19px;">
-                            <div style="float: right;margin-right: 65px;">Teste</div>
+                            <div style="float: right;margin-right: -45px;">0%</div>
                         </div>
                         <div style="width: 150px;text-align: end;" th:text="${ofertaEtapa.descricao}"></div>
                     </div>
@@ -52,34 +54,96 @@
 
 <script>
 
-$(document).ready(function() {
-	carregarInformacoesGrafico();
-});
-    window.onload = function() {
-    	
-    	carregarInformacoesGrafico();
 
+	$(document).ready(function() {
+		carregarInformacoesGrafico();
+		carregarInformacoesGraficoDeBarras();
+	});
+	window.onload = function() {
 
-        $("#kt_subheader > div > div:nth-child(4) > div > div:nth-child(3)").css('width', '50%');
-    }
-    
-    function carregarInformacoesGrafico(){
-		
+		carregarInformacoesGrafico();
+		carregarInformacoesGraficoDeBarras();
+
+		$("#kt_subheader > div > div:nth-child(4) > div > div:nth-child(3)")
+				.css('width', '50%');
+	}
+
+	function carregarInformacoesGrafico() {
+
 		$.ajax({
-            type: "GET",
-            url: dominio + "/dashboardREST/buscarQuantidadeDeAcoesAtribuidasParaOClientePorAcaoId",
-            async: false,
-            success: function(response) {
-            	console.log(response[0].percentual);
-            	
-            	$("#circle > figcaption > h2").text(response[0].percentual + "%");
-            	$("#circle > figcaption > p").text(response[0].quantidadeDeAcao);
-            	
+					type : "GET",
+					url : dominio
+							+ "/dashboardREST/buscarQuantidadeDeAcoesAtribuidasParaOClientePorAcaoId",
+					async : false,
+					success : function(response) {
+						console.log(response[0].percentual);
 
-            }
-        });
+						$("#circle > figcaption > h2").text(response[0].percentual + "%");
+						$("#circle > figcaption > p:nth-child(2)").text(response[0].quantidadeDeAcao);
+						$("#circle > figcaption > p:nth-child(3)").text(response[0].descricaoAcao);
+
+						var valorFinal = (257 * response[0].percentual) / 100;
+						$("#circle > svg > circle.outer").css('stroke-dashoffset', 257 - valorFinal.toFixed(1) + '%');
+
+					}
+				});
+
+	}
+	
+	function carregarInformacoesGraficoDeBarras(){
 		
-	
-	
+		
+		var colunasGrafico = $("#kt_subheader > div > div:nth-child(4) > div > div");
+		
+		var valoresEtapas = [];
+		
+		var cont = 1;
+		$(colunasGrafico).each(function () {
+			var lugarAtual = $(this);
+			//lugarAtual.css('width', '25%');
+			
+			$.ajax({
+				type : "GET",
+				url : dominio + "/etapaFunilREST/buscarQuantidadeClientesNasEtapasporEtapaFunilId?etapaFunilId="+cont,
+				async : false,
+				success : function(response) {
+					console.log(response);
+					valoresEtapas.push(response);
+
+					
+				}
+			});				
+			cont++;
+		});
+		cont=1;
+		
+		
+		//Calcular porcentagem do grafico
+		
+		//pegando o maior valor
+		var somaValores = 0;
+		for(var i = 0; i< valoresEtapas.length; i++){
+			somaValores += valoresEtapas[i];
+		}
+		
+		
+		var valoresEtapasPercentagem = [];
+		for(var i = 0; i< valoresEtapas.length; i++){
+			var valorAtualEtapa = valoresEtapas[i];
+			var percentagem = (valorAtualEtapa*100)/somaValores;
+			valoresEtapasPercentagem[i] = percentagem;
+		}
+		
+		var cont = 1;
+		$(colunasGrafico).each(function () {
+			var lugarAtual = $(this);
+			lugarAtual.css('width', valoresEtapasPercentagem[cont-1]+'%');		
+			lugarAtual.find("div > div:nth-child(1) > div").text(valoresEtapasPercentagem[cont-1]+'%');
+			cont++;
+		});
+		cont=1;
+		
+		
+		
 	}
 </script>
