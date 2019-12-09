@@ -92,17 +92,17 @@ body {
 }
 
 #graficoBarrasEstilo {
-    width: 1%;
+    width: 5%;
     -webkit-animation: graficoBarrasEstilo 2s;
     animation: graficoBarrasEstilo 2s;
-    animation-fill-mode: forwards;
+    /*animation-fill-mode: forwards;*/
 }
 
 #graficoBarrasEstilo:after {
     content: ' 10 ';
     position: absolute;
     right: -24px;
-    color: #fff;
+    color: black;
     top: 10px;
     opacity: 0;
     -webkit-animation: see 2s;
@@ -112,7 +112,7 @@ body {
 }
 
 #graficoBarrasEstilo:before {
-    content: 'Chile';
+    /*content: 'Chile';*/
     position: absolute;
     left: -45px;
     color: black;
@@ -121,7 +121,7 @@ body {
     -webkit-animation: see 2s;
     animation: see 2s;
     animation-delay: 0.5s;
-    animation-fill-mode: forwards;
+    /* animation-fill-mode: forwards;*/
 }
 
 
@@ -148,7 +148,7 @@ body {
 }
 
 #chile:before {
-    content: 'Chile';
+    /*content: 'Chile';*/
     position: absolute;
     left: -45px;
     color: #fff;

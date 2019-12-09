@@ -356,14 +356,45 @@
                 </div>
                 <!------------------------------------- Menu e Dashboard (acima) ----------------------------------------------------------------->
 
-                <div id="central" class="col-md-12 content-page">
+                <div id="central" class="col-md-12 content-page" style="z-index: 0;">
 
                 </div>
 
             </div>
             <!-- /col-md-12 content-page -->
             <div class="" style="position: fixed;margin-bottom: 2%;bottom: 0;margin-left: 90%;">
-                <div style="width: 70px;height: 70px;background: black;border-radius: 50%;margin: 0px 0px;padding: 0px 0px;"></div>
+                <div class="chatbootBotaoAtivar" style="cursor: pointer;">
+                    <div style="width: 70px;height: 70px;background: black;border-radius: 50%;margin: 0px 0px;padding: 0px 0px;">
+                        <img th:src="@{/img/balao.png}" alt="" style="width: 50px;margin-top: 28%;margin-left: 14%;">
+                    </div>
+
+                </div>
+            </div>
+            <div style="position: fixed;bottom: 0;margin-left: 64%;width: 338px;height: 50%;margin-bottom: 100px;">
+                <div class="chatbootTela" style="position: fixed; float: left; width: 320px; height: 320px; background: white; border-top-left-radius: 10%; border-top-right-radius: 10%; bottom: 0px; margin-bottom: 36px;">
+                    <div style="width: 100%;height: 80%;overflow-y: scroll;" id="corpoChatbot">
+                        <div style="margin-top: 140px;"></div>
+                        <div class="row msg_container base_sent" style="width: 215px;height: 115px;position: relative;display: -webkit-inline-box;margin-left: 1px;">
+                            <div class="col-md-10 col-xs-10">
+                                <div class="messages msg_sent">
+                                    <p>Olá Digite seu nome para comerçarmos</p>
+                                    <time datetime="2009-11-13T20:00">Agora • 1 min</time>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-xs-2 avatar">
+                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive " style="width: 100px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="bottom: -20px;position: relative;width: 100%;">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Digite o Texto" aria-label="Enviar" aria-describedby="basic-addon2" id="enviarTextoChatBot">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="botaoEnviarTextoAoChatboot">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- <div class="" style="transform: translateY(550%);position: absolute;margin-left: 90%;">
 					<div style="width: 70px;height: 70px;background: black;border-radius: 50%;margin: 0px 0px;padding: 0px 0px;"></div>
@@ -717,6 +748,26 @@
                 $("#central").load(dominio + "/oferta/listarTodasAsOfertas");
             });
 
+            $("#botaoEnviarTextoAoChatboot").click(function(e) {
+                console.log("testeeeeeeeeeeeeeeeeee");
+
+                var textoRecebido = $("#enviarTextoChatBot").val();
+                $("#enviarTextoChatBot").val('Digite o texto');
+
+                $('#corpoChatbot').append('<div class="row msg_container base_sent" style="width: 215px;height: 115px;position: relative;display: -webkit-inline-box;margin-left: 1px;"> ' +
+                    '<div class="col-md-10 col-xs-10"> ' +
+                    '<div class="messages msg_sent"> ' +
+                    '<p>' + textoRecebido + '</p> ' +
+                    '<time datetime="2009-11-13T20:00">Agora • 1 min</time>' +
+                    '</div> ' +
+                    '</div> ' +
+                    '<div class="col-md-2 col-xs-2 avatar"> ' +
+                    '<img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive " style="width: 100px;"> ' +
+                    '</div> ' +
+                    '</div> ');
+
+            });
+
 
 
             $("#botaoAdicionarNovoCampo").click(function() {
@@ -1016,6 +1067,12 @@
             });
 
         }
+
+        $(".chatbootBotaoAtivar").click(function(e) {
+            $(".chatbootTela").toggle("slow", function() {
+                // Animation complete.
+            });
+        });
 
         /*
         var lista = new Array();
