@@ -374,7 +374,7 @@
                 <div class="chatbootTela" style="position: fixed; float: left; width: 320px; height: 320px; background: white; border-top-left-radius: 10%; border-top-right-radius: 10%; bottom: 0px; margin-bottom: 36px;">
                     <div style="width: 100%;height: 80%;overflow-y: scroll;" id="corpoChatbot">
                         <div style="margin-top: 140px;"></div>
-                        <div class="row msg_container base_sent" style="width: 215px;height: 115px;position: relative;display: -webkit-inline-box;margin-left: 1px;">
+                        <div class="row msg_container base_sent" style="width: 215px;height: 100px;position: relative;display: -webkit-inline-box;margin-left: 1px;">
                             <div class="col-md-10 col-xs-10">
                                 <div class="messages msg_sent">
                                     <p>Olá Digite seu nome para comerçarmos</p>
@@ -382,7 +382,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive " style="width: 100px;">
+                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive " style="width: 60px;">
                             </div>
                         </div>
                     </div>
@@ -752,9 +752,9 @@
                 console.log("testeeeeeeeeeeeeeeeeee");
 
                 var textoRecebido = $("#enviarTextoChatBot").val();
-                $("#enviarTextoChatBot").val('Digite o texto');
+                $("#enviarTextoChatBot").attr('placeholder', 'Digite o texto');
 
-                $('#corpoChatbot').append('<div class="row msg_container base_sent" style="width: 215px;height: 115px;position: relative;display: -webkit-inline-box;margin-left: 1px;"> ' +
+                $('#corpoChatbot').append('<div class="row msg_container base_sent" style="width: 215px;height: 100px;position: relative;display: -webkit-inline-box;margin-left: 1px;"> ' +
                     '<div class="col-md-10 col-xs-10"> ' +
                     '<div class="messages msg_sent"> ' +
                     '<p>' + textoRecebido + '</p> ' +
@@ -762,11 +762,41 @@
                     '</div> ' +
                     '</div> ' +
                     '<div class="col-md-2 col-xs-2 avatar"> ' +
-                    '<img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive " style="width: 100px;"> ' +
+                    '<img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive " style="width: 60px;"> ' +
                     '</div> ' +
                     '</div> ');
 
+                var elem = document.getElementById('corpoChatbot');
+                elem.scrollTop = elem.scrollHeight;
+
+                console.log("testeeeeeeeeeeeee");
+
+                $.ajax({
+                    type: "GET",
+                    url: dominio + "/chatbootREST/enviarTextoAoServidor?texto=" + textoRecebido,
+                    async: false,
+                    success: function(response) {
+                        console.log(response);
+
+                        $('#corpoChatbot').append('<div class="row msg_container base_sent" style="width: 215px;height: 100px;position: relative;display: -webkit-inline-box;margin-left: 1px;"> ' +
+                            '<div class="col-md-10 col-xs-10"> ' +
+                            '<div class="messages msg_sent"> ' +
+                            '<p>' + response + '</p> ' +
+                            '<time datetime="2009-11-13T20:00">Agora • 1 min</time>' +
+                            '</div> ' +
+                            '</div> ' +
+                            '<div class="col-md-2 col-xs-2 avatar"> ' +
+                            '<img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg" class=" img-responsive " style="width: 60px;"> ' +
+                            '</div> ' +
+                            '</div> ');
+                        var elem = document.getElementById('corpoChatbot');
+                        elem.scrollTop = elem.scrollHeight;
+
+                    }
+                });
+
             });
+
 
 
 
