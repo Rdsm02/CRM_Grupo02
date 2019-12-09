@@ -18,6 +18,8 @@ public class ChatbootControllerREST {
 			return "Bem vindo ao Senac! Eu sou a SEIA(Senac inteligência Artificial)  Por favor digite seu nome completo!!!";
 		}else if(texto.equals("help")) {
 			return "Precisamos do seu nome para comerçamos a nos falar";
+		}else if(texto.equals("Rodrigo dos Santos Moreira")) {
+			return "Muito bem Rodrigo Moreira!";
 		}
 		
 		return "Não Consegui entender o que você disse, por favor digite seu nome completo!!!";		
