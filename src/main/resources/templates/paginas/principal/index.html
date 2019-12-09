@@ -370,7 +370,7 @@
 
                 </div>
             </div>
-            <div style="position: fixed;bottom: 0;margin-left: 64%;width: 338px;height: 50%;margin-bottom: 100px;">
+            <div style="position: fixed;bottom: 0;margin-left: 64%;width: 338px;height: 50%;margin-bottom: 100px;z-index: -1;" id="disparadorChatBoot">
                 <div class="chatbootTela" style="position: fixed; float: left; width: 320px; height: 320px; background: white; border-top-left-radius: 10%; border-top-right-radius: 10%; bottom: 0px; margin-bottom: 36px;display: none;">
                     <div style="width: 100%;height: 80%;overflow-y: scroll;padding-top: 9px;" id="corpoChatbot">
                         <div style="margin-top: 140px;"></div>
@@ -603,6 +603,71 @@
 
                             <button type="button" class="btn btn-secondary btn-cancelar p-2" data-dismiss="modal" style="padding: 0.65rem 1rem!important;" onclick="zerarTodosOsCampos()">Cancelar</button>
                             <button type="button" class="btn btn-primary btn-cadastrar p-2">Cadastrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalExemploAbrirAtribuicaoDeClienteAOferta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Atribuição de Oferta</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row mr-0 ml-0 pt-3">
+                                <div class="col-md-5" style="margin-top: 1%;">
+                                    <label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
+                                </div>
+                                <div class="col-md-5" style="">
+                                    <select class="form-control" id="produtoAtribuido" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+                                        <option value="-1">Selecione um Produto</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="row mr-0 ml-0 pt-3">
+                                <div class="col-md-5" style="margin-top: 1%;">
+                                    <label for="exampleFormControlTextarea6" class="float-right">Oferta a Ser Atribuída:</label>
+                                </div>
+                                <div class="col-md-5" style="">
+                                    <select class="form-control" id="OfertaAtribuida" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
+                                        <option value="-1">Selecione uma Oferta</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="row mr-0 ml-0 pt-3">
+                                <div class="col-md-5" style="margin-top: 1%;">
+                                    <label for="exampleFormControlTextarea6" class="float-right">Descricao
+                                        da Atribuição:</label>
+                                </div>
+                                <div class="col-md-5" style="">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="descricaoAtribuida" placeholder="Digite uma descrição...">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row mr-0 ml-0 pt-3">
+                                <div class="col-md-5" style="margin-top: 1%;">
+                                    <label for="exampleFormControlTextarea6" class="float-right">Valor da Oferta:</label>
+                                </div>
+                                <div class="col-md-5" style="">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="valorOfertaAtribuida" placeholder="Digite um valor...">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary" onclick="salvarClienteOferta()" data-dismiss="modal">Salvar mudanças</button>
                         </div>
                     </div>
                 </div>

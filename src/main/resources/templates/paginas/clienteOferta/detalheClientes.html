@@ -34,7 +34,7 @@
                     <label for="whats" class="formDetalhamentoClientes">SobreNome</label>
                     <input class="form-control" type="text" name="sobreNome" id="sobreNome" th:field="*{sobrenome}">
 
-                    <button id="atribuirOferta" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="modal" data-target="#modalExemplo" data-placement="right" data-original-title="Atribuir Oferta" onclick="atualizarModalAtribuicaoDeOferta()">
+                    <button id="atribuirOferta" type="button" class="btn btn-brand btn-circle btn-icon btn-adicionar-contato" data-toggle="modal" data-target="#exampleModalTeste" data-placement="right" data-original-title="Atribuir Oferta" onclick="atualizarModalAtribuicaoDeOferta()">
 						<i class="fa fa-plus"></i>
 					</button>
 
@@ -201,71 +201,6 @@
     </div>
     <!-- /col-md-9 col-lg-9 -->
 
-</div>
-
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Atribuição de Oferta</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-            </div>
-            <div class="modal-body">
-                <div class="row mr-0 ml-0 pt-3">
-                    <div class="col-md-5" style="margin-top: 1%;">
-                        <label for="exampleFormControlTextarea6" class="float-right">Produto:</label>
-                    </div>
-                    <div class="col-md-5" style="">
-                        <select class="form-control" id="produtoAtribuido" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
-							<option value="-1">Selecione um Produto</option>
-						</select>
-
-                    </div>
-                </div>
-                <div class="row mr-0 ml-0 pt-3">
-                    <div class="col-md-5" style="margin-top: 1%;">
-                        <label for="exampleFormControlTextarea6" class="float-right">Oferta a Ser Atribuída:</label>
-                    </div>
-                    <div class="col-md-5" style="">
-                        <select class="form-control" id="OfertaAtribuida" data-placeholder="Selecione uma Oferta" style="margin-left: auto; margin-right: auto; width: 100%; margin: 0px auto 10px auto;">
-							<option value="-1">Selecione uma Oferta</option>
-						</select>
-
-                    </div>
-                </div>
-                <div class="row mr-0 ml-0 pt-3">
-                    <div class="col-md-5" style="margin-top: 1%;">
-                        <label for="exampleFormControlTextarea6" class="float-right">Descricao
-							da Atribuição:</label>
-                    </div>
-                    <div class="col-md-5" style="">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="descricaoAtribuida" placeholder="Digite uma descrição...">
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row mr-0 ml-0 pt-3">
-                    <div class="col-md-5" style="margin-top: 1%;">
-                        <label for="exampleFormControlTextarea6" class="float-right">Valor da Oferta:</label>
-                    </div>
-                    <div class="col-md-5" style="">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="valorOfertaAtribuida" placeholder="Digite um valor...">
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="salvarClienteOferta()" data-dismiss="modal">Salvar mudanças</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 
