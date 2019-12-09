@@ -130,7 +130,8 @@
 		var valoresEtapasPercentagem = [];
 		for(var i = 0; i< valoresEtapas.length; i++){
 			var valorAtualEtapa = valoresEtapas[i];
-			var percentagem = (valorAtualEtapa*100)/somaValores;
+			var percentagem = 0;
+			percentagem = Number.isNaN((valorAtualEtapa*100)/somaValores) ?  percentagem = 0 : (valorAtualEtapa*100)/somaValores;
 			valoresEtapasPercentagem[i] = percentagem;
 		}
 		

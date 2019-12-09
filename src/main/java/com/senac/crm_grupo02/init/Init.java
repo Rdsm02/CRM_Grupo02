@@ -39,10 +39,10 @@ import com.senac.crm_grupo02.service.UsuarioService;
 @Component
 public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	
-	/*public void onApplicationEvent(ContextRefreshedEvent event) {
+	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
-	}*/
-	@Autowired
+	}
+	/*@Autowired
 	ClienteService servicoCliente;
 	
 	@Autowired
@@ -323,7 +323,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		servicoEtapaFunil.save(etapaFunilNegociacaoFechada);
 		
 		
-		/*=====[Acessos Spring Security]=====*/
+		=====[Acessos Spring Security]=====
 		
 		Role roleAdmin = new Role();
 		roleAdmin.setNomeRole("ROLE_ADMIN");
@@ -356,5 +356,5 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		
 	}
-
+*/
 }
