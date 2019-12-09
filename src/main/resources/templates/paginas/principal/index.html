@@ -1168,8 +1168,16 @@
 
         }
 
+        var verificarChatbootAtivo = false;
         $(".chatbootBotaoAtivar").click(function(e) {
             $(".chatbootTela").toggle("slow", function() {
+                if (verificarChatbootAtivo == false) {
+                    $("#disparadorChatBoot").css("z-index", '1');
+                    verificarChatbootAtivo = true;
+                } else {
+                    $("#disparadorChatBoot").css("z-index", '-1');
+                    verificarChatbootAtivo = false;
+                }
                 // Animation complete.
             });
         });
