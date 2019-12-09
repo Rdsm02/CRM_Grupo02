@@ -693,6 +693,12 @@
         console.log(window.location.href);
         console.log(window.location);
 
+        window.onload = function() {
+
+            $("#central").load(dominio + "/dashboard/dashboard");
+        }
+
+
         $(document).ready(function() {
             // Handler for .ready() called.
             /*=====[Rodrigo]=====*/
