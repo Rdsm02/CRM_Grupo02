@@ -20,6 +20,8 @@ public class ChatbootControllerREST {
 			return "Precisamos do seu nome para comerçamos a nos falar";
 		}else if(texto.equals("Rodrigo dos Santos Moreira")) {
 			return "Muito bem Rodrigo Moreira!";
+		}else if(texto.equals("Miryan")) {
+			return "Programadora HTML Sênior Logada!!!";
 		}
 		
 		return "Não Consegui entender o que você disse, por favor digite seu nome completo!!!";		

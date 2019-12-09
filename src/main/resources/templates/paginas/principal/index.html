@@ -798,6 +798,7 @@
             $("#dashboard").click(function() {
                 $("#navegacaoTitulo > span").text("DashBoard");
                 $("#central").load(dominio + "/dashboard/dashboard");
+                carregarInformacoesGrafico();
             });
 
             $("#nivelInstrucaoChamar").click(function() {

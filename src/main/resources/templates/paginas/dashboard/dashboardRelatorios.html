@@ -51,10 +51,35 @@
 </div>
 
 <script>
-    window.onload = function() {
 
+$(document).ready(function() {
+	carregarInformacoesGrafico();
+});
+    window.onload = function() {
+    	
+    	carregarInformacoesGrafico();
 
 
         $("#kt_subheader > div > div:nth-child(4) > div > div:nth-child(3)").css('width', '50%');
     }
+    
+    function carregarInformacoesGrafico(){
+		
+		$.ajax({
+            type: "GET",
+            url: dominio + "/dashboardREST/buscarQuantidadeDeAcoesAtribuidasParaOClientePorAcaoId",
+            async: false,
+            success: function(response) {
+            	console.log(response[0].percentual);
+            	
+            	$("#circle > figcaption > h2").text(response[0].percentual + "%");
+            	$("#circle > figcaption > p").text(response[0].quantidadeDeAcao);
+            	
+
+            }
+        });
+		
+	
+	
+	}
 </script>

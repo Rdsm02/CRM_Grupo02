@@ -473,7 +473,7 @@ svg .inner {
     position: absolute;
     z-index: 1;
     left: calc( 50% - (80%/2) - -15px);
-    top: calc( 50% - (80%/2) - -35px);
+    top: calc( 50% - (80%/2) - -70px);
     -webkit-animation: see 1s;
     animation: see 1s;
 }
